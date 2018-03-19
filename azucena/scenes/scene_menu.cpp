@@ -8,7 +8,9 @@ using namespace std;
 using namespace sf;
 
 void MenuScene::Load() {
+#if DEBUG
   cout << "Menu Load \n";
+#endif
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>(
@@ -18,8 +20,6 @@ void MenuScene::Load() {
 }
 
 void MenuScene::Update(const double& dt) {
-  // cout << "Menu Update "<<dt<<"\n";
-
   if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
     Engine::ChangeScene(&level1);
   }

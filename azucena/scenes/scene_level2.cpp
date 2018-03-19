@@ -12,21 +12,21 @@ using namespace sf;
 
 static shared_ptr<Entity> player;
 void Level2Scene::Load() {
+#if DEBUG
   cout << "Scene 2 Load" << endl;
+#endif
   ls::loadLevelFile("res/level_2.txt", 40.0f);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
 
   // Create player
   {
-    // *********************************
-	  player = makeEntity();
-	  player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
-	  auto s = player->addComponent<ShapeComponent>();
-	  s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
-	  s->getShape().setFillColor(Color::Magenta);
-	  s->getShape().setOrigin(10.f, 15.f);
-    // *********************************
+	player = makeEntity();
+	player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+	auto s = player->addComponent<ShapeComponent>();
+	s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
+	s->getShape().setFillColor(Color::Magenta);
+	s->getShape().setOrigin(10.f, 15.f);
     player->addTag("player");
     player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
   }
@@ -36,7 +36,6 @@ void Level2Scene::Load() {
     auto enemy = makeEntity();
     enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]) +
                        Vector2f(0, 24));
-    // *********************************
     // Add HurtComponent
 	enemy->addComponent<HurtComponent>();
     // Add ShapeComponent, Red 16.f Circle
@@ -46,7 +45,6 @@ void Level2Scene::Load() {
 	s->getShape().setOrigin(16.f, 16.f);
     // Add EnemyAIComponent
 	enemy->addComponent<EnemyAIComponent>(); 
-    // *********************************
   }
 
   // Create Turret
@@ -63,7 +61,6 @@ void Level2Scene::Load() {
 
   // Add physics colliders to level tiles.
   {
-    // *********************************
 	  auto walls = ls::findTiles(ls::WALL);
 	  for (auto w : walls) {
 		  auto pos = ls::getTilePosition(w);
@@ -72,15 +69,18 @@ void Level2Scene::Load() {
 		  e->setPosition(pos);
 		  e->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
 	  }
-    // *********************************
   }
 
+#if DEBUG
   cout << " Scene 2 Load Done" << endl;
+#endif
   setLoaded(true);
 }
 
 void Level2Scene::UnLoad() {
+#if DEBUG
   cout << "Scene 2 UnLoad" << endl;
+#endif
   player.reset();
   ls::unload();
   Scene::UnLoad();

@@ -11,14 +11,15 @@ using namespace sf;
 static shared_ptr<Entity> player;
 
 void Level3Scene::Load() {
+#if DEBUG
   cout << "Scene 3 Load" << endl;
+#endif
   ls::loadLevelFile("res/level_3.txt", 40.0f);
   auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
   ls::setOffset(Vector2f(0, ho));
 
   // Create player
   {
-    // *********************************
 	  player = makeEntity();
 	  player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
     // pl->setPosition({100, 100});
@@ -28,12 +29,10 @@ void Level3Scene::Load() {
 	  s->getShape().setOrigin(10.f, 15.f);
 	  player->addTag("player");
 	  player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
-    // *********************************
   }
 
   // Add physics colliders to level tiles.
   {
-    // *********************************
 	  auto walls = ls::findTiles(ls::WALL);
 	  for (auto w : walls) {
 		  auto pos = ls::getTilePosition(w);
@@ -42,15 +41,18 @@ void Level3Scene::Load() {
 		  e->setPosition(pos);
 		  e->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
 	  }
-    // *********************************
   }
 
+#if DEBUG
   cout << " Scene 3 Load Done" << endl;
+#endif
   setLoaded(true);
 }
 
 void Level3Scene::UnLoad() {
+#if DEBUG
   cout << "Scene 3 UnLoad" << endl;
+#endif
   player.reset();
   ls::unload();
   Scene::UnLoad();
