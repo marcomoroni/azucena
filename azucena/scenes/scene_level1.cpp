@@ -5,6 +5,7 @@
 #include <LevelSystem.h>
 #include <iostream>
 #include <thread>
+#include <system_resources.h>
 
 using namespace std;
 using namespace sf;
@@ -24,12 +25,15 @@ void Level1Scene::Load() {
   {
     player = makeEntity();
     player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
-    auto s = player->addComponent<ShapeComponent>();
-    s->setShape<sf::RectangleShape>(Vector2f(20.f, 30.f));
-    s->getShape().setFillColor(Color::Magenta);
-    s->getShape().setOrigin(10.f, 15.f);
 
-    player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+		auto s = player->addComponent<SpriteComponent>();
+		auto tex = Resources::load<Texture>("invaders_sheet.png");
+		s->setTexture(tex);
+		s->getSprite().setTextureRect(sf::IntRect(32, 0, 32, 32));
+		// Centre origin
+		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+    player->addComponent<PlayerPhysicsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
   }
 
   // Add physics colliders to level tiles.
