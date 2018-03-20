@@ -32,8 +32,8 @@ PhysicsComponent::PhysicsComponent(Entity* p, bool dyn,
     b2FixtureDef FixtureDef;
     // Fixture properties
     // FixtureDef.density = _dynamic ? 10.f : 0.f;
-	FixtureDef.friction = _dynamic ? 0.1f : 0.8f;
-	FixtureDef.restitution = /*.2;*/ 0;
+		FixtureDef.friction = _dynamic ? 0.1f : 0.8f;
+		FixtureDef.restitution = /*.2;*/ 0;
     FixtureDef.shape = &Shape;
     // Add to body
     _fixture = _body->CreateFixture(&FixtureDef);
