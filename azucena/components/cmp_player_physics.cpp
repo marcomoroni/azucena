@@ -41,7 +41,7 @@ void PlayerPhysicsComponent::update(double dt) {
 	if (_isSprinting)
 	{
 		// Apply sprint velocity for a fraction of the cooldown timer
-		if (_sprintCooldown > 0.52f)
+		if (_sprintCooldown > 0.42f)
 		{
 			speed = _sprintSpeed;
 			// If sprinting, direction is fixed
@@ -53,7 +53,7 @@ void PlayerPhysicsComponent::update(double dt) {
 		if (_sprintCooldown < 0)
 		{
 			_isSprinting = false;
-			_parent->GetCompatibleComponent<ShapeComponent>()[0]->getShape().setFillColor(Color::Red);
+			_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(255, 255, 255));
 		}
 	}
 
@@ -64,9 +64,9 @@ void PlayerPhysicsComponent::update(double dt) {
 		cout << "Sprinting" << endl;
 #endif
 		_isSprinting = true;
-		_sprintCooldown = 0.6f;
+		_sprintCooldown = 0.5f;
 		_sprintDirection = direction;
-		_parent->GetCompatibleComponent<ShapeComponent>()[0]->getShape().setFillColor(Color::White);
+		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(180, 255, 255));
 	}
 
 	setVelocity(Vector2f(normalize(direction)  * speed));

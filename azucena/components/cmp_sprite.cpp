@@ -27,3 +27,5 @@ ShapeComponent::ShapeComponent(Entity* p)
     : Component(p), _shape(make_shared<sf::CircleShape>()) {}
 
 sf::Sprite& SpriteComponent::getSprite() const { return *_sprite; }
+
+sf::Texture& SpriteComponent::getTexure() const { return *_tex; }
