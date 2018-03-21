@@ -2,7 +2,13 @@
 
 using namespace sf;
 
-std::map<std::string, GameKey> Controls::Keys;
+//std::map<std::string, GameKey> Controls::Keys;
+std::shared_ptr<std::map<std::string, GameKey>> _keys;
+
+std::map<std::string, GameKey>& Controls::GetKeys()
+{
+	return *_keys;
+}
 
 bool Controls::testEvent(GameKey k, Event e)
 {

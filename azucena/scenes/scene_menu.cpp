@@ -23,18 +23,17 @@ void MenuScene::Load() {
 	key.inputType = KeyboardInput;
 	key.eventType = sf::Event::KeyPressed;
 	key.keyCode = sf::Keyboard::Space;
-	Controls::Keys["Enter"] = key;
+	//Controls::Keys["Enter"] = key;
+	Controls::GetKeys()["Enter"] = key;
 
   setLoaded(true);
 }
 
 void MenuScene::Update(const double& dt) {
 
-	//Event Event;
-	//auto &window = Engine::GetWindow();
-
-	if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
-	/*if (Controls::testEvent(Controls::Keys["Enter"], Event)) {*/
+	//if (sf::Keyboard::isKeyPressed(Keyboard::Space)) {
+	//if (Controls::testEvent(Controls::Keys["Enter"], Engine::GetEvent())) {
+	if (Controls::testEvent(Controls::GetKeys()["Enter"], Engine::GetEvent())) {
 		Engine::ChangeScene(&level1);
 	}
 

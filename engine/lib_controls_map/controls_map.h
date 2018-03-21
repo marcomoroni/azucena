@@ -26,6 +26,10 @@ struct GameKey
 class Controls
 {
 public:
-	static std::map<std::string, GameKey> Keys;
+	//static std::map<std::string, GameKey> Keys;
+	static std::map<std::string, GameKey>& GetKeys();
 	static bool testEvent(GameKey, sf::Event);
+
+protected:
+	static std::shared_ptr<std::map<std::string, GameKey>> _keys;
 };
