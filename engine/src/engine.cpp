@@ -12,6 +12,7 @@ using namespace sf;
 using namespace std;
 Scene* Engine::_activeScene = nullptr;
 std::string Engine::_gameName;
+sf::Event* Engine::_event;
 
 static bool loading = false;
 static float loadingspinner = 0.f;
@@ -90,6 +91,7 @@ void Engine::Start(unsigned int width, unsigned int height,
   while (window.isOpen()) {
     Event event;
     while (window.pollEvent(event)) {
+			_event = &event;
       if (event.type == Event::Closed) {
         window.close();
       }
@@ -183,6 +185,8 @@ void Scene::LoadAsync() { _loaded_future = std::async(&Scene::Load, this); }
 sf::Vector2u Engine::getWindowSize() { return _window->getSize(); }
 
 sf::RenderWindow& Engine::GetWindow() { return *_window; }
+
+sf::Event& Engine::GetEvent() { return *_event; }
 
 namespace timing {
 // Return time since Epoc
