@@ -3,6 +3,7 @@
 #include "system_physics.h"
 #include "system_renderer.h"
 #include "system_resources.h"
+#include "controls_map.h"
 #include <SFML/Graphics.hpp>
 #include <future>
 #include <iostream>
@@ -142,7 +143,7 @@ void Engine::ChangeScene(Scene* s) {
   if (!s->isLoaded()) {
     cout << "Eng: Entering Loading Screen\n";
     loadingTime =0;
-    _activeScene->LoadAsync();
+    _activeScene->Load();
     loading = true;
   }
 }
@@ -178,7 +179,7 @@ void Scene::UnLoad() {
   setLoaded(false);
 }
 
-void Scene::LoadAsync() { _loaded_future = std::async(&Scene::Load, this); }
+void Scene::LoadAsync() { /*_loaded_future = std::async(&Scene::Load, this);*/ }
 
 sf::Vector2u Engine::getWindowSize() { return _window->getSize(); }
 

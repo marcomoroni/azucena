@@ -1,5 +1,6 @@
 #include "cmp_player_physics.h"
 #include "system_physics.h"
+#include "controls_map.h"
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
 
