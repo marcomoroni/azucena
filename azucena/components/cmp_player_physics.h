@@ -12,6 +12,8 @@ protected:
 	float _sprintSpeed;
 	// Player cannot change direction when sprinting
 	sf::Vector2f _sprintDirection;
+	// Has to press Space again to sprint (cannot keep Space pressed)
+	bool _isStillPressingSprintKey;
 
 public:
   void update(double dt) override;

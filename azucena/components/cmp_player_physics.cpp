@@ -41,7 +41,7 @@ void PlayerPhysicsComponent::update(double dt) {
 	if (_isSprinting)
 	{
 		// Apply sprint velocity for a fraction of the cooldown timer
-		if (_sprintCooldown > 0.42f)
+		if (_sprintCooldown > 0.32f)
 		{
 			speed = _sprintSpeed;
 			// If sprinting, direction is fixed
@@ -57,15 +57,22 @@ void PlayerPhysicsComponent::update(double dt) {
 		}
 	}
 
+	// Check if player is still pressing Sprint key
+	if (!Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		_isStillPressingSprintKey = false;
+	}
+
 	// Check if player starts sprinting
-	if (Keyboard::isKeyPressed(Keyboard::Space) && !_isSprinting && direction != Vector2f(0, 0))
+	if (Keyboard::isKeyPressed(Keyboard::Space) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey)
 	{
 #if DEBUG
 		cout << "Sprinting" << endl;
 #endif
 		_isSprinting = true;
-		_sprintCooldown = 0.5f;
+		_sprintCooldown = 0.4f;
 		_sprintDirection = direction;
+		_isStillPressingSprintKey = true;
 		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(180, 255, 255));
 	}
 
@@ -82,6 +89,7 @@ PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
 	_isSprinting = false;
 	_sprintSpeed = 1200.f;
 	_sprintCooldown = 0.0f;
+	_isStillPressingSprintKey = false;
 	_body->SetSleepingAllowed(false);
 	_body->SetFixedRotation(true);
 	//Bullet items have higher-res collision detection
