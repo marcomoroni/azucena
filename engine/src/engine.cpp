@@ -93,6 +93,12 @@ void Engine::Start(unsigned int width, unsigned int height,
       if (event.type == Event::Closed) {
         window.close();
       }
+			// Resize window
+			if (event.type == sf::Event::Resized)
+			{
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
+			}
     }
     if (Keyboard::isKeyPressed(Keyboard::Escape)) {
       window.close();
