@@ -25,6 +25,7 @@ void Level1Scene::Load() {
   {
     player = makeEntity();
     player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+		player->addTag("player");
 
 		auto s = player->addComponent<SpriteComponent>();
 		auto tex = Resources::load<Texture>("invaders_sheet.png");
