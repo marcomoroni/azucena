@@ -75,10 +75,13 @@ void Level1Scene::Update(const double& dt) {
   }
 
 	// Camera follows player
-	View player_view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	// THIS IS NOT WORKING -> we need to change the ORIGINAL view
+	/*View player_view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
 	player_view.setCenter(player->getPosition());
-	Engine::GetWindow().setView(player_view);
+	Engine::GetWindow().setView(player_view);*/
 
+	Engine::GetWindow().getView().setCenter(player->getPosition()); // WHY IS THIS NOT WORKING???
+	
   Scene::Update(dt);
 }
 
