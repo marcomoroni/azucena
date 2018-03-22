@@ -2,6 +2,7 @@
 #include "system_physics.h"
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
+#include "../constrols.h"
 
 using namespace std;
 using namespace sf;
@@ -20,19 +21,19 @@ void PlayerPhysicsComponent::update(double dt) {
 
 	Vector2f direction = { 0, 0 };
 
-	if (Keyboard::isKeyPressed(Keyboard::D))
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Right")))
 	{
 		direction.x += 1.0f;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::A))
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Left")))
 	{
 		direction.x -= 1.0f;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::W))
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Up")))
 	{
 		direction.y += 1.0f;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::S))
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Down")))
 	{
 		direction.y -= 1.0f;
 	}
@@ -64,7 +65,7 @@ void PlayerPhysicsComponent::update(double dt) {
 	}
 
 	// Check if player starts sprinting
-	if (Keyboard::isKeyPressed(Keyboard::Space) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey)
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey)
 	{
 #if DEBUG
 		cout << "Sprinting" << endl;
