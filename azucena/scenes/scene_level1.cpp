@@ -18,8 +18,9 @@ void Level1Scene::Load() {
 #endif
   ls::loadLevelFile("res/level_1.txt", 40.0f);
 
-  auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  ls::setOffset(Vector2f(0, ho));
+  //auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
+  //ls::setOffset(Vector2f(0, ho));
+	ls::setOffset(Vector2f(0, 0));
 
   // Create player
   {
@@ -72,6 +73,12 @@ void Level1Scene::Update(const double& dt) {
   if (ls::getTileAt(player->getPosition()) == ls::END) {
     Engine::ChangeScene((Scene*)&level2);
   }
+
+	// Camera follows player
+	View player_view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	player_view.setCenter(player->getPosition());
+	Engine::GetWindow().setView(player_view);
+
   Scene::Update(dt);
 }
 
