@@ -2,7 +2,19 @@
 
 ## General
 
+### Editor
+
 Remeber to change the editor indentation to 2 spaces (Sam wrote verything like that).
+
+### Debug only code
+
+Remember to put Debug only code inside
+
+``` cpp
+#if DEBUG
+// God mode
+#endif
+```
 
 ## Git
 
@@ -41,7 +53,7 @@ For example, to check if a key is pressed write
 ``` cpp
 if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Up")))
 {
-      // Going up
+	// Going up
 }
 ```
 
