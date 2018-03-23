@@ -18,9 +18,15 @@ Remember to put Debug only code inside
 #endif
 ```
 
+### Continuous integration
+
+[![Build status](https://ci.appveyor.com/api/projects/status/8sqlliuqw0d2a50g?svg=true)](https://ci.appveyor.com/project/marcomoroni/azucena)
+
+Builds only `master` branch.
+
 ## Git
 
-Do not commit in master branch unless a feature is complete or you want to tweak or change small details.
+Do not commit to `master` branch unless a feature is complete or you want to tweak or change small details.
 
 After you clone this repo remember to run
 
