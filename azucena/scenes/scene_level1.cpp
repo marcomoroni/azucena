@@ -70,17 +70,15 @@ void Level1Scene::UnLoad() {
 
 void Level1Scene::Update(const double& dt) {
 
+	// Camera follows player
+	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
+	View player_view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	player_view.setCenter(player->getPosition());
+	Engine::GetWindow().setView(player_view);
+
   if (ls::getTileAt(player->getPosition()) == ls::END) {
     Engine::ChangeScene((Scene*)&level2);
   }
-
-	// Camera follows player
-	// THIS IS NOT WORKING -> we need to change the ORIGINAL view
-	/*View player_view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
-	player_view.setCenter(player->getPosition());
-	Engine::GetWindow().setView(player_view);*/
-
-	Engine::GetWindow().getView().setCenter(player->getPosition()); // WHY IS THIS NOT WORKING???
 	
   Scene::Update(dt);
 }
