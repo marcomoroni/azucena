@@ -3,6 +3,7 @@
 #include "system_physics.h"
 #include "system_renderer.h"
 #include "system_resources.h"
+#include "../azucena/constrols.h"
 #include <SFML/Graphics.hpp>
 #include <future>
 #include <iostream>
@@ -86,6 +87,7 @@ void Engine::Start(unsigned int width, unsigned int height,
   _window = &window;
   Renderer::initialise(window);
   Physics::initialise();
+	Controls::initialise();
   ChangeScene(scn);
   while (window.isOpen()) {
     Event event;

@@ -3,10 +3,22 @@
 #include <stdexcept>
 
 using namespace std;
+using namespace sf;
 
-std::map<std::string, sf::Keyboard::Key> Controls::_keyboardLookupTable;
+map<std::string, Keyboard::Key> Controls::_keyboardLookupTable;
 
-sf::Keyboard::Key Controls::GetKeyboardKey(std::string action)
+void Controls::initialise()
+{
+	Controls::SetKeyboardKey("Return to menu", Keyboard::Escape);
+	Controls::SetKeyboardKey("Enter", Keyboard::Space);
+	Controls::SetKeyboardKey("Sprint", Keyboard::Space);
+	Controls::SetKeyboardKey("Up", Keyboard::W);
+	Controls::SetKeyboardKey("Down", Keyboard::S);
+	Controls::SetKeyboardKey("Left", Keyboard::A);
+	Controls::SetKeyboardKey("Right", Keyboard::D);
+}
+
+Keyboard::Key Controls::GetKeyboardKey(string action)
 {
 	auto k = _keyboardLookupTable.find(action);
 	if (k != _keyboardLookupTable.end())
@@ -19,7 +31,7 @@ sf::Keyboard::Key Controls::GetKeyboardKey(std::string action)
 	}
 }
 
-void Controls::SetKeyboardKey(std::string action, sf::Keyboard::Key key)
+void Controls::SetKeyboardKey(string action, Keyboard::Key key)
 {
 	_keyboardLookupTable[action] = key;
 }
