@@ -1,5 +1,7 @@
 # Notes
 
+We should use this to keep track of everything we have to write in the report and to help eachother know what we've done.
+
 ## General
 
 ### Editor
@@ -29,6 +31,26 @@ I changed this to simulate top-down view movement.
 I'm not using impulses because I couldn't get the movement I wanted. Instead, I'm setting the velocity at every frame.
 
 The player can sprint by pressing <kbd>Space</kbd>. You have to release the button and press it again to sprint again. You need to wait a little bit until you can sprint again.
+
+## Smooth camera
+
+Every scene has to set the view at least once when opened.
+
+You can set a new `View` each frame. Remeber not to change scene before. For example:
+
+``` cpp
+void Level1Scene::Update(const double& dt)
+{
+	// Do not include code that can change a scene here
+
+	// Set view
+	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	view.setCenter(player->getPosition());
+	Engine::GetWindow().setView(view);
+	
+	// Can include code that changes scene here
+}
+```
 
 ## Remappable controls
 
