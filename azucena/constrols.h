@@ -10,6 +10,7 @@ private:
 	static std::map<std::string, sf::Keyboard::Key> _keyboardLookupTable;
 
 public:
+	static void initialise();
 	static sf::Keyboard::Key GetKeyboardKey(std::string action);
 	static void SetKeyboardKey(std::string action, sf::Keyboard::Key key);
 };
