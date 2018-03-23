@@ -22,6 +22,12 @@ Remember to put Debug only code inside
 
 Do not commit in master branch unless a feature is complete or you want to tweak or change small details.
 
+After you clone this repo remember to run
+
+```
+git submodule update --init --recursive
+```
+
 ## Components
 
 ### `cmp_player_physics`
