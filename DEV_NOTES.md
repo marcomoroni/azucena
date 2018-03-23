@@ -34,7 +34,7 @@ The player can sprint by pressing <kbd>Space</kbd>. You have to release the butt
 
 There is a `Controls` class that allows to store a lookup table for keyboard keys.
 
-We set all controls for the first time in `scene_menu.cpp`.
+We set all controls for the first time in `Engine::Start()` by calling `Controls::initialise()`.
 
 To set or change a keyboard key use
 
