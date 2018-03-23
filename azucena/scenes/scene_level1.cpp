@@ -12,6 +12,7 @@ using namespace std;
 using namespace sf;
 
 static shared_ptr<Entity> player;
+Vector2f view_center;
 
 void Level1Scene::Load() {
 #if DEBUG
@@ -51,6 +52,9 @@ void Level1Scene::Load() {
     }
   }
 
+	// Set view
+	view_center = player->getPosition();
+
 #if DEBUG
   //Simulate long loading times
   //std::this_thread::sleep_for(std::chrono::milliseconds(3000));
@@ -73,9 +77,13 @@ void Level1Scene::Update(const double& dt) {
 
 	// Camera follows player
 	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
-	View player_view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
-	player_view.setCenter(player->getPosition());
-	Engine::GetWindow().setView(player_view);
+	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	float view_player_distance = sqrt(((player->getPosition().x - view_center.x) * (player->getPosition().x - view_center.x)) + ((player->getPosition().y - view_center.y) * (player->getPosition().y - view_center.y)));
+	if (view_player_distance > 100.0f)
+		view_center += (player->getPosition() - view_center) * 0.0005f;
+	view.setCenter(view_center);
+	
+	Engine::GetWindow().setView(view);
 
   if (ls::getTileAt(player->getPosition()) == ls::END) {
     Engine::ChangeScene((Scene*)&level2);
