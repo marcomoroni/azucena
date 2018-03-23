@@ -13,5 +13,5 @@ public:
   void Render() override;
 
 private:
-	float _escButtonTimePressed;
+	float _escButtonTimePressed = 0.0f;
 };

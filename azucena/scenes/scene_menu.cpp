@@ -18,6 +18,10 @@ void MenuScene::Load() {
         "Platformer\nPress Space to Start");
   }
 
+	// Set view
+	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	Engine::GetWindow().setView(view);
+
   setLoaded(true);
 }
 
