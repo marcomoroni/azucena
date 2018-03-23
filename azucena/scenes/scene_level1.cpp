@@ -6,6 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <system_resources.h>
+#include "../constrols.h"
 
 using namespace std;
 using namespace sf;
@@ -71,6 +72,12 @@ void Level1Scene::Update(const double& dt) {
   if (ls::getTileAt(player->getPosition()) == ls::END) {
     Engine::ChangeScene((Scene*)&level2);
   }
+
+	// Press Esc for 1 sec button to return to menu
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu"))) _escButtonTimePressed += dt;
+	else _escButtonTimePressed = 0.0f;
+	if (_escButtonTimePressed > 1.0f) Engine::ChangeScene((Scene*)&menu);
+
   Scene::Update(dt);
 }
 

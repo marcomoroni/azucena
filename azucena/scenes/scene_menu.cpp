@@ -19,6 +19,7 @@ void MenuScene::Load() {
   }
 
 	// Set controls
+	Controls::SetKeyboardKey("Return to menu", Keyboard::Escape);
 	Controls::SetKeyboardKey("Enter", Keyboard::Space);
 	Controls::SetKeyboardKey("Sprint", Keyboard::Space);
 	Controls::SetKeyboardKey("Up", Keyboard::W);

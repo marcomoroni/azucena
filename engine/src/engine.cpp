@@ -100,9 +100,9 @@ void Engine::Start(unsigned int width, unsigned int height,
 				window.setView(sf::View(visibleArea));
 			}
     }
-    if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+    /*if (Keyboard::isKeyPressed(Keyboard::Escape)) {
       window.close();
-    }
+    }*/
 
     window.clear();
     Update();
