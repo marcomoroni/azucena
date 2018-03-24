@@ -57,8 +57,8 @@ void Level1Scene::Update(const double& dt) {
 	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
 	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
 	float view_player_distance = sqrt(((player->getPosition().x - view_center.x) * (player->getPosition().x - view_center.x)) + ((player->getPosition().y - view_center.y) * (player->getPosition().y - view_center.y)));
-	if (view_player_distance > 100.0f)
-		view_center += (player->getPosition() - view_center) * 0.0005f;
+	if (view_player_distance > 80.0f)
+		view_center += (player->getPosition() - view_center) * 0.002f;
 	view.setCenter(view_center);
 	
 	Engine::GetWindow().setView(view);
