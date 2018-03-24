@@ -38,6 +38,12 @@ git submodule update --init --recursive
 
 Use the functions here when loading a scene to create entities. Without this, you would have, for example, to copy paste the code to create the player into every scene.
 
+## Map generation
+
+`LevelSystem` has been changed so the tiles have textures instead of plain colours.
+
+However, rendering a sprite for each tile makes the game slower, so the sprite of each tile gets drawn into a `Rendertexture` when the map is loaded. Then, only this `RenderTexture` (its sprite) gets rendered.
+
 ## Components
 
 ### `cmp_player_physics`
