@@ -5,13 +5,14 @@
 
 #include "components/cmp_player_physics.h"
 #include "components/cmp_sprite.h"
+#include "components/cmp_physics.h"
 
 using namespace std;
 using namespace sf;
 
-shared_ptr<Entity> create_player(Scene* scene)
+shared_ptr<Entity> create_player()
 {
-	auto player = scene->makeEntity();
+	auto player = Engine::GetActiveScene()->makeEntity();
 	player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
 	player->addTag("player");
 
@@ -27,7 +28,7 @@ shared_ptr<Entity> create_player(Scene* scene)
 	return player;
 }
 
-vector<shared_ptr<Entity>> create_enemies(Scene* scene)
+vector<shared_ptr<Entity>> create_enemies()
 {
 	vector<shared_ptr<Entity>> enemies;
 
@@ -35,7 +36,7 @@ vector<shared_ptr<Entity>> create_enemies(Scene* scene)
 	auto enemy_A_tiles = ls::findTiles(ls::ENEMY_A);
 	for (auto t : enemy_A_tiles)
 	{
-		auto enemy_A = scene-> makeEntity();
+		auto enemy_A = Engine::GetActiveScene()-> makeEntity();
 		enemy_A->setPosition(ls::getTilePosition(t));
 		enemy_A->addTag("enemy");
 		enemy_A->addTag("enemy_A");
@@ -54,7 +55,7 @@ vector<shared_ptr<Entity>> create_enemies(Scene* scene)
 	auto enemy_B_tiles = ls::findTiles(ls::ENEMY_B);
 	for (auto t : enemy_B_tiles)
 	{
-		auto enemy_B = scene->makeEntity();
+		auto enemy_B = Engine::GetActiveScene()->makeEntity();
 		enemy_B->setPosition(ls::getTilePosition(t));
 		enemy_B->addTag("enemy");
 		enemy_B->addTag("enemy_B");
@@ -73,7 +74,7 @@ vector<shared_ptr<Entity>> create_enemies(Scene* scene)
 	auto enemy_C_tiles = ls::findTiles(ls::ENEMY_C);
 	for (auto t : enemy_C_tiles)
 	{
-		auto enemy_C = scene->makeEntity();
+		auto enemy_C = Engine::GetActiveScene()->makeEntity();
 		enemy_C->setPosition(ls::getTilePosition(t));
 		enemy_C->addTag("enemy");
 		enemy_C->addTag("enemy_C");
@@ -89,4 +90,16 @@ vector<shared_ptr<Entity>> create_enemies(Scene* scene)
 	}
 
 	return enemies;
+}
+
+void add_physics_colliders_to_tiles()
+{
+	auto walls = ls::findTiles(ls::WALL);
+	for (auto w : walls) {
+		auto pos = ls::getTilePosition(w);
+		pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2); //offset to center
+		auto e = Engine::GetActiveScene()->makeEntity();
+		e->setPosition(pos);
+		e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
+	}
 }

@@ -2,5 +2,6 @@
 
 #include "ecm.h"
 
-std::shared_ptr<Entity> create_player(Scene* scene);
-std::vector<std::shared_ptr<Entity>> create_enemies(Scene* scene);
+std::shared_ptr<Entity> create_player();
+std::vector<std::shared_ptr<Entity>> create_enemies();
+void add_physics_colliders_to_tiles();

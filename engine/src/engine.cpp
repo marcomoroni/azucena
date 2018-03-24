@@ -204,3 +204,8 @@ long long last() {
 } // namespace timing
 
 Scene::~Scene() { UnLoad(); }
+
+Scene* Engine::GetActiveScene()
+{
+	return _activeScene;
+}

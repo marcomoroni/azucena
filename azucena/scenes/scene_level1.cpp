@@ -22,22 +22,13 @@ void Level1Scene::Load() {
   ls::loadLevelFile("res/level_1.txt", 40.0f);
 
   // Create player
-	player = create_player(this);
+	player = create_player();
 
 	// Create enemies
-	create_enemies(this);
+	create_enemies();
 
   // Add physics colliders to level tiles.
-  {
-    auto walls = ls::findTiles(ls::WALL);
-    for (auto w : walls) {
-      auto pos = ls::getTilePosition(w);
-			pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2); //offset to center
-      auto e = makeEntity();
-      e->setPosition(pos);
-      e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
-    }
-  }
+	add_physics_colliders_to_tiles();
 
 	// Set view
 	view_center = player->getPosition();
