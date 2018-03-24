@@ -36,6 +36,44 @@ void Level1Scene::Load() {
     player->addComponent<PlayerPhysicsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
   }
 
+	// Crate enemies A
+	{
+		auto enemy_A_tiles = ls::findTiles(ls::ENEMY_A);
+		for (auto t : enemy_A_tiles)
+		{
+			auto enemy_A = makeEntity();
+			enemy_A->setPosition(ls::getTilePosition(t));
+			enemy_A->addTag("enemy");
+			enemy_A->addTag("enemy_A");
+
+			auto s = enemy_A->addComponent<SpriteComponent>();
+			auto tex = Resources::load<Texture>("invaders_sheet.png");
+			s->setTexture(tex);
+			s->getSprite().setTextureRect(sf::IntRect(64, 0, 32, 32));
+			// Centre origin
+			s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+		}
+	}
+
+	// Crate enemies B
+	{
+		auto enemy_B_tiles = ls::findTiles(ls::ENEMY_B);
+		for (auto t : enemy_B_tiles)
+		{
+			auto enemy_B = makeEntity();
+			enemy_B->setPosition(ls::getTilePosition(t));
+			enemy_B->addTag("enemy");
+			enemy_B->addTag("enemy_B");
+
+			auto s = enemy_B->addComponent<SpriteComponent>();
+			auto tex = Resources::load<Texture>("invaders_sheet.png");
+			s->setTexture(tex);
+			s->getSprite().setTextureRect(sf::IntRect(96, 0, 32, 32));
+			// Centre origin
+			s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+		}
+	}
+
   // Add physics colliders to level tiles.
   {
     auto walls = ls::findTiles(ls::WALL);

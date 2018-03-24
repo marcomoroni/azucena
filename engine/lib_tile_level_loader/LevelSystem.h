@@ -21,8 +21,9 @@ public:
     START = 's',
     END = 'e',
     WALL = 'w',
-    ENEMY = 'n',
-    WAYPOINT = '+'
+    ENEMY = 'n', // to delete
+		ENEMY_A = 'A',
+		ENEMY_B = 'B'
   };
 
   static Tile getTile(sf::Vector2ul);
