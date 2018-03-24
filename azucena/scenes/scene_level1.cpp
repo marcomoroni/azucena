@@ -20,10 +20,6 @@ void Level1Scene::Load() {
 #endif
   ls::loadLevelFile("res/level_1.txt", 40.0f);
 
-  //auto ho = Engine::getWindowSize().y - (ls::getHeight() * 40.f);
-  //ls::setOffset(Vector2f(0, ho));
-	ls::setOffset(Vector2f(0, 0));
-
   // Create player
   {
     player = makeEntity();

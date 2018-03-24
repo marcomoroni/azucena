@@ -14,11 +14,6 @@ void PlayerPhysicsComponent::update(double dt) {
 
 	auto speed = _groundspeed;
 
-	//Teleport to start if we fall off map.
-	if (pos.y > ls::getHeight() * ls::getTileSize()) {
-		teleport(ls::getTilePosition(ls::findTiles(ls::START)[0]));
-	}
-
 	Vector2f direction = { 0, 0 };
 
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Right")))
