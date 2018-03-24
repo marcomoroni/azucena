@@ -41,9 +41,11 @@ public:
 
   static std::vector<sf::Vector2ul> findTiles(Tile);
 
-  static sf::Color getColor(Tile t);
+  //static sf::Color getColor(Tile t);
+	static sf::IntRect getSpriteRect(Tile t);
 
-  static void setColor(Tile t, sf::Color c);
+  //static void setColor(Tile t, sf::Color c);
+	static void setSpriteRect(Tile t, sf::IntRect r);
 
   static void setOffset(const sf::Vector2f& _offset);
 
@@ -57,12 +59,12 @@ protected:
   static size_t _height;
   static sf::Vector2f _offset;
 
-  static std::vector<std::unique_ptr<sf::RectangleShape>> _sprites;
+	static sf::Sprite _map;
 
-  static void buildSprites(bool optimise = true);
+  static void buildSprites();
 
   static float _tileSize; // for rendering
-  static std::map<Tile, sf::Color> _colours;
+	static std::map<Tile, sf::IntRect> _rectMap;
 
 private:
   LevelSystem() = delete;

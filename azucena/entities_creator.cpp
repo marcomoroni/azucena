@@ -13,7 +13,7 @@ using namespace sf;
 shared_ptr<Entity> create_player()
 {
 	auto player = Engine::GetActiveScene()->makeEntity();
-	player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
+	player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
 	player->addTag("player");
 
 	auto s = player->addComponent<SpriteComponent>();
@@ -37,7 +37,7 @@ vector<shared_ptr<Entity>> create_enemies()
 	for (auto t : enemy_A_tiles)
 	{
 		auto enemy_A = Engine::GetActiveScene()-> makeEntity();
-		enemy_A->setPosition(ls::getTilePosition(t));
+		enemy_A->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
 		enemy_A->addTag("enemy");
 		enemy_A->addTag("enemy_A");
 
@@ -56,7 +56,7 @@ vector<shared_ptr<Entity>> create_enemies()
 	for (auto t : enemy_B_tiles)
 	{
 		auto enemy_B = Engine::GetActiveScene()->makeEntity();
-		enemy_B->setPosition(ls::getTilePosition(t));
+		enemy_B->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
 		enemy_B->addTag("enemy");
 		enemy_B->addTag("enemy_B");
 
@@ -75,7 +75,7 @@ vector<shared_ptr<Entity>> create_enemies()
 	for (auto t : enemy_C_tiles)
 	{
 		auto enemy_C = Engine::GetActiveScene()->makeEntity();
-		enemy_C->setPosition(ls::getTilePosition(t));
+		enemy_C->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
 		enemy_C->addTag("enemy");
 		enemy_C->addTag("enemy_C");
 

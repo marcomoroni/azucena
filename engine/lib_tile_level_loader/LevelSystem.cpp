@@ -1,34 +1,44 @@
 #include "LevelSystem.h"
+#include <system_resources.h>
 #include <fstream>
 
 using namespace std;
 using namespace sf;
 
-std::map<LevelSystem::Tile, sf::Color> LevelSystem::_colours{
-	{ WALL, Color::White },{ END, Color::Red } };
+float LevelSystem::_tileSize(100.f);
 
-sf::Color LevelSystem::getColor(LevelSystem::Tile t) {
-	auto it = _colours.find(t);
-	if (it == _colours.end()) {
-		_colours[t] = Color::Transparent;
+std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
+	{ EMPTY, IntRect(736, 160, _tileSize, _tileSize) },
+	{ START, IntRect(736, 160, _tileSize, _tileSize) }, // Same as empty
+	{ END, IntRect(902, 97, _tileSize, _tileSize) },
+	{ WALL, IntRect(640, 160, _tileSize, _tileSize) },
+	// All enemies have empty below them
+	{ ENEMY_A, IntRect(736, 160, _tileSize, _tileSize) },
+	{ ENEMY_B, IntRect(736, 160, _tileSize, _tileSize) },
+	{ ENEMY_C, IntRect(736, 160, _tileSize, _tileSize) } };
+
+sf::IntRect LevelSystem::getSpriteRect(LevelSystem::Tile t) {
+	auto it = _rectMap.find(t);
+	if (it == _rectMap.end()) {
+		// Pink texture // TODO
+		return IntRect(12, 34, _tileSize, _tileSize);
 	}
-	return _colours[t];
+	return _rectMap[t];
 }
 
-void LevelSystem::setColor(LevelSystem::Tile t, sf::Color c) {
-	_colours[t] = c;
+void LevelSystem::setSpriteRect(LevelSystem::Tile t, sf::IntRect r) {
+	_rectMap[t] = r;
 }
 
 std::unique_ptr<LevelSystem::Tile[]> LevelSystem::_tiles;
 size_t LevelSystem::_width;
 size_t LevelSystem::_height;
 
-float LevelSystem::_tileSize(100.f);
-Vector2f LevelSystem::_offset(0.0f, 30.0f);
-// Vector2f LevelSystem::_offset(0,0);
-vector<std::unique_ptr<sf::RectangleShape>> LevelSystem::_sprites;
+Vector2f LevelSystem::_offset(0.0f, 0.0f);
+Sprite LevelSystem::_map;
 
 void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
+
 	_tileSize = tileSize;
 	size_t w = 0, h = 0;
 	string buffer;
@@ -78,107 +88,42 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 	buildSprites();
 }
 
-void LevelSystem::buildSprites(bool optimise) {
-	_sprites.clear();
+shared_ptr<Texture> tex;
+RenderTexture bigMapTexture;
+
+void LevelSystem::buildSprites() {
 
 	struct tp {
-		sf::Vector2f p;
-		sf::Vector2f s;
-		sf::Color c;
+		sf::Vector2f pos;
+		sf::IntRect intRect;
 	};
 	vector<tp> tps;
-	const auto tls = Vector2f(_tileSize, _tileSize);
 	for (size_t y = 0; y < _height; ++y) {
 		for (size_t x = 0; x < _width; ++x) {
 			Tile t = getTile({ x, y });
-			if (t == EMPTY) {
-				continue;
-			}
-			tps.push_back({ getTilePosition({ x, y }), tls, getColor(t) });
+			tps.push_back({ getTilePosition({ x, y }), getSpriteRect(t) });
 		}
 	}
 
-	const auto nonempty = tps.size();
+	tex = Resources::load<Texture>("terrain_atlas.png");
+	bigMapTexture.create(_tileSize * _width, _tileSize * _height);
+	bigMapTexture.clear(Color::Red);
 
-	// If tile of the same type are next to each other,
-	// We can use one large sprite instead of two.
-	if (optimise && nonempty) {
-
-		vector<tp> tpo;
-		tp last = tps[0];
-		size_t samecount = 0;
-
-		for (size_t i = 1; i < nonempty; ++i) {
-			// Is this tile compressible with the last?
-			bool same = ((tps[i].p.y == last.p.y) &&
-				(tps[i].p.x == last.p.x + (tls.x * (1 + samecount))) &&
-				(tps[i].c == last.c));
-			if (same) {
-				++samecount; // Yes, keep going
-							 // tps[i].c = Color::Green;
-			}
-			else {
-				if (samecount) {
-					last.s.x = (1 + samecount) * tls.x; // Expand tile
-				}
-				// write tile to list
-				tpo.push_back(last);
-				samecount = 0;
-				last = tps[i];
-			}
-		}
-		// catch the last tile
-		if (samecount) {
-			last.s.x = (1 + samecount) * tls.x;
-			tpo.push_back(last);
-		}
-
-		// No scan down Y, using different algo now that compressible blocks may
-		// not be contiguous
-		const auto xsave = tpo.size();
-		samecount = 0;
-		vector<tp> tpox;
-		for (size_t i = 0; i < tpo.size(); ++i) {
-			last = tpo[i];
-			for (size_t j = i + 1; j < tpo.size(); ++j) {
-				bool same = ((tpo[j].p.x == last.p.x) && (tpo[j].s == last.s) &&
-					(tpo[j].p.y == last.p.y + (tls.y * (1 + samecount))) &&
-					(tpo[j].c == last.c));
-				if (same) {
-					++samecount;
-					tpo.erase(tpo.begin() + j);
-					--j;
-				}
-			}
-			if (samecount) {
-				last.s.y = (1 + samecount) * tls.y; // Expand tile
-			}
-			// write tile to list
-			tpox.push_back(last);
-			samecount = 0;
-		}
-
-		tps.swap(tpox);
-	}
-
+	// Make everything one big sprite
 	for (auto& t : tps) {
-		auto s = make_unique<sf::RectangleShape>();
-		s->setPosition(t.p);
-		s->setSize(t.s);
-		s->setFillColor(Color::Red);
-		s->setFillColor(t.c);
-		// s->setFillColor(Color(rand()%255,rand()%255,rand()%255));
-		_sprites.push_back(move(s));
+		auto s = Sprite();
+		s.setTexture(*tex);
+		s.setTextureRect(t.intRect);
+		s.setPosition(t.pos);
+		bigMapTexture.draw(s);
 	}
 
-	cout << "Level with " << (_width * _height) << " Tiles, With " << nonempty
-		<< " Not Empty, using: " << _sprites.size() << " Sprites\n";
+	bigMapTexture.display();
+	_map = Sprite(bigMapTexture.getTexture());
 }
 
 void LevelSystem::render(RenderWindow& window) {
-	for (auto& t : _sprites) {
-		window.draw(*t);
-	}
+	window.draw(_map);
 }
 
 LevelSystem::Tile LevelSystem::getTile(sf::Vector2ul p) {
@@ -237,7 +182,7 @@ void LevelSystem::setOffset(const Vector2f& _offset) {
 
 void LevelSystem::unload() {
 	cout << "LevelSystem unloading\n";
-	_sprites.clear();
+	//_sprites.clear();
 	_tiles.reset();
 	_width = 0;
 	_height = 0;

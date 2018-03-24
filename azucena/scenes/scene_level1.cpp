@@ -19,7 +19,7 @@ void Level1Scene::Load() {
 #if DEBUG
   cout << " Scene 1 Load" << endl;
 #endif
-  ls::loadLevelFile("res/level_1.txt", 40.0f);
+  ls::loadLevelFile("res/level_1.txt", 32.0f);
 
   // Create player
 	player = create_player();
