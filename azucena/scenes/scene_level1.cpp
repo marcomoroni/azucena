@@ -32,10 +32,10 @@ void Level1Scene::Load() {
     auto walls = ls::findTiles(ls::WALL);
     for (auto w : walls) {
       auto pos = ls::getTilePosition(w);
-      pos += Vector2f(20.f, 20.f); //offset to center
+			pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2); //offset to center
       auto e = makeEntity();
       e->setPosition(pos);
-      e->addComponent<PhysicsComponent>(false, Vector2f(40.f, 40.f));
+      e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
     }
   }
 
