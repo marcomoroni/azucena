@@ -111,7 +111,7 @@ shared_ptr<Entity> create_button(string txt)
 
 	auto s = button->addComponent<ShapeComponent>();
 	s->setShape<RectangleShape>(Vector2f(300.0f, 60.0f));
-	s->getShape().setFillColor(Color::Green);
+	s->getShape().setFillColor(Color::Blue);
 	s->getShape().setOrigin(s->getShape().getGlobalBounds().width / 2, s->getShape().getGlobalBounds().height / 2);
 
 	auto t = button->addComponent<TextComponent>(txt);

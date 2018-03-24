@@ -15,18 +15,24 @@ void MenuScene::Load() {
 #endif
   {
     auto txt = makeEntity();
-    auto t = txt->addComponent<TextComponent>(
-        "Platformer\nPress Space to Start");
+    auto t = txt->addComponent<TextComponent>("Azucena");
+		t->getText().setOrigin(t->getText().getLocalBounds().width / 2, t->getText().getLocalBounds().height / 2);
+		txt->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 100.f));
   }
 
 	{
 		auto b = create_button("Start");
-		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 200.f));
+		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 250.f));
+	}
+
+	{
+		auto b = create_button("Options");
+		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 350.f));
 	}
 
 	{
 		auto b = create_button("Quit");
-		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 300.f));
+		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 450.f));
 	}
 
 	// Set view
