@@ -1,12 +1,12 @@
 #include "scene_level1.h"
-#include "../components/cmp_player_physics.h"
-#include "../components/cmp_sprite.h"
+#include "../components/cmp_physics.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
 #include <thread>
 #include <system_resources.h>
 #include "../constrols.h"
+#include "../entities_creator.h"
 
 using namespace std;
 using namespace sf;
@@ -21,58 +21,10 @@ void Level1Scene::Load() {
   ls::loadLevelFile("res/level_1.txt", 40.0f);
 
   // Create player
-  {
-    player = makeEntity();
-    player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
-		player->addTag("player");
+	player = create_player(this);
 
-		auto s = player->addComponent<SpriteComponent>();
-		auto tex = Resources::load<Texture>("invaders_sheet.png");
-		s->setTexture(tex);
-		s->getSprite().setTextureRect(sf::IntRect(32, 0, 32, 32));
-		// Centre origin
-		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
-
-    player->addComponent<PlayerPhysicsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
-  }
-
-	// Crate enemies A
-	{
-		auto enemy_A_tiles = ls::findTiles(ls::ENEMY_A);
-		for (auto t : enemy_A_tiles)
-		{
-			auto enemy_A = makeEntity();
-			enemy_A->setPosition(ls::getTilePosition(t));
-			enemy_A->addTag("enemy");
-			enemy_A->addTag("enemy_A");
-
-			auto s = enemy_A->addComponent<SpriteComponent>();
-			auto tex = Resources::load<Texture>("invaders_sheet.png");
-			s->setTexture(tex);
-			s->getSprite().setTextureRect(sf::IntRect(64, 0, 32, 32));
-			// Centre origin
-			s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
-		}
-	}
-
-	// Crate enemies B
-	{
-		auto enemy_B_tiles = ls::findTiles(ls::ENEMY_B);
-		for (auto t : enemy_B_tiles)
-		{
-			auto enemy_B = makeEntity();
-			enemy_B->setPosition(ls::getTilePosition(t));
-			enemy_B->addTag("enemy");
-			enemy_B->addTag("enemy_B");
-
-			auto s = enemy_B->addComponent<SpriteComponent>();
-			auto tex = Resources::load<Texture>("invaders_sheet.png");
-			s->setTexture(tex);
-			s->getSprite().setTextureRect(sf::IntRect(96, 0, 32, 32));
-			// Centre origin
-			s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
-		}
-	}
+	// Create enemies
+	create_enemies(this);
 
   // Add physics colliders to level tiles.
   {

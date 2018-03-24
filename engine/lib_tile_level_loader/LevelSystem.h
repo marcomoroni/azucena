@@ -23,7 +23,8 @@ public:
     WALL = 'w',
     ENEMY = 'n', // to delete
 		ENEMY_A = 'A',
-		ENEMY_B = 'B'
+		ENEMY_B = 'B',
+		ENEMY_C = 'C'
   };
 
   static Tile getTile(sf::Vector2ul);

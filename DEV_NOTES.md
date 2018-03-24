@@ -34,6 +34,10 @@ After you clone this repo remember to run
 git submodule update --init --recursive
 ```
 
+## `entities_creator`
+
+Use the functions here when loading a scene to create entities. Without this, you would have, for example, to copy paste the code to create the player into every scene.
+
 ## Components
 
 ### `cmp_player_physics`
