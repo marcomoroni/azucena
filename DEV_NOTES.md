@@ -91,6 +91,10 @@ if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Up")))
 }
 ```
 
+## Menu
+
+Press <kbd>Esc</kbd> for a while to return to menu.
+
 ## Resize window
 
 Changes in `Engine::Start()`.
