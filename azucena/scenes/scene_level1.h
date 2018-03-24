@@ -11,7 +11,4 @@ public:
   void Update(const double& dt) override;
 
   void Render() override;
-
-private:
-	float _escButtonTimePressed = 0.0f;
 };

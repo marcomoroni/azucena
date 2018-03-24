@@ -13,6 +13,7 @@ using namespace sf;
 
 static shared_ptr<Entity> player;
 Vector2f view_center;
+float _escButtonTimePressed = 0.0f;
 
 void Level1Scene::Load() {
 #if DEBUG
