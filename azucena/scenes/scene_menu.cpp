@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include "../constrols.h"
+#include "../entities_creator.h"
 
 using namespace std;
 using namespace sf;
@@ -17,6 +18,16 @@ void MenuScene::Load() {
     auto t = txt->addComponent<TextComponent>(
         "Platformer\nPress Space to Start");
   }
+
+	{
+		auto b = create_button("Start");
+		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 200.f));
+	}
+
+	{
+		auto b = create_button("Quit");
+		b->setPosition(Vector2f(Engine::GetWindow().getSize().x / 2, 300.f));
+	}
 
 	// Set view
 	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));

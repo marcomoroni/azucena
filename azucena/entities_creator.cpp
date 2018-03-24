@@ -6,6 +6,7 @@
 #include "components/cmp_player_physics.h"
 #include "components/cmp_sprite.h"
 #include "components/cmp_physics.h"
+#include "components/cmp_text.h"
 
 using namespace std;
 using namespace sf;
@@ -102,4 +103,23 @@ void add_physics_colliders_to_tiles()
 		e->setPosition(pos);
 		e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
 	}
+}
+
+shared_ptr<Entity> create_button(string txt)
+{
+	auto button = Engine::GetActiveScene()->makeEntity();
+
+	auto s = button->addComponent<ShapeComponent>();
+	s->setShape<RectangleShape>(Vector2f(300.0f, 60.0f));
+	s->getShape().setFillColor(Color::Green);
+	s->getShape().setOrigin(s->getShape().getGlobalBounds().width / 2, s->getShape().getGlobalBounds().height / 2);
+
+	auto t = button->addComponent<TextComponent>(txt);
+	t->getText().setOrigin(t->getText().getLocalBounds().width / 2, t->getText().getLocalBounds().height / 2);
+	// For some reason it is not in the center, so move the center a bit
+	t->getText().setOrigin(t->getText().getOrigin().x, t->getText().getOrigin().y + 10.f);
+
+	button->addTag("button");
+
+	return button;
 }

@@ -2,7 +2,12 @@
 #include <system_renderer.h>
 #include <system_resources.h>
 
-void TextComponent::update(double dt) {}
+using namespace std;
+using namespace sf;
+
+void TextComponent::update(double dt) {
+	_text.setPosition(_parent->getPosition() /*+ _offset*/);
+}
 
 void TextComponent::render() { Renderer::queue(&_text); }
 
@@ -17,3 +22,5 @@ void TextComponent::SetText(const std::string& str) {
   _string = str;
   _text.setString(_string);
 }
+
+Text& TextComponent::getText() { return _text; }
