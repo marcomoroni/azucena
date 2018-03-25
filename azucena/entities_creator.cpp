@@ -6,6 +6,8 @@
 #include "components/cmp_player_physics.h"
 #include "components/cmp_sprite.h"
 #include "components/cmp_physics.h"
+#include "components/cmp_state_machine.h"
+#include "enemies_states.h"
 
 using namespace std;
 using namespace sf;
@@ -47,6 +49,11 @@ vector<shared_ptr<Entity>> create_enemies()
 		s->getSprite().setTextureRect(sf::IntRect(64, 0, 32, 32));
 		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+		auto sm = enemy_A->addComponent<StateMachineComponent>();
+		sm->addState("normal", make_shared<NormalState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("near", make_shared<NearState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->changeState("normal");
 
 		enemies.push_back(enemy_A);
 	}
