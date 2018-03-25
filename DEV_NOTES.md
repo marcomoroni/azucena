@@ -62,6 +62,10 @@ Not much to say.
 
 Add this component to each enemy. It renders a health bar near the enemy.
 
+### `cmp_player_health`
+
+Similar to `cmp_enemy_health`, but it also handles potions.
+
 ## Smooth camera
 
 Every scene has to set the view at least once when opened.
