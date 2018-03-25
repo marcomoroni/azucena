@@ -9,6 +9,8 @@ class EnemyHealthComponent : public Component
 private:
 	int _maxHealth;
 	int _health;
+
+	// For health bar
 	int _spriteSize = 16;
 	std::shared_ptr<sf::Texture> _tex = std::make_shared<sf::Texture>();
 	std::shared_ptr<sf::Sprite> _backSprite;

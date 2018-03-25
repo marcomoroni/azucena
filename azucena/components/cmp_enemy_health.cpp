@@ -13,13 +13,14 @@ EnemyHealthComponent::EnemyHealthComponent(Entity* p, int maxHealth)
 {
 	_tex = Resources::load<Texture>("enemy_health.png");
 	
-	// Create healt bar sprite 
+	// Create healt bar sprite using a render texture
 	backTex.create(_spriteSize * _maxHealth, _spriteSize);
 	backTex.clear(Color::Yellow);
 	for (int i = 0; i < _maxHealth; i++)
 	{
 		auto s = Sprite();
 		s.setTexture(*_tex);
+		// Use different sprite for left and right ends
 		if (i == 0)
 		{
 			s.setTextureRect(IntRect(0, 0, _spriteSize, _spriteSize));
@@ -61,13 +62,14 @@ void EnemyHealthComponent::update(double dt)
 		s->setPosition({ (s->getPosition().x - _backSprite->getLocalBounds().width / 2 + (float)_spriteSize / 2) + (float)_spriteSize * i, s->getPosition().y });
 	}
 
+	// If healt changes change heart sprites
 	if (_flagHeathChanged)
 	{
 		for (int i = 0; i < _heartSprites.size(); i++)
 		{
 			auto s = _heartSprites[i];
-			if (i + 1 > _health) s->setTextureRect(IntRect(_spriteSize, _spriteSize, _spriteSize, _spriteSize));
-			else s->setTextureRect(IntRect(0, _spriteSize, _spriteSize, _spriteSize));
+			if (i + 1 > _health) s->setTextureRect(IntRect(_spriteSize, _spriteSize, _spriteSize, _spriteSize)); // Empty sprite
+			else s->setTextureRect(IntRect(0, _spriteSize, _spriteSize, _spriteSize)); // Heart sprite
 		}
 		_flagHeathChanged = false;
 	}
@@ -75,7 +77,6 @@ void EnemyHealthComponent::update(double dt)
 
 void EnemyHealthComponent::render()
 {
-	//Renderer::queue(_testSprite.get());
 	Renderer::queue(_backSprite.get());
 	for (auto s : _heartSprites) Renderer::queue(s.get());
 }
