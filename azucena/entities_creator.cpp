@@ -77,6 +77,8 @@ vector<shared_ptr<Entity>> create_enemies()
 		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
+		auto h = enemy_B->addComponent<EnemyHealthComponent>(6);
+
 		enemies.push_back(enemy_B);
 	}
 
@@ -95,6 +97,8 @@ vector<shared_ptr<Entity>> create_enemies()
 		s->getSprite().setTextureRect(sf::IntRect(128, 0, 32, 32));
 		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+		auto h = enemy_C->addComponent<EnemyHealthComponent>(2);
 
 		enemies.push_back(enemy_C);
 	}
