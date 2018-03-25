@@ -7,6 +7,7 @@
 #include "components/cmp_sprite.h"
 #include "components/cmp_physics.h"
 #include "components/cmp_state_machine.h"
+#include "components/cmp_enemy_health.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -54,6 +55,8 @@ vector<shared_ptr<Entity>> create_enemies()
 		sm->addState("normal", make_shared<NormalState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("near", make_shared<NearState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->changeState("normal");
+
+		auto h = enemy_A->addComponent<EnemyHealthComponent>(4);
 
 		enemies.push_back(enemy_A);
 	}
