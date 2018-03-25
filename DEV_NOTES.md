@@ -58,6 +58,10 @@ The player can sprint by pressing <kbd>Space</kbd>. You have to release the butt
 
 Not much to say.
 
+### `cmp_enemy_health`
+
+Add this component to each enemy. It renders a health bar near the enemy.
+
 ## Smooth camera
 
 Every scene has to set the view at least once when opened.
