@@ -25,6 +25,6 @@ public:
 	void decreaseHealth(int);
 	void increaseHealth();
 	void increaseHealth(int);
-	int GetHealth();
-	int GetMaxHealth();
+	int getHealth();
+	int getMaxHealth();
 };

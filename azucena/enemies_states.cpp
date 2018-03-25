@@ -1,6 +1,5 @@
 #include "enemies_states.h"
 #include "components/cmp_sprite.h"
-#include "components/cmp_enemy_health.h"
 
 using namespace sf;
 

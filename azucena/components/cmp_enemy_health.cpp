@@ -106,6 +106,6 @@ void EnemyHealthComponent::increaseHealth()
 	increaseHealth(1);
 }
 
-int EnemyHealthComponent::GetHealth() { return _health; }
+int EnemyHealthComponent::getHealth() { return _health; }
 
-int EnemyHealthComponent::GetMaxHealth() { return _maxHealth; }
+int EnemyHealthComponent::getMaxHealth() { return _maxHealth; }
