@@ -1,4 +1,6 @@
-#include "cmp_hurt_player.h"
+// NOT USING THIS
+
+/*#include "cmp_hurt_player.h"
 #include <engine.h>
 
 using namespace std;
@@ -15,3 +17,4 @@ void HurtComponent::update(double dt) {
 
 HurtComponent::HurtComponent(Entity* p)
     : Component(p), _player(_parent->scene->ents.find("player")[0]) {}
+*/

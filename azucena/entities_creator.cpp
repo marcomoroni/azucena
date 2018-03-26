@@ -8,6 +8,8 @@
 #include "components/cmp_physics.h"
 #include "components/cmp_state_machine.h"
 #include "components/cmp_enemy_health.h"
+#include "components/cmp_hurt.h"
+#include "components/cmp_player_health.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -27,6 +29,8 @@ shared_ptr<Entity> create_player()
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	player->addComponent<PlayerPhysicsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+
+	player->addComponent<PlayerHealthComponent>(4);
 
 	return player;
 }
@@ -56,7 +60,10 @@ vector<shared_ptr<Entity>> create_enemies()
 		sm->addState("near", make_shared<NearState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->changeState("normal");
 
-		auto h = enemy_A->addComponent<EnemyHealthComponent>(4);
+		enemy_A->addComponent<EnemyHealthComponent>(4);
+
+		auto h = enemy_A->addComponent<HurtComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+		h->addTagToHurt("player");
 
 		enemies.push_back(enemy_A);
 	}

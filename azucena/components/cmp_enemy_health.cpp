@@ -86,7 +86,6 @@ void EnemyHealthComponent::decreaseHealth(int h)
 	int newHealth = _health - h;
 	if (newHealth >= 0) _health = newHealth;
 	_flagHeathChanged = true;
-
 }
 
 void EnemyHealthComponent::decreaseHealth()
