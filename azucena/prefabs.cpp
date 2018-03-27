@@ -9,6 +9,7 @@
 #include "components/cmp_state_machine.h"
 #include "components/cmp_enemy_health.h"
 #include "components/cmp_text.h"
+#include "components/cmp_button.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -133,10 +134,12 @@ shared_ptr<Entity> create_button(string text)
 
 	auto s = button->addComponent<ShapeComponent>();
 	s->setShape<RectangleShape>(Vector2f(300.0f, 60.0f));
-	s->getShape().setFillColor(Color::Blue);
+	//s->getShape().setFillColor(Color::Blue);
 	s->getShape().setOrigin(s->getShape().getLocalBounds().width / 2, s->getShape().getLocalBounds().height / 2);
 
 	auto t = button->addComponent<TextComponent>(text);
+
+	button->addComponent<ButtonComponent>(s, t);
 
 	return button;
 }
