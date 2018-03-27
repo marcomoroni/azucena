@@ -18,5 +18,6 @@ TextComponent::TextComponent(Entity* const p, const std::string& str)
     : Component(p), _string(str) {
   _font = Resources::get<sf::Font>("RobotoMono-Regular.ttf");
   _text.setFont(*_font);
+	_text.setCharacterSize(10);
 	setText(_string);
 }

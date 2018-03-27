@@ -36,7 +36,7 @@ void OptionsScene::Load()
 	// Set buttons position
 	for (int i = 0; i < btns.size(); i++)
 	{
-		btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (100.0f * i) + 200.0f });
+		btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (40.0f * i) + 200.0f });
 	}
 
 	// Set view

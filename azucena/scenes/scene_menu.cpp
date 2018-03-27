@@ -27,10 +27,10 @@ void MenuScene::Load() {
 	btn_Start->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 200.0f });
 
 	btn_Options = create_button("Options");
-	btn_Options->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 300.0f });
+	btn_Options->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 240.0f });
 
 	btn_Quit = create_button("Quit");
-	btn_Quit->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 400.0f });
+	btn_Quit->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 280.0f });
 
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
