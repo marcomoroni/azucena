@@ -10,6 +10,7 @@
 #include "components/cmp_enemy_health.h"
 #include "components/cmp_text.h"
 #include "components/cmp_button.h"
+#include "components/cmp_game_ui.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -151,4 +152,11 @@ shared_ptr<Entity> create_button(string text)
 	button->addComponent<ButtonComponent>(s, t);
 
 	return button;
+}
+
+shared_ptr<Entity> create_game_ui()
+{
+	auto e = Engine::GetActiveScene()->makeEntity();
+	e->addComponent<GameUIComponent>();
+	return e;
 }
