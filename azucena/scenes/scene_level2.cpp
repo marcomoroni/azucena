@@ -1,9 +1,11 @@
+// NOT USING THIS
+
 #include "scene_level2.h"
 #include "../components/cmp_enemy_ai.h"
 #include "../components/cmp_enemy_turret.h"
 #include "../components/cmp_hurt_player.h"
 #include "../components/cmp_physics.h"
-#include "../components/cmp_player_physics.h"
+//#include "../components/cmp_player_physics.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
@@ -28,7 +30,7 @@ void Level2Scene::Load() {
 		s->getShape().setFillColor(Color::Magenta);
 		s->getShape().setOrigin(10.f, 15.f);
     player->addTag("player");
-    player->addComponent<PlayerPhysicsComponent>(Vector2f(20.f, 30.f));
+    //player->addComponent<PlayerControlsComponent>(Vector2f(20.f, 30.f));
   }
 
   // Create Enemy

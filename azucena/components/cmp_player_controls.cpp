@@ -1,14 +1,15 @@
-#include "cmp_player_physics.h"
+#include "cmp_player_controls.h"
 #include "system_physics.h"
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
 #include "../constrols.h"
+#include "cmp_physics.h"
 
 using namespace std;
 using namespace sf;
 using namespace Physics;
 
-void PlayerPhysicsComponent::update(double dt) {
+void PlayerControlsComponent::update(double dt) {
 
 	const auto pos = _parent->getPosition();
 
@@ -72,22 +73,22 @@ void PlayerPhysicsComponent::update(double dt) {
 		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(180, 255, 255));
 	}
 
-	setVelocity(Vector2f(normalize(direction)  * speed));
+	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction)  * speed));
+	//setVelocity(Vector2f(normalize(direction)  * speed));
 
-	PhysicsComponent::update(dt);
+	//PhysicsComponent::update(dt);
 }
 
-PlayerPhysicsComponent::PlayerPhysicsComponent(Entity* p,
-	const Vector2f& size)
-	: PhysicsComponent(p, true, size) {
-	_size = sv2_to_bv2(size, true);
+PlayerControlsComponent::PlayerControlsComponent(Entity* p)
+	: Component(p)
+{
 	_groundspeed = 160.f;
 	_isSprinting = false;
 	_sprintSpeed = 1200.f;
 	_sprintCooldown = 0.0f;
 	_isStillPressingSprintKey = false;
-	_body->SetSleepingAllowed(false);
-	_body->SetFixedRotation(true);
+	//_body->SetSleepingAllowed(false);
+	//_body->SetFixedRotation(true);
 	//Bullet items have higher-res collision detection
-	_body->SetBullet(true);
+	//_body->SetBullet(true);
 }

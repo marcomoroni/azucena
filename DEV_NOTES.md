@@ -46,11 +46,11 @@ However, rendering a sprite for each tile makes the game slower, so the sprite o
 
 ## Components
 
-### `cmp_player_physics`
+### ~`cmp_player_physics`~ `cmp_player_controls`
 
 I changed this to simulate top-down view movement.
 
-I'm not using impulses because I couldn't get the movement I wanted. Instead, I'm setting the velocity at every frame.
+I'm not using impulses because I couldn't get the movement I wanted. Instead, I'm setting the velocity of the physics component at every frame.
 
 The player can sprint by pressing <kbd>Space</kbd>. You have to release the button and press it again to sprint again. You need to wait a little bit until you can sprint again.
 

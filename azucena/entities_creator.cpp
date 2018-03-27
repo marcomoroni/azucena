@@ -3,7 +3,7 @@
 #include <LevelSystem.h>
 #include <system_resources.h>
 
-#include "components/cmp_player_physics.h"
+#include "components/cmp_player_controls.h"
 #include "components/cmp_sprite.h"
 #include "components/cmp_physics.h"
 #include "components/cmp_state_machine.h"
@@ -26,7 +26,14 @@ shared_ptr<Entity> create_player()
 	// Centre origin
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	player->addComponent<PlayerPhysicsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	//player->addComponent<PlayerControlsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	auto p = player->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	p->getBody()->SetSleepingAllowed(false);
+	p->getBody()->SetFixedRotation(true);
+	//Bullet items have higher-res collision detection
+	p->getBody()->SetBullet(true);
+
+	player->addComponent<PlayerControlsComponent>();
 
 	return player;
 }
