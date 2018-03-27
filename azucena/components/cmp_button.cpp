@@ -8,6 +8,8 @@ using namespace sf;
 ButtonComponent::ButtonComponent(Entity* p, shared_ptr<ShapeComponent> s, shared_ptr<TextComponent> t)
 	: _shapeCmp(s), _textCmp(t), Component(p)
 {
+	// Set the initial style
+	setHighlight(false, true);
 }
 
 void ButtonComponent::update(double dt)
@@ -24,9 +26,9 @@ void ButtonComponent::update(double dt)
 	}
 }
 
-void ButtonComponent::setHighlight(bool h)
+void ButtonComponent::setHighlight(bool h, bool force)
 {
-	if (h != _isHighlited)
+	if (h != _isHighlited || force)
 	{
 		_isHighlited = h;
 		if (h)

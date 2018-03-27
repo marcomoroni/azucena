@@ -16,6 +16,6 @@ public:
 	explicit ButtonComponent(Entity* p, std::shared_ptr<ShapeComponent>, std::shared_ptr<TextComponent>);
 	void update(double dt) override;
 	void render() override {}
-	void setHighlight(bool);
+	void setHighlight(bool, bool force=false);
 	bool isSelected();
 };
