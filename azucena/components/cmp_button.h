@@ -7,7 +7,7 @@
 class ButtonComponent : public Component
 {
 private:
-	bool _isHighlited;
+	bool _isHighlited = false;
 	std::shared_ptr<ShapeComponent> _shapeCmp;
 	std::shared_ptr<TextComponent> _textCmp;
 
@@ -17,4 +17,5 @@ public:
 	void update(double dt) override;
 	void render() override {}
 	void setHighlight(bool);
+	bool isSelected();
 };

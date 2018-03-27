@@ -5,9 +5,13 @@
 #include <iostream>
 #include "../constrols.h"
 #include "../prefabs.h"
+#include "../components/cmp_button.h"
 
 using namespace std;
 using namespace sf;
+
+shared_ptr<Entity> btn_Start;
+shared_ptr<Entity> btn_Quit;
 
 void MenuScene::Load() {
 #if DEBUG
@@ -15,15 +19,15 @@ void MenuScene::Load() {
 #endif
   {
     auto txt = makeEntity();
-    auto t = txt->addComponent<TextComponent>(
-        "Azucena");
+    auto t = txt->addComponent<TextComponent>("Azucena");
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
   }
 
-	{
-		auto button = create_button("Start");
-		button->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 200.0f });
-	}
+	btn_Start = create_button("Start");
+	btn_Start->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 200.0f });
+
+	btn_Quit = create_button("Quit");
+	btn_Quit->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 300.0f });
 
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
@@ -32,9 +36,16 @@ void MenuScene::Load() {
 }
 
 void MenuScene::Update(const double& dt) {
-	if (sf::Keyboard::isKeyPressed(Controls::GetKeyboardKey("Enter"))) {
-    Engine::ChangeScene(&level1);
-  }
+
+	if (btn_Start->get_components<ButtonComponent>()[0]->isSelected())
+	{
+		Engine::ChangeScene(&level1);
+	}
+
+	if (btn_Quit->get_components<ButtonComponent>()[0]->isSelected())
+	{
+		Engine::GetWindow().close();
+	}
 
   Scene::Update(dt);
 }

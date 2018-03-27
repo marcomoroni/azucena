@@ -10,9 +10,9 @@ ButtonComponent::ButtonComponent(Entity* p, shared_ptr<ShapeComponent> s, shared
 {
 }
 
-void ButtonComponent::update(double dt) {
-
-	// Highlight button if mouse hover shape
+void ButtonComponent::update(double dt)
+{
+	// Highlight button if mouse hovers shape
 	auto mousePos = Engine::GetWindow().mapPixelToCoords(Mouse::getPosition(Engine::GetWindow()));
 	if (_shapeCmp->getShape().getGlobalBounds().contains(mousePos))
 	{
@@ -40,4 +40,16 @@ void ButtonComponent::setHighlight(bool h)
 			_shapeCmp->getShape().setFillColor(Color(255, 255, 255, 80));
 		}
 	}
+}
+
+bool ButtonComponent::isSelected()
+{
+	if (_isHighlited)
+	{
+		if (Mouse::isButtonPressed(Mouse::Left))
+		{
+			return true;
+		}
+	}
+	return false;
 }
