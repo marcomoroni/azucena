@@ -46,7 +46,7 @@ However, rendering a sprite for each tile makes the game slower, so the sprite o
 
 ## Components
 
-### ~`cmp_player_physics`~ `cmp_player_controls`
+### ~`PlayerPhysicsComponent`~ `PlayerControlsComponent`
 
 I changed this to simulate top-down view movement.
 
@@ -54,19 +54,19 @@ I'm not using impulses because I couldn't get the movement I wanted. Instead, I'
 
 The player can sprint by pressing <kbd>Space</kbd>. You have to release the button and press it again to sprint again. You need to wait a little bit until you can sprint again.
 
-### `cmp_state_machine`
+### `StateMachineComponent`
 
 Not much to say.
 
-### `cmp_enemy_health`
+### `EnemyHealthComponent`
 
 Add this component to each enemy. It renders a health bar near the enemy.
 
-### `cmp_player_health`
+### `PlayerHealthComponent`
 
 Similar to `cmp_enemy_health`, but it also handles potions.
 
-### `cmp_button`
+### `ButtonComponent`
 
 This component handles the different states of button (highlight, select).
 
