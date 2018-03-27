@@ -67,6 +67,9 @@ vector<shared_ptr<Entity>> create_enemies()
 
 		auto h = enemy_A->addComponent<EnemyHealthComponent>(4);
 
+		auto p = enemy_A->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+		p->getBody()->SetBullet(true);
+
 		enemies.push_back(enemy_A);
 	}
 
@@ -88,6 +91,9 @@ vector<shared_ptr<Entity>> create_enemies()
 
 		auto h = enemy_B->addComponent<EnemyHealthComponent>(6);
 
+		auto p = enemy_B->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+		p->getBody()->SetBullet(true);
+
 		enemies.push_back(enemy_B);
 	}
 
@@ -108,6 +114,9 @@ vector<shared_ptr<Entity>> create_enemies()
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto h = enemy_C->addComponent<EnemyHealthComponent>(2);
+
+		auto p = enemy_C->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+		p->getBody()->SetBullet(true);
 
 		enemies.push_back(enemy_C);
 	}
