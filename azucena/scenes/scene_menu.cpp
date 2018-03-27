@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
 #include "../constrols.h"
+#include "../prefabs.h"
 
 using namespace std;
 using namespace sf;
@@ -15,9 +16,14 @@ void MenuScene::Load() {
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>(
-        "Azucena\nPress Space to Start");
-		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (float)Engine::GetWindow().getSize().y / 2 });
+        "Azucena");
+		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
   }
+
+	{
+		auto button = create_button("Start");
+		button->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 200.0f });
+	}
 
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());

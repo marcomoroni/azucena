@@ -8,6 +8,7 @@
 #include "components/cmp_physics.h"
 #include "components/cmp_state_machine.h"
 #include "components/cmp_enemy_health.h"
+#include "components/cmp_text.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -123,4 +124,19 @@ void add_physics_colliders_to_tiles()
 		e->setPosition(pos);
 		e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
 	}
+}
+
+shared_ptr<Entity> create_button(string text)
+{
+	auto button = Engine::GetActiveScene()->makeEntity();
+	button->addTag("button");
+
+	auto s = button->addComponent<ShapeComponent>();
+	s->setShape<RectangleShape>(Vector2f(300.0f, 60.0f));
+	s->getShape().setFillColor(Color::Blue);
+	s->getShape().setOrigin(s->getShape().getLocalBounds().width / 2, s->getShape().getLocalBounds().height / 2);
+
+	auto t = button->addComponent<TextComponent>(text);
+
+	return button;
 }
