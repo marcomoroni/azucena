@@ -7,6 +7,8 @@
 #include "../constrols.h"
 #include "../prefabs.h"
 
+#include "../components/cmp_game_ui.h"
+
 using namespace std;
 using namespace sf;
 
@@ -28,6 +30,10 @@ void Level1Scene::Load() {
 
   // Add physics colliders to level tiles.
 	add_physics_colliders_to_tiles();
+
+	// Add UI
+	auto ui = makeEntity();
+	ui->addComponent<UIComponent>();
 
 	// Set view
 	view_center = player->getPosition();

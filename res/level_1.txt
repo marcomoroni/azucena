@@ -8,7 +8,7 @@ w         A                                      w
 w                                                w
 w                                                w
 w                                                w
-w                                                w
+w   s                                            w
 w                                                w
 w                                                w
 w                                                w
@@ -18,6 +18,6 @@ w                   e                     B      w
 w                   www             B            w
 w                        w               B       w
 w                       ww                       w
-w s       e     w     wwww                       w
+w         e     w     wwww                       w
 w  w      n    www                               w
 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
