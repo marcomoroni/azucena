@@ -14,6 +14,7 @@ public:
   ~TextComponent() override = default;
 
   void setText(const std::string& str);
+	sf::Text* getText() { return &_text; }
 
 protected:
   std::shared_ptr<sf::Font> _font;
