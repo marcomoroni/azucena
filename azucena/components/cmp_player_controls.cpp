@@ -74,9 +74,6 @@ void PlayerControlsComponent::update(double dt) {
 	}
 
 	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction)  * speed));
-	//setVelocity(Vector2f(normalize(direction)  * speed));
-
-	//PhysicsComponent::update(dt);
 }
 
 PlayerControlsComponent::PlayerControlsComponent(Entity* p)
@@ -87,8 +84,4 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_sprintSpeed = 1200.f;
 	_sprintCooldown = 0.0f;
 	_isStillPressingSprintKey = false;
-	//_body->SetSleepingAllowed(false);
-	//_body->SetFixedRotation(true);
-	//Bullet items have higher-res collision detection
-	//_body->SetBullet(true);
 }

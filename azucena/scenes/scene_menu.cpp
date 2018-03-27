@@ -20,8 +20,7 @@ void MenuScene::Load() {
   }
 
 	// Set view
-	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
-	Engine::GetWindow().setView(view);
+	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
 
   setLoaded(true);
 }
