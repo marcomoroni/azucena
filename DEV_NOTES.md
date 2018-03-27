@@ -72,6 +72,10 @@ This component handles the different states of button (highlight, select).
 
 It changes `TextComponent` and `ShapeComponent` of the parent.
 
+### `GameUIComponent`
+
+Changing the renderer system to allow rendering things on different views is too complicated, so we can attach this component to an empty entity. In the `update` function this component will change its `_parent` position to the center of the current view. In this way it looks like is not moving.
+
 ## Smooth camera
 
 Every scene has to set the view at least once when opened.
