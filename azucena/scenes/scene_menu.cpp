@@ -15,7 +15,8 @@ void MenuScene::Load() {
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>(
-        "Platformer\nPress Space to Start");
+        "Azucena\nPress Space to Start");
+		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (float)Engine::GetWindow().getSize().y / 2 });
   }
 
 	// Set view
