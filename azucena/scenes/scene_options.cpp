@@ -77,6 +77,7 @@ void OptionsScene::Update(const double& dt)
 		Engine::ChangeScene(&menu);
 	}
 
+	// Select key to be changed
 	if (changingControl == nullptr)
 	{
 		for (auto b : controlsBtns)
@@ -84,8 +85,8 @@ void OptionsScene::Update(const double& dt)
 			if (b.first->get_components<ButtonComponent>()[0]->isSelected())
 			{
 				changingControl = b.first;
+				// Change text colour
 				b.first->get_components<TextComponent>()[0]->getText()->setColor(Color::Red);
-				cout << b.second << " button selected." << endl;
 			}
 		}
 	}
@@ -93,11 +94,15 @@ void OptionsScene::Update(const double& dt)
 	// Change key
 	if (changingControl != nullptr)
 	{
+		// Since without events we cannot get the key pressed,
+		// we loop though all the keys and if one is pressed, we set it to the
+		// control that is being changed
 		for (auto k = Keyboard::Unknown; k != Keyboard::Pause; k = static_cast<Keyboard::Key>(k + 1))
 		{
 			if (Keyboard::isKeyPressed(k))
 			{
 				Controls::SetKeyboardKey(controlsBtns[changingControl], k);
+				// Change back text colour
 				changingControl->get_components<TextComponent>()[0]->getText()->setColor(Color::White);
 				changingControl = nullptr;
 			}
