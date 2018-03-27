@@ -7,6 +7,11 @@
 using namespace std;
 using namespace sf;
 
+shared_ptr<Entity> btn_ControlsUp;
+shared_ptr<Entity> btn_ControlsDown;
+shared_ptr<Entity> btn_ControlsLeft;
+shared_ptr<Entity> btn_ControlsRight;
+shared_ptr<Entity> btn_ControlsDash;
 shared_ptr<Entity> btn_Back;
 vector<shared_ptr<Entity>> btns;
 
@@ -18,17 +23,22 @@ void OptionsScene::Load()
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
 	}
 
-	auto btn = create_button("Move up: ...");
-	btns.push_back(btn);
+	btns.clear();
 
-	btn = create_button("Down down: ...");
-	btns.push_back(btn);
+	btn_ControlsUp = create_button("Up: ...");
+	btns.push_back(btn_ControlsUp);
 
-	btn = create_button("Down left: ...");
-	btns.push_back(btn);
+	btn_ControlsDown = create_button("Down: ...");
+	btns.push_back(btn_ControlsDown);
 
-	btn = create_button("Down right: ...");
-	btns.push_back(btn);
+	btn_ControlsLeft = create_button("Left: ...");
+	btns.push_back(btn_ControlsLeft);
+
+	btn_ControlsRight = create_button("Right: ...");
+	btns.push_back(btn_ControlsRight);
+
+	btn_ControlsDash = create_button("Dash: ...");
+	btns.push_back(btn_ControlsDash);
 
 	btn_Back = create_button("Back");
 	btns.push_back(btn_Back);
