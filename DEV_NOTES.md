@@ -66,6 +66,12 @@ Add this component to each enemy. It renders a health bar near the enemy.
 
 Similar to `cmp_enemy_health`, but it also handles potions.
 
+### `cmp_button`
+
+This component handles the different states of button (highlight, select).
+
+It changes `TextComponent` and `ShapeComponent` of the parent.
+
 ## Smooth camera
 
 Every scene has to set the view at least once when opened.
