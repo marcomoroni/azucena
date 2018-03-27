@@ -33,7 +33,7 @@ void Level1Scene::Load() {
 
 	// Add UI
 	auto ui = makeEntity();
-	ui->addComponent<UIComponent>();
+	ui->addComponent<GameUIComponent>();
 
 	// Set view
 	view_center = player->getPosition();
