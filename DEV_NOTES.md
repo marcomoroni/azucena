@@ -66,6 +66,12 @@ Add this component to each enemy. It renders a health bar near the enemy.
 
 Similar to `cmp_enemy_health`, but it also handles potions. After getting hit, player has immunity for a little while.
 
+### `HurtComponent`
+
+Add this component if the entity hurts something. Add a tag as a parameter when initialising this component: this tag correspont to which entities will be hurt. By default, this component does not hurt, you need to use `setActive(true)` to activate it.
+
+For now it can only handle one tag.
+
 ### `ButtonComponent`
 
 This component handles the different states of button (highlight, select).
