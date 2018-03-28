@@ -54,6 +54,8 @@ EnemyHealthComponent::EnemyHealthComponent(Entity* p, int maxHealth)
 
 void EnemyHealthComponent::update(double dt)
 {
+	if (_immunity >= 0.0f) _immunity -= dt;
+
 	_backSprite->setPosition(_parent->getPosition() + Vector2f(0, 40.0f));
 	for (int i = 0; i < _heartSprites.size(); i++)
 	{
@@ -83,9 +85,12 @@ void EnemyHealthComponent::render()
 
 void EnemyHealthComponent::decreaseHealth(int h)
 {
-	int newHealth = _health - h;
-	if (newHealth >= 0) _health = newHealth;
-	_flagHeathChanged = true;
+	if (_immunity < 0.0f)
+	{
+		int newHealth = _health - h;
+		if (newHealth >= 0) _health = newHealth;
+		_immunity = 0.8f;
+	}
 
 }
 

@@ -9,6 +9,7 @@ class EnemyHealthComponent : public Component
 private:
 	int _maxHealth;
 	int _health;
+	float _immunity = -1.0f;
 
 	// For health bar
 	int _spriteSize = 16;
