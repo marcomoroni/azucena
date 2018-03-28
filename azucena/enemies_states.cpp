@@ -94,7 +94,7 @@ void AttackState::execute(Entity *owner, double dt) noexcept
 	// Quick attack without changing direction,
 	// after a while the enemy has to rest before going back to chase
 
-	float speed = 600.0f;
+	float speed = 800.0f;
 
 	if (_timer < 0.5f)
 	{

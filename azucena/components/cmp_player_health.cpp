@@ -25,7 +25,7 @@ void PlayerHealthComponent::decreaseHealth(int h)
 	{
 		int newHealth = _health - h;
 		if (newHealth >= 0) _health = newHealth;
-		_immunity = 0.5f;
+		_immunity = 0.8f;
 		printf("Player hurt.\n");
 	}
 
