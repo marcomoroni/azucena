@@ -35,7 +35,6 @@ void ChaseState::execute(Entity *owner, double dt) noexcept
 	// If enemy is close to player, prepare attack
 	if (length(owner->getPosition() - _player->getPosition()) < 60.0f)
 	{
-		printf("Entering prepare_attack\n");
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("prepare_attack");
 	}
@@ -57,6 +56,11 @@ void ReturnState::execute(Entity *owner, double dt) noexcept
 	}
 }
 
+void PrepareAttackState::enterState() noexcept
+{
+	_timer = 1.0f;
+}
+
 void PrepareAttackState::execute(Entity *owner, double dt) noexcept
 {
 	_timer -= dt;
@@ -64,14 +68,15 @@ void PrepareAttackState::execute(Entity *owner, double dt) noexcept
 	// Simulate a funnisng start
 	Vector2f direction = -normalize(_player->getPosition() - owner->getPosition());
 	direction.y *= -1; // why?
-	float speed = 10.0f;
+	float speed = 30.0f;
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(direction * speed));
 
 	if (_timer < 0.0f)
 	{
-		_timer = 3.0f; // this is repeated
-		//auto sm = owner->get_components<StateMachineComponent>()[0];
-		//sm->changeState("attack");
+		// TEST //
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("chase");
+		//////////
 	}
 }
 

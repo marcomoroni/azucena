@@ -8,6 +8,7 @@ class State
 {
 public:
 	virtual ~State() = default;
+	virtual void enterState() noexcept = 0;
 	virtual void execute(Entity*, double) noexcept = 0;
 };
 

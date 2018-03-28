@@ -42,6 +42,7 @@ void StateMachineComponent::changeState(const string &name) noexcept
 	if (found != _states.end())
 	{
 		_current_state = found->second;
+		_current_state->enterState();
 		_current_state_name = name;
 	}
 }

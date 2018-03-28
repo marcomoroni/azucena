@@ -10,6 +10,7 @@ private:
 public:
 	IdleState(std::shared_ptr<Entity> player)
 		: _player(player) {}
+	void enterState() noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };
 
@@ -21,6 +22,7 @@ private:
 public:
 	ChaseState(std::shared_ptr<Entity> player)
 		: _player(player) {}
+	void enterState() noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };
 
@@ -32,6 +34,7 @@ private:
 public:
 	ReturnState(sf::Vector2f pos)
 		: _pos(pos) {}
+	void enterState() noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };
 
@@ -39,13 +42,13 @@ class PrepareAttackState : public State
 {
 private:
 	std::shared_ptr<Entity> _player;
-	float _timer = 3.0f;
+	float _timer;
 
 public:
 	PrepareAttackState(std::shared_ptr<Entity> player)
 		: _player(player) {}
 	void execute(Entity*, double) noexcept override;
-	float* getTimer() { return &_timer; }
+	void enterState() noexcept override;
 };
 
 /*class AttackState : public State
