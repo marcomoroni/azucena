@@ -16,6 +16,8 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 	_player_health_left = Sprite(*_tex);
 	_player_health_left.setTextureRect(IntRect(0, 0, _player_health_sprite_size, _player_health_sprite_size));
 
+	// Note: creating the sptites for the hearts here means that if the player max
+	// health changes the ui will not be updated (unless we change scene)
 	int i;
 	auto phc = _player->get_components<PlayerHealthComponent>()[0];
 	for (i = 0; i < phc->getMaxHealth(); i++)
@@ -52,13 +54,13 @@ void GameUIComponent::update(double dt)
 		);
 	}
 
-	
 	_player_health_right.setPosition(
 		_player_health_hearts[_player_health_hearts.size() - 1].getPosition().x + _player_health_sprite_size,
 		_player_health_left.getPosition().y
 	);
 
 	// Change heart sprite if hit
+	// (not very efficient)
 	for (int i = 0; i < _player_health_hearts.size(); i++)
 	{
 		if (i < _player->get_components<PlayerHealthComponent>()[0]->getHealth())
