@@ -11,6 +11,7 @@ private:
 	int _health;
 	int _maxPotions = 4;
 	int _potions = 0;
+	float _immunity = -1.0f;
 
 public:
 	void update(double) override;

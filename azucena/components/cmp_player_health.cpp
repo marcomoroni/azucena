@@ -12,6 +12,7 @@ PlayerHealthComponent::PlayerHealthComponent(Entity* p, int maxHealth)
 
 void PlayerHealthComponent::update(double dt)
 {
+	if (_immunity >= 0.0f) _immunity -= dt;
 }
 
 void PlayerHealthComponent::render()
@@ -20,8 +21,12 @@ void PlayerHealthComponent::render()
 
 void PlayerHealthComponent::decreaseHealth(int h)
 {
-	int newHealth = _health - h;
-	if (newHealth >= 0) _health = newHealth;
+	if (_immunity < 0.0f)
+	{
+		int newHealth = _health - h;
+		if (newHealth >= 0) _health = newHealth;
+		_immunity = 0.5f;
+	}
 
 }
 
