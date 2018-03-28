@@ -39,7 +39,7 @@ void Level2Scene::Load() {
     enemy->setPosition(ls::getTilePosition(ls::findTiles(ls::ENEMY)[0]) +
                        Vector2f(0, 24));
     // Add HurtComponent
-		enemy->addComponent<HurtComponent>();
+//		enemy->addComponent<HurtComponent>();
     // Add ShapeComponent, Red 16.f Circle
 		auto s = enemy->addComponent<ShapeComponent>();
 		s->setShape<sf::CircleShape>(16.f);
