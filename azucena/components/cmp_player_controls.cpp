@@ -73,7 +73,7 @@ void PlayerControlsComponent::update(double dt) {
 		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(180, 255, 255));
 	}
 
-	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction)  * speed));
+	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction) * speed));
 }
 
 PlayerControlsComponent::PlayerControlsComponent(Entity* p)

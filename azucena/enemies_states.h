@@ -2,28 +2,63 @@
 
 #include "components/cmp_state_machine.h"
 
-class NormalState : public State
+class IdleState : public State
 {
 private:
 	std::shared_ptr<Entity> _player;
 
 public:
-	NormalState(std::shared_ptr<Entity> player)
-		: _player(player)
-	{
-	}
+	IdleState(std::shared_ptr<Entity> player)
+		: _player(player) {}
 	void execute(Entity*, double) noexcept override;
 };
 
-class NearState : public State
+class ChaseState : public State
 {
 private:
 	std::shared_ptr<Entity> _player;
 
 public:
-	NearState(std::shared_ptr<Entity> player)
-		: _player(player)
-	{
-	}
+	ChaseState(std::shared_ptr<Entity> player)
+		: _player(player) {}
 	void execute(Entity*, double) noexcept override;
 };
+
+class ReturnState : public State
+{
+private:
+	sf::Vector2f _pos;
+
+public:
+	ReturnState(sf::Vector2f pos)
+		: _pos(pos) {}
+	void execute(Entity*, double) noexcept override;
+};
+
+class PrepareAttackState : public State
+{
+private:
+	std::shared_ptr<Entity> _player;
+	float _timer = 3.0f;
+
+public:
+	PrepareAttackState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void execute(Entity*, double) noexcept override;
+	float* getTimer() { return &_timer; }
+};
+
+/*class AttackState : public State
+{
+private:
+	std::shared_ptr<Entity> _player;
+	sf::Vector2f _direction;
+	float _timer = 1.2f;
+
+public:
+	AttackState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void execute(Entity*, double) noexcept override;
+	float* getTimer() { return &_timer; }
+	sf::Vector2f* getDirection() { return &_direction; }
+};*/

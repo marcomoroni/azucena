@@ -62,9 +62,11 @@ vector<shared_ptr<Entity>> create_enemies()
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = enemy_A->addComponent<StateMachineComponent>();
-		sm->addState("normal", make_shared<NormalState>(Engine::GetActiveScene()->ents.find("player")[0]));
-		sm->addState("near", make_shared<NearState>(Engine::GetActiveScene()->ents.find("player")[0]));
-		sm->changeState("normal");
+		sm->addState("idle", make_shared<IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("chase", make_shared<ChaseState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("return", make_shared<ReturnState>(enemy_A->getPosition()));
+		sm->addState("prepare_attack", make_shared<PrepareAttackState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->changeState("idle");
 
 		auto h = enemy_A->addComponent<EnemyHealthComponent>(4);
 
