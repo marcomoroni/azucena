@@ -33,7 +33,7 @@ void ChaseState::execute(Entity *owner, double dt) noexcept
 	}
 
 	// If enemy is close to player, prepare attack
-	if (length(owner->getPosition() - _player->getPosition()) < 60.0f)
+	if (length(owner->getPosition() - _player->getPosition()) < 160.0f)
 	{
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("prepare_attack");
@@ -56,44 +56,57 @@ void ReturnState::execute(Entity *owner, double dt) noexcept
 	}
 }
 
-void PrepareAttackState::enterState() noexcept
+void PrepareAttackState::enterState(Entity *owner) noexcept
 {
-	_timer = 1.0f;
+	_timer = 0.6f;
 }
 
 void PrepareAttackState::execute(Entity *owner, double dt) noexcept
 {
-	_timer -= dt;
-
 	// Simulate a funnisng start
 	Vector2f direction = -normalize(_player->getPosition() - owner->getPosition());
 	direction.y *= -1; // why?
-	float speed = 30.0f;
+	float speed = 60.0f;
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(direction * speed));
 
-	if (_timer < 0.0f)
-	{
-		// TEST //
-		auto sm = owner->get_components<StateMachineComponent>()[0];
-		sm->changeState("chase");
-		//////////
-	}
-}
-
-/*void AttackState::execute(Entity *owner, double dt) noexcept
-{
 	_timer -= dt;
 
-	// Simulate a funnisng start
-	Vector2f direction = normalize(owner->getPosition() - _player->getPosition());
-	direction.y *= -1; // why?
-	float speed = 10.0f;
-	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(direction * speed));
-
 	if (_timer < 0.0f)
 	{
-		_timer = 1.2f; // this is repeated
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("attack");
 	}
-}*/
+}
+
+void AttackState::enterState(Entity *owner) noexcept
+{
+	_timer = 0.9f;
+	_direction = normalize(_player->getPosition() - owner->getPosition());
+	_direction.y *= -1; // why?
+}
+
+void AttackState::execute(Entity *owner, double dt) noexcept
+{
+	_timer -= dt;
+
+	// Quick attack without changing direction,
+	// after a while the enemy has to rest before going back to chase
+
+	float speed = 600.0f;
+
+	if (_timer < 0.5f)
+	{
+		speed = 30.0f;
+	}
+
+	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(_direction * speed));
+
+	// If hits player, decrease health
+	// ...
+
+	if (_timer < 0.0f)
+	{
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("chase");
+	}
+}

@@ -10,7 +10,7 @@ private:
 public:
 	IdleState(std::shared_ptr<Entity> player)
 		: _player(player) {}
-	void enterState() noexcept override {};
+	void enterState(Entity*) noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };
 
@@ -22,7 +22,7 @@ private:
 public:
 	ChaseState(std::shared_ptr<Entity> player)
 		: _player(player) {}
-	void enterState() noexcept override {};
+	void enterState(Entity*) noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };
 
@@ -34,7 +34,7 @@ private:
 public:
 	ReturnState(sf::Vector2f pos)
 		: _pos(pos) {}
-	void enterState() noexcept override {};
+	void enterState(Entity*) noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };
 
@@ -48,20 +48,19 @@ public:
 	PrepareAttackState(std::shared_ptr<Entity> player)
 		: _player(player) {}
 	void execute(Entity*, double) noexcept override;
-	void enterState() noexcept override;
+	void enterState(Entity*) noexcept override;
 };
 
-/*class AttackState : public State
+class AttackState : public State
 {
 private:
 	std::shared_ptr<Entity> _player;
 	sf::Vector2f _direction;
-	float _timer = 1.2f;
+	float _timer;
 
 public:
 	AttackState(std::shared_ptr<Entity> player)
 		: _player(player) {}
 	void execute(Entity*, double) noexcept override;
-	float* getTimer() { return &_timer; }
-	sf::Vector2f* getDirection() { return &_direction; }
-};*/
+	void enterState(Entity*) noexcept override;
+};
