@@ -5,8 +5,6 @@
 using namespace std;
 using namespace sf;
 
-RectangleShape r;
-
 GameUIComponent::GameUIComponent(Entity* p)
 	: Component(p)
 {
