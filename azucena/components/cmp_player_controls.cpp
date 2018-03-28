@@ -81,7 +81,7 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 {
 	_groundspeed = 160.f;
 	_isSprinting = false;
-	_sprintSpeed = 1200.f;
+	_sprintSpeed = 1500.f;
 	_sprintCooldown = 0.0f;
 	_isStillPressingSprintKey = false;
 }
