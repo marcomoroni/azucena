@@ -111,7 +111,6 @@ void AttackState::execute(Entity *owner, double dt) noexcept
 	{
 		if (c->GetFixtureA() == player_pc->getFixture())
 		{
-			_player->get_components<SpriteComponent>()[0]->getSprite().setRotation(90.0f); // TEST
 			_player->get_components<PlayerHealthComponent>()[0]->decreaseHealth();
 		}
 	}
