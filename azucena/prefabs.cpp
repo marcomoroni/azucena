@@ -12,6 +12,7 @@
 #include "components/cmp_button.h"
 #include "components/cmp_game_ui.h"
 #include "components/cmp_player_health.h"
+#include "components/cmp_hurt.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -76,6 +77,8 @@ vector<shared_ptr<Entity>> create_enemies()
 
 		auto p = enemy_A->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
+
+		enemy_A->addComponent<HurtComponent>("player");
 
 		enemies.push_back(enemy_A);
 	}
