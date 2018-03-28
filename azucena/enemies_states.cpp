@@ -1,6 +1,8 @@
 #include "enemies_states.h"
 #include "components/cmp_sprite.h"
 #include "components/cmp_physics.h"
+#include "components/cmp_player_health.h"
+#include "system_physics.h"
 
 using namespace sf;
 
@@ -102,7 +104,17 @@ void AttackState::execute(Entity *owner, double dt) noexcept
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(_direction * speed));
 
 	// If hits player, decrease health
-	// ...
+	auto player_pc = _player->get_components<PhysicsComponent>()[0];
+	auto owner_pc = owner->get_components<PhysicsComponent>()[0];
+	auto cs = owner_pc->getTouching();
+	for (auto c : cs)
+	{
+		if (c->GetFixtureA() == player_pc->getFixture())
+		{
+			_player->get_components<SpriteComponent>()[0]->getSprite().setRotation(90.0f); // TEST
+			_player->get_components<PlayerHealthComponent>()[0]->decreaseHealth();
+		}
+	}
 
 	if (_timer < 0.0f)
 	{

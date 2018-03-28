@@ -11,6 +11,7 @@
 #include "components/cmp_text.h"
 #include "components/cmp_button.h"
 #include "components/cmp_game_ui.h"
+#include "components/cmp_player_health.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -35,6 +36,8 @@ shared_ptr<Entity> create_player()
 	p->getBody()->SetFixedRotation(true);
 	//Bullet items have higher-res collision detection
 	p->getBody()->SetBullet(true);
+
+	player->addComponent<PlayerHealthComponent>(6);
 
 	player->addComponent<PlayerControlsComponent>();
 
