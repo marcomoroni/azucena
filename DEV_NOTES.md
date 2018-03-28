@@ -64,7 +64,7 @@ Add this component to each enemy. It renders a health bar near the enemy.
 
 ### `PlayerHealthComponent`
 
-Similar to `cmp_enemy_health`, but it also handles potions.
+Similar to `cmp_enemy_health`, but it also handles potions. After getting hit, player has immunity for a little while.
 
 ### `ButtonComponent`
 
@@ -77,6 +77,14 @@ It changes `TextComponent` and `ShapeComponent` of the parent.
 Only used for in-game UI, not main menu (for now).
 
 Changing the renderer system to allow rendering things on different views is too complicated, so we can attach this component to an empty entity. In the `update` function this component will change its `_parent` position to the center of the current view. In this way it looks like is not moving.
+
+### `StateMachineComponent`
+
+Since there are no ways to reset values (for example a timer) in a `State` I had to add a `enterState()` virtual function. This function gets called every we change state.
+
+## AI
+
+For enemy _A_, see notes.
 
 ## Smooth camera
 
