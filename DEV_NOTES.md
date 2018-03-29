@@ -54,6 +54,8 @@ I'm not using impulses because I couldn't get the movement I wanted. Instead, I'
 
 The player can sprint by pressing <kbd>Space</kbd>. You have to release the button and press it again to sprint again. You need to wait a little bit until you can sprint again.
 
+Right now, player can shoot bullet entities. These entities are created in real-time, but if we have time we can try to avoid this.
+
 ### `StateMachineComponent`
 
 Not much to say.
@@ -87,6 +89,10 @@ Changing the renderer system to allow rendering things on different views is too
 ### `StateMachineComponent`
 
 Since there are no ways to reset values (for example a timer) in a `State` I had to add a `enterState()` virtual function. This function gets called every we change state.
+
+### `BulletComponent`
+
+Attach this to bullets. the entity will follow a straight line until it hits something (but the owner). When this happens (or a few seconds are passed, to avoid having infinite bullets) this component will delete its parent.
 
 ## AI
 
