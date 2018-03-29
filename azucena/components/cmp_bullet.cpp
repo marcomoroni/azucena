@@ -34,6 +34,6 @@ void BulletComponent::update(double dt)
 }
 
 BulletComponent::BulletComponent(Entity* p, shared_ptr<Entity> owner, Vector2f direction)
-    : Component(p), _owner(owner), _direction(direction), _lifetime(3.0f), _maxSpeed(600.0f)
+    : Component(p), _owner(owner), _direction(direction), _lifetime(5.0f), _maxSpeed(600.0f)
 {
 }
