@@ -26,7 +26,8 @@ void HurtComponent::update(double dt)
 			auto entsToHurt = Engine::GetActiveScene()->ents.find(_tagToHurt);
 			for (auto entityToHurt : entsToHurt)
 			{
-				if (c->GetFixtureA() == entityToHurt->get_components<PhysicsComponent>()[0]->getFixture())
+				if (c->GetFixtureA() == entityToHurt->get_components<PhysicsComponent>()[0]->getFixture() ||
+					c->GetFixtureB() == entityToHurt->get_components<PhysicsComponent>()[0]->getFixture())
 				{
 					if (_tagToHurt == "player") entityToHurt->get_components<PlayerHealthComponent>()[0]->decreaseHealth(_damage);
 					else if (_tagToHurt == "enemy") entityToHurt->get_components<EnemyHealthComponent>()[0]->decreaseHealth(_damage);

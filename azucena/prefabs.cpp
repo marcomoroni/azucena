@@ -100,7 +100,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-		auto h = enemy_B->addComponent<EnemyHealthComponent>(6);
+		auto h = enemy_B->addComponent<EnemyHealthComponent>(4);
 
 		auto p = enemy_B->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
