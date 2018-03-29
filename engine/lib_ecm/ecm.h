@@ -16,6 +16,7 @@ protected:
   Entity* const _parent;
   bool _fordeletion; // should be removed
   explicit Component(Entity* const p);
+  std::string _name;
 
 public:
   Component() = delete;
@@ -27,6 +28,9 @@ public:
   virtual void render() = 0;
 
   virtual ~Component();
+
+  void setName(std::string name) { _name = name; }
+  std::string getName() { return _name; }
 };
 
 struct EntityManager {

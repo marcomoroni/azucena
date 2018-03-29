@@ -46,6 +46,8 @@ However, rendering a sprite for each tile makes the game slower, so the sprite o
 
 ## Components
 
+Components can have a `_name`. This makes easier to handle multiple components attached to an entity. For example, an enemy entity can have two `SatateMachineComponents`, one for the AI, and one for sprite selection.
+
 ### ~`PlayerPhysicsComponent`~ `PlayerControlsComponent`
 
 I changed this to simulate top-down view movement.

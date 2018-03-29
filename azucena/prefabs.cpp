@@ -67,6 +67,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = enemy_A->addComponent<StateMachineComponent>();
+    sm->setName("ai");
 		sm->addState("idle", make_shared<IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("chase", make_shared<ChaseState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("return", make_shared<ReturnState>(enemy_A->getPosition()));
