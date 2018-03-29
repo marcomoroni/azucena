@@ -36,6 +36,12 @@ void PlayerControlsComponent::update(double dt) {
 		direction.y -= 1.0f;
 	}
 
+	if (direction != Vector2f(0.0, 0.0f))
+	{
+		_shootDirection = direction;
+		_shootDirection.y *= -1;
+	}
+
 	// Sprint
 	if (_isSprinting)
 	{
@@ -78,7 +84,7 @@ void PlayerControlsComponent::update(double dt) {
 	// Check if player shoots
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f)
 	{
-		create_player_bullet(Vector2f(1.0f, 0.0f));
+		create_player_bullet(normalize(_shootDirection));
 		_shootCooldown = 0.3f;
 	}
 	if (_shootCooldown > 0.0f) _shootCooldown -= dt;
@@ -95,4 +101,5 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_sprintCooldown = 0.0f;
 	_isStillPressingSprintKey = false;
 	_shootCooldown = 0.0f;
+	_shootDirection = { 1.0f, 0.0f };
 }

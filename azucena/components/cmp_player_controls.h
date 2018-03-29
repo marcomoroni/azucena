@@ -15,6 +15,8 @@ protected:
 	bool _isStillPressingSprintKey;
 	// Shoot cooldown
 	float _shootCooldown;
+	// Shooth direction (if 0.0f should be the previous one)
+	sf::Vector2f _shootDirection;
 
 public:
   void update(double dt) override;
