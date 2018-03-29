@@ -194,7 +194,7 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	auto h = e->addComponent<HurtComponent>("enemy"); // NOT WORKING ?
 	h->setActive(true);
 
-	auto b = e->addComponent<BulletComponent>(direction);
+	auto b = e->addComponent<BulletComponent>(player, direction);
 
 	return e;
 }

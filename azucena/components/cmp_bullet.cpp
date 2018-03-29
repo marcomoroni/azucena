@@ -1,5 +1,9 @@
 #include "cmp_bullet.h"
 #include "cmp_physics.h"
+#include "cmp_sprite.h"
+#include "system_physics.h"
+
+#define M_PI 3.14159265358979323846
 
 using namespace std;
 using namespace sf;
@@ -9,10 +13,17 @@ void BulletComponent::update(double dt)
 	// Use teleport because it sould alway go in a straight line
 	_parent->get_components<PhysicsComponent>()[0]->teleport(_parent->getPosition() + (normalize(_direction) * _maxSpeed * (float)dt));
 
-	// Delete if hits something
-	if (_parent->get_components<PhysicsComponent>()[0]->getTouching().size() > 0)
+	// Delete if hits something (but not the owner)
+	auto touching = _parent->get_components<PhysicsComponent>()[0]->getTouching();
+	if (touching.size() > 0)
 	{
-		_parent->setForDelete();
+		for (auto t : touching)
+		{
+			if (t->GetFixtureA() != _owner->get_components<PhysicsComponent>()[0]->getFixture())
+			{
+				_parent->setForDelete();
+			}
+		}
 	}
 
 	// Or delete if lifetime is over
@@ -22,5 +33,7 @@ void BulletComponent::update(double dt)
   }
 }
 
-BulletComponent::BulletComponent(Entity* p, Vector2f direction)
-    : Component(p), _direction(direction), _lifetime(3.0f), _maxSpeed(600.0f) {}
+BulletComponent::BulletComponent(Entity* p, shared_ptr<Entity> owner, Vector2f direction)
+    : Component(p), _owner(owner), _direction(direction), _lifetime(3.0f), _maxSpeed(600.0f)
+{
+}
