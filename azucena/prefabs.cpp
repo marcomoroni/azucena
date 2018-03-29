@@ -13,6 +13,7 @@
 #include "components/cmp_game_ui.h"
 #include "components/cmp_player_health.h"
 #include "components/cmp_hurt.h"
+#include "components/cmp_bullet.h"
 #include "enemies_states.h"
 
 using namespace std;
@@ -73,7 +74,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		sm->addState("attack", make_shared<AttackState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->changeState("idle");
 
-		auto h = enemy_A->addComponent<EnemyHealthComponent>(4);
+		auto h = enemy_A->addComponent<EnemyHealthComponent>(2);
 
 		auto p = enemy_A->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
@@ -153,7 +154,6 @@ shared_ptr<Entity> create_button(string text)
 
 	auto s = button->addComponent<ShapeComponent>();
 	s->setShape<RectangleShape>(Vector2f(300.0f, 30.0f));
-	//s->getShape().setFillColor(Color::Blue);
 	s->getShape().setOrigin(s->getShape().getLocalBounds().width / 2, s->getShape().getLocalBounds().height / 2);
 
 	auto t = button->addComponent<TextComponent>(text);
@@ -167,5 +167,32 @@ shared_ptr<Entity> create_game_ui()
 {
 	auto e = Engine::GetActiveScene()->makeEntity();
 	e->addComponent<GameUIComponent>(Engine::GetActiveScene()->ents.find("player")[0]);
+	return e;
+}
+
+shared_ptr<Entity> create_player_bullet(Vector2f direction)
+{
+	auto e = Engine::GetActiveScene()->makeEntity();
+	e->addTag("bullet");
+
+	// Start position is near the player
+	auto player = Engine::GetActiveScene()->ents.find("player")[0];
+	Vector2f pos = player->getPosition() + (40.0f * direction);
+	e->setPosition(pos);
+
+	auto s = e->addComponent<SpriteComponent>();
+	auto tex = Resources::load<Texture>("invaders_sheet.png");
+	s->setTexture(tex);
+	s->getSprite().setTextureRect(sf::IntRect(32, 32, 32, 32));
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+	auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+	p->getBody()->SetBullet(true);
+
+	auto h = e->addComponent<HurtComponent>("enemy"); // NOT WORKING ?
+	h->setActive(true);
+
+	auto b = e->addComponent<BulletComponent>(direction);
+
 	return e;
 }

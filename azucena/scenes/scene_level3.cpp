@@ -76,7 +76,7 @@ void Level3Scene::Update(const double& dt) {
 
   if (rocktime <= 0.f){
     rocktime  = 5.f;
-    auto rock = makeEntity();
+    /*auto rock = makeEntity();
     rock->setPosition(ls::getTilePosition(ls::findTiles('r')[0]) +
                       Vector2f(0, 40) );
     rock->addComponent<BulletComponent>(30.f);
@@ -88,7 +88,7 @@ void Level3Scene::Update(const double& dt) {
     p->setRestitution(.4f);
     p->setFriction(.0001f);
     p->impulse(Vector2f(-3.f, 0));
-    p->setMass(1000000000.f);
+    p->setMass(1000000000.f);*/
   }
   
 }

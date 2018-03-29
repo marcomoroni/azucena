@@ -4,6 +4,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "../constrols.h"
 #include "cmp_physics.h"
+#include "engine.h"
+#include "../prefabs.h"
 
 using namespace std;
 using namespace sf;
@@ -73,6 +75,14 @@ void PlayerControlsComponent::update(double dt) {
 		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(180, 255, 255));
 	}
 
+	// Check if player shoots
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f)
+	{
+		create_player_bullet(Vector2f(1.0f, 0.0f));
+		_shootCooldown = 0.3f;
+	}
+	if (_shootCooldown > 0.0f) _shootCooldown -= dt;
+
 	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction) * speed));
 }
 
@@ -84,4 +94,5 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_sprintSpeed = 1600.f;
 	_sprintCooldown = 0.0f;
 	_isStillPressingSprintKey = false;
+	_shootCooldown = 0.0f;
 }

@@ -13,6 +13,8 @@ protected:
 	sf::Vector2f _sprintDirection;
 	// Has to press Space again to sprint (cannot keep Space pressed)
 	bool _isStillPressingSprintKey;
+	// Shoot cooldown
+	float _shootCooldown;
 
 public:
   void update(double dt) override;

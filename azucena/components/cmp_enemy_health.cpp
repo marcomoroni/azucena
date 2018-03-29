@@ -75,6 +75,12 @@ void EnemyHealthComponent::update(double dt)
 		}
 		_flagHeathChanged = false;
 	}
+
+	// Delete if health == 0
+	if (_health <= 0)
+	{
+		_parent->setForDelete();
+	}
 }
 
 void EnemyHealthComponent::render()
@@ -87,9 +93,11 @@ void EnemyHealthComponent::decreaseHealth(int h)
 {
 	if (_immunity < 0.0f)
 	{
+		printf("Enemy decrease health.\n");
 		int newHealth = _health - h;
 		if (newHealth >= 0) _health = newHealth;
-		_immunity = 0.8f;
+		_immunity = 0.2f;
+		_flagHeathChanged = true;
 	}
 
 }

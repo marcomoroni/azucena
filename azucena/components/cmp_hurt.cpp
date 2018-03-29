@@ -16,6 +16,8 @@ HurtComponent::HurtComponent(Entity* p, string tagToHurt)
 
 void HurtComponent::update(double dt)
 {
+	_isHurting = false;
+
 	if (_active)
 	{
 		auto cs = _parent->get_components<PhysicsComponent>()[0]->getTouching();
@@ -28,6 +30,7 @@ void HurtComponent::update(double dt)
 				{
 					if (_tagToHurt == "player") entityToHurt->get_components<PlayerHealthComponent>()[0]->decreaseHealth(_damage);
 					else if (_tagToHurt == "enemy") entityToHurt->get_components<EnemyHealthComponent>()[0]->decreaseHealth(_damage);
+					_isHurting = true;
 				}
 			}
 		}
@@ -37,3 +40,5 @@ void HurtComponent::update(double dt)
 void HurtComponent::setDamage(int d) { _damage = d; }
 
 void HurtComponent::setActive(bool a) { _active = a; }
+
+bool HurtComponent::isHurting() { return _isHurting; }

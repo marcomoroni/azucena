@@ -14,6 +14,7 @@ shared_ptr<Entity> btn_ControlsDown;
 shared_ptr<Entity> btn_ControlsLeft;
 shared_ptr<Entity> btn_ControlsRight;
 shared_ptr<Entity> btn_ControlsDash;
+shared_ptr<Entity> btn_ControlsShoot;
 shared_ptr<Entity> btn_Back;
 // All buttons
 vector<shared_ptr<Entity>> btns;
@@ -51,6 +52,10 @@ void OptionsScene::Load()
 	btn_ControlsDash = create_button("Dash");
 	btns.push_back(btn_ControlsDash);
 	controlsBtns[btn_ControlsDash] = "Sprint";
+
+	btn_ControlsDash = create_button("Shoot");
+	btns.push_back(btn_ControlsDash);
+	controlsBtns[btn_ControlsDash] = "Shoot";
 
 	btn_Back = create_button("Back");
 	btns.push_back(btn_Back);

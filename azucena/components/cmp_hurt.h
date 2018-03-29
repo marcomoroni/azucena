@@ -9,6 +9,7 @@ private:
 	bool _active;
 	int _damage = 1;
 	std::string _tagToHurt;
+	bool _isHurting = false;
 
 public:
 	void update(double) override;
@@ -17,4 +18,5 @@ public:
 	HurtComponent() = delete;
 	void setDamage(int);
 	void setActive(bool);
+	bool isHurting();
 };

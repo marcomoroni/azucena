@@ -12,6 +12,7 @@ void Controls::initialise()
 	Controls::SetKeyboardKey("Return to menu", Keyboard::Escape);
 	Controls::SetKeyboardKey("Enter", Keyboard::Space);
 	Controls::SetKeyboardKey("Sprint", Keyboard::Space);
+	Controls::SetKeyboardKey("Shoot", Keyboard::RShift);
 	Controls::SetKeyboardKey("Up", Keyboard::W);
 	Controls::SetKeyboardKey("Down", Keyboard::S);
 	Controls::SetKeyboardKey("Left", Keyboard::A);
