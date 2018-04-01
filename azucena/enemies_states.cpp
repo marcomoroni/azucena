@@ -1,9 +1,16 @@
 #include "enemies_states.h"
+#include "prefabs.h"
+#include <random>
+#include <chrono>
 #include "components/cmp_sprite.h"
 #include "components/cmp_physics.h"
 #include "components/cmp_hurt.h"
 
 using namespace sf;
+using namespace std::chrono;
+using namespace std;
+
+// ENEMY A ////////////////////////////////////////////////////////////////////
 
 void EnemyA_IdleState::execute(Entity *owner, double dt) noexcept
 {
@@ -110,4 +117,94 @@ void EnemyA_AttackState::execute(Entity *owner, double dt) noexcept
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("chase");
 	}
+}
+
+// ENEMY B ////////////////////////////////////////////////////////////////////
+
+void EnemyB_IdleState::execute(Entity *owner, double dt) noexcept
+{
+  // Don't move
+  owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
+
+  // Move when player is sight
+  if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
+  {
+    auto sm = owner->get_components<StateMachineComponent>()[0];
+    sm->changeState("move");
+  }
+}
+
+void EnemyB_MoveState::enterState(Entity *owner) noexcept
+{
+  _timer = 3.0f;
+  _movementStep = 0;
+}
+
+// Move three time in random orthogonal direction
+void EnemyB_MoveState::execute(Entity *owner, double dt) noexcept
+{
+  float speed = 200;
+
+  if (_timer >= 3.0f && _movementStep == 0)
+  {
+    random_device dev;
+    default_random_engine engine(dev());
+    uniform_int_distribution<int> dir(0, 3);
+    _direction = _directions[dir(engine)];
+  }
+
+  if (_timer >= 2.0f && _timer < 2.2f)
+  {
+    speed = 0;
+  }
+
+  if (_timer < 2.0f && _movementStep == 0)
+  {
+    _movementStep++;
+    random_device dev;
+    default_random_engine engine(dev());
+    uniform_int_distribution<int> dir(0, 3);
+    _direction = _directions[dir(engine)];
+  }
+
+  if (_timer >= 1.0f && _timer < 1.2f)
+  {
+    speed = 0;
+  }
+
+  if (_timer < 1.0f && _movementStep == 1)
+  {
+    _movementStep++;
+    random_device dev;
+    default_random_engine engine(dev());
+    uniform_int_distribution<int> dir(0, 3);
+    _direction = _directions[dir(engine)];
+  }
+
+  if (_timer >= 0.0f && _timer < 0.2f)
+  {
+    speed = 0;
+  }
+
+  if (_timer < 0.0f)
+  {
+    auto sm = owner->get_components<StateMachineComponent>()[0];
+    sm->changeState("shoot");
+  }
+
+  owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(_direction * speed));
+  
+  _timer -= dt;
+}
+
+void EnemyB_ShootState::execute(Entity *owner, double dt) noexcept
+{
+  // Shoot 4 projectiles
+  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ 1.0f, 0.0f });
+  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ -1.0f, 0.0f });
+  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ 0.0f, 1.0f });
+  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ 0.0f, -1.0f });
+
+  auto sm = owner->get_components<StateMachineComponent>()[0];
+  sm->changeState("move");
 }

@@ -2,6 +2,8 @@
 
 #include "components/cmp_state_machine.h"
 
+// ENEMY A ////////////////////////////////////////////////////////////////////
+
 class EnemyA_IdleState : public State
 {
 private:
@@ -63,4 +65,49 @@ public:
 		: _player(player) {}
 	void execute(Entity*, double) noexcept override;
 	void enterState(Entity*) noexcept override;
+};
+
+// ENEMY B ////////////////////////////////////////////////////////////////////
+
+class EnemyB_IdleState : public State
+{
+private:
+  std::shared_ptr<Entity> _player;
+
+public:
+  EnemyB_IdleState(std::shared_ptr<Entity> player)
+    : _player(player) {}
+  void enterState(Entity*) noexcept override {};
+  void execute(Entity*, double) noexcept override;
+};
+
+class EnemyB_MoveState : public State
+{
+private:
+  std::shared_ptr<Entity> _player;
+  float _timer;
+  int _movementStep;
+  std::vector<sf::Vector2f> _directions = {
+    sf::Vector2f(1.0f, 0.0f),
+    sf::Vector2f(-1.0f, 0.0f),
+    sf::Vector2f(0.0f, 1.0f),
+    sf::Vector2f(0.0f, -1.0f),
+  };
+  sf::Vector2f _direction;
+
+public:
+  EnemyB_MoveState(std::shared_ptr<Entity> player)
+    : _player(player) {}
+  void enterState(Entity*) noexcept override;
+  void execute(Entity*, double) noexcept override;
+};
+
+class EnemyB_ShootState : public State
+{
+private:
+
+public:
+  EnemyB_ShootState() {}
+  void enterState(Entity*) noexcept override {};
+  void execute(Entity*, double) noexcept override;
 };

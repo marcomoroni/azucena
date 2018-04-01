@@ -101,10 +101,19 @@ vector<shared_ptr<Entity>> create_enemies()
 		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-		auto h = enemy_B->addComponent<EnemyHealthComponent>(4);
+    auto sm = enemy_B->addComponent<StateMachineComponent>();
+    sm->setName("ai");
+    sm->addState("idle", make_shared<EnemyB_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
+    sm->addState("move", make_shared<EnemyB_MoveState>(Engine::GetActiveScene()->ents.find("player")[0]));
+    sm->addState("shoot", make_shared<EnemyB_ShootState>());
+    sm->changeState("idle");
+
+    auto h = enemy_B->addComponent<EnemyHealthComponent>(2);
 
 		auto p = enemy_B->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
+
+    enemy_B->addComponent<HurtComponent>("player");
 
 		enemies.push_back(enemy_B);
 	}
@@ -198,4 +207,30 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	auto b = e->addComponent<BulletComponent>(player, direction);
 
 	return e;
+}
+
+shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, Vector2f direction)
+{
+  auto e = Engine::GetActiveScene()->makeEntity();
+  e->addTag("bullet");
+
+  // Start position is near the player
+  Vector2f pos = owner->getPosition() + (50.0f * direction);
+  e->setPosition(pos);
+
+  auto s = e->addComponent<SpriteComponent>();
+  auto tex = Resources::load<Texture>("invaders_sheet.png");
+  s->setTexture(tex);
+  s->getSprite().setTextureRect(sf::IntRect(32, 32, 32, 32));
+  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+  auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+  p->getBody()->SetBullet(true);
+
+  auto h = e->addComponent<HurtComponent>("player"); // NOT WORKING ?
+  h->setActive(true);
+
+  auto b = e->addComponent<BulletComponent>(owner, direction);
+
+  return e;
 }
