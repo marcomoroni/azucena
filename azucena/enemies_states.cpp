@@ -18,7 +18,7 @@ void EnemyA_IdleState::execute(Entity *owner, double dt) noexcept
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
 
 	// Chase player when is sight
-	if (length(owner->getPosition() - _player->getPosition()) < 400.0f)
+	if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
 	{
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("chase");
@@ -136,60 +136,37 @@ void EnemyB_IdleState::execute(Entity *owner, double dt) noexcept
 
 void EnemyB_MoveState::enterState(Entity *owner) noexcept
 {
-  _timer = 3.0f;
-  _movementStep = 0;
+  _timer = 0.0f;
+  //_movementStep = 0;
+  for (int i = 0; i < 3; i++)
+  {
+    random_device dev;
+    default_random_engine engine(dev());
+    uniform_int_distribution<int> dir(0, 3);
+    _directionsStack.push_back(_directions[dir(engine)]);
+  }
 }
 
 // Move three time in random orthogonal direction
 void EnemyB_MoveState::execute(Entity *owner, double dt) noexcept
 {
-  float speed = 200;
+  float speed = 100.0f;
 
-  if (_timer >= 3.0f && _movementStep == 0)
-  {
-    random_device dev;
-    default_random_engine engine(dev());
-    uniform_int_distribution<int> dir(0, 3);
-    _direction = _directions[dir(engine)];
-  }
-
-  if (_timer >= 2.0f && _timer < 2.2f)
-  {
-    speed = 0;
-  }
-
-  if (_timer < 2.0f && _movementStep == 0)
-  {
-    _movementStep++;
-    random_device dev;
-    default_random_engine engine(dev());
-    uniform_int_distribution<int> dir(0, 3);
-    _direction = _directions[dir(engine)];
-  }
-
-  if (_timer >= 1.0f && _timer < 1.2f)
-  {
-    speed = 0;
-  }
-
-  if (_timer < 1.0f && _movementStep == 1)
-  {
-    _movementStep++;
-    random_device dev;
-    default_random_engine engine(dev());
-    uniform_int_distribution<int> dir(0, 3);
-    _direction = _directions[dir(engine)];
-  }
-
-  if (_timer >= 0.0f && _timer < 0.2f)
-  {
-    speed = 0;
-  }
-
-  if (_timer < 0.0f)
+  if (_timer <= 0.0f && _directionsStack.size() <= 0)
   {
     auto sm = owner->get_components<StateMachineComponent>()[0];
     sm->changeState("shoot");
+  }
+
+  if (_timer <= 0.0f && _directionsStack.size() > 0)
+  {
+    _timer = 0.8f;
+    _direction = _directionsStack[_directionsStack.size() - 1];
+    _directionsStack.pop_back();
+  }
+  else if (_timer < 0.2f)
+  {
+    speed = 0.0f;
   }
 
   owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(_direction * speed));

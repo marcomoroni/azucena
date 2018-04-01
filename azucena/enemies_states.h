@@ -86,7 +86,6 @@ class EnemyB_MoveState : public State
 private:
   std::shared_ptr<Entity> _player;
   float _timer;
-  int _movementStep;
   std::vector<sf::Vector2f> _directions = {
     sf::Vector2f(1.0f, 0.0f),
     sf::Vector2f(-1.0f, 0.0f),
@@ -94,6 +93,7 @@ private:
     sf::Vector2f(0.0f, -1.0f),
   };
   sf::Vector2f _direction;
+  std::vector<sf::Vector2f> _directionsStack = {};
 
 public:
   EnemyB_MoveState(std::shared_ptr<Entity> player)
