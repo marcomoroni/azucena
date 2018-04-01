@@ -5,7 +5,7 @@
 
 using namespace sf;
 
-void IdleState::execute(Entity *owner, double dt) noexcept
+void EnemyA_IdleState::execute(Entity *owner, double dt) noexcept
 {
 	// Don't move
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
@@ -18,7 +18,7 @@ void IdleState::execute(Entity *owner, double dt) noexcept
 	}
 }
 
-void ChaseState::execute(Entity *owner, double dt) noexcept
+void EnemyA_ChaseState::execute(Entity *owner, double dt) noexcept
 {
 	// Chase player
 	Vector2f direction = normalize(_player->getPosition() - owner->getPosition());
@@ -41,7 +41,7 @@ void ChaseState::execute(Entity *owner, double dt) noexcept
 	}
 }
 
-void ReturnState::execute(Entity *owner, double dt) noexcept
+void EnemyA_ReturnState::execute(Entity *owner, double dt) noexcept
 {
 	// Go back to original position
 	Vector2f direction = normalize(_pos - owner->getPosition());
@@ -57,12 +57,12 @@ void ReturnState::execute(Entity *owner, double dt) noexcept
 	}
 }
 
-void PrepareAttackState::enterState(Entity *owner) noexcept
+void EnemyA_PrepareAttackState::enterState(Entity *owner) noexcept
 {
 	_timer = 0.6f;
 }
 
-void PrepareAttackState::execute(Entity *owner, double dt) noexcept
+void EnemyA_PrepareAttackState::execute(Entity *owner, double dt) noexcept
 {
 	// Simulate a funnisng start
 	Vector2f direction = -normalize(_player->getPosition() - owner->getPosition());
@@ -79,7 +79,7 @@ void PrepareAttackState::execute(Entity *owner, double dt) noexcept
 	}
 }
 
-void AttackState::enterState(Entity *owner) noexcept
+void EnemyA_AttackState::enterState(Entity *owner) noexcept
 {
 	_timer = 0.9f;
 	_direction = normalize(_player->getPosition() - owner->getPosition());
@@ -88,7 +88,7 @@ void AttackState::enterState(Entity *owner) noexcept
 	owner->get_components<HurtComponent>()[0]->setActive(true);
 }
 
-void AttackState::execute(Entity *owner, double dt) noexcept
+void EnemyA_AttackState::execute(Entity *owner, double dt) noexcept
 {
 	_timer -= dt;
 
