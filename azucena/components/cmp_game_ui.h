@@ -13,8 +13,6 @@ private:
 
 	// Player health
 	int _player_health_sprite_size;
-	sf::Sprite _player_health_left;
-	sf::Sprite _player_health_right;
 	std::vector<sf::Sprite> _player_health_hearts;
 
 public:

@@ -5,17 +5,17 @@
 using namespace std;
 using namespace sf;
 
-float LevelSystem::_tileSize(100.f);
+float LevelSystem::_tileSize(32.f);
 
 std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
-	{ EMPTY, IntRect(736, 160, _tileSize, _tileSize) },
-	{ START, IntRect(736, 160, _tileSize, _tileSize) }, // Same as empty
-	{ END, IntRect(902, 97, _tileSize, _tileSize) },
-	{ WALL, IntRect(640, 160, _tileSize, _tileSize) },
+	{ EMPTY, IntRect(0, _tileSize, _tileSize, _tileSize) },
+	{ START, IntRect(0, _tileSize, _tileSize, _tileSize) }, // Same as empty
+	{ END, IntRect(_tileSize * 4, _tileSize * 2, _tileSize, _tileSize) },
+	{ WALL, IntRect(0, 0, _tileSize, _tileSize) },
 	// All enemies have empty below them
-	{ ENEMY_A, IntRect(736, 160, _tileSize, _tileSize) },
-	{ ENEMY_B, IntRect(736, 160, _tileSize, _tileSize) },
-	{ ENEMY_C, IntRect(736, 160, _tileSize, _tileSize) } };
+	{ ENEMY_A, IntRect(0, _tileSize, _tileSize, _tileSize) },
+	{ ENEMY_B, IntRect(0, _tileSize, _tileSize, _tileSize) },
+	{ ENEMY_C, IntRect(0, _tileSize, _tileSize, _tileSize) } };
 
 sf::IntRect LevelSystem::getSpriteRect(LevelSystem::Tile t) {
 	auto it = _rectMap.find(t);
@@ -105,7 +105,7 @@ void LevelSystem::buildSprites() {
 		}
 	}
 
-	tex = Resources::load<Texture>("terrain_atlas.png");
+	tex = Resources::load<Texture>("tex.png");
 	bigMapTexture.create(_tileSize * _width, _tileSize * _height);
 	bigMapTexture.clear(Color::Red);
 
