@@ -29,6 +29,8 @@ public:
     EXIT_7 = '7',
     EXIT_8 = '8',
     EXIT_9 = '9',
+    KEY = 'k',
+    DOOR = 'd',
     WALL = 'w',
     ENEMY = 'n', // to delete
 		ENEMY_A = 'A',

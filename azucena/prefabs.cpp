@@ -15,6 +15,7 @@
 #include "components/cmp_hurt.h"
 #include "components/cmp_bullet.h"
 #include "enemies_states.h"
+#include "key_states.h"
 
 using namespace std;
 using namespace sf;
@@ -233,4 +234,29 @@ shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, Vector2f
   auto b = e->addComponent<BulletComponent>(owner, direction);
 
   return e;
+}
+
+shared_ptr<Entity> create_key()
+{
+  auto key = Engine::GetActiveScene()->makeEntity();
+  key->setPosition(ls::getTilePosition(ls::findTiles(ls::KEY)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+  key->addTag("key");
+
+  auto s = key->addComponent<SpriteComponent>();
+  auto tex = Resources::load<Texture>("tex.png");
+  s->setTexture(tex);
+  s->getSprite().setTextureRect(sf::IntRect(0, 32 * 2 + 4, 32, 32 - 4));
+  // Centre origin
+  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+  //auto p = key->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+
+  auto sm = key->addComponent<StateMachineComponent>();
+  sm->setName("ai");
+  sm->addState("not taken", make_shared<Key_NotTakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
+  sm->addState("taken", make_shared<Key_TakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
+  sm->addState("used", make_shared<Key_UsedState>());
+  sm->changeState("not taken");
+
+  return key;
 }

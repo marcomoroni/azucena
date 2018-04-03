@@ -10,3 +10,4 @@ std::shared_ptr<Entity> create_button(std::string);
 std::shared_ptr<Entity> create_game_ui();
 std::shared_ptr<Entity> create_player_bullet(sf::Vector2f direction);
 std::shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, sf::Vector2f direction);
+std::shared_ptr<Entity> create_key();

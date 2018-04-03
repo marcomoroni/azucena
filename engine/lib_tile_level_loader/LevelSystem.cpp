@@ -20,6 +20,8 @@ std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
   { EXIT_7, IntRect(0, _tileSize, _tileSize, _tileSize) },
   { EXIT_8, IntRect(0, _tileSize, _tileSize, _tileSize) },
   { EXIT_9, IntRect(0, _tileSize, _tileSize, _tileSize) },
+  { KEY, IntRect(0, _tileSize, _tileSize, _tileSize) },
+  { DOOR, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ WALL, IntRect(0, 0, _tileSize, _tileSize) },
 	// All enemies have empty below them
 	{ ENEMY_A, IntRect(0, _tileSize, _tileSize, _tileSize) },
