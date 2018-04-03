@@ -23,7 +23,7 @@ void Key_TakenState::execute(Entity *owner, double dt) noexcept
   Vector2f target;
   // Target is close to the player or, if player is close to
   // the door the target is the door
-  if (length(_player->getPosition() - _door->getPosition()) > 96.0f)
+  if (length(_player->getPosition() - _door->getPosition()) > 130.0f)
   {
     target = _player->getPosition() + Vector2f(-40.0f, -40.0f);
   }
