@@ -16,6 +16,7 @@
 #include "components/cmp_bullet.h"
 #include "enemies_states.h"
 #include "key_states.h"
+#include "door_states.h"
 
 using namespace std;
 using namespace sf;
@@ -252,11 +253,33 @@ shared_ptr<Entity> create_key()
   //auto p = key->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
 
   auto sm = key->addComponent<StateMachineComponent>();
-  sm->setName("ai");
   sm->addState("not taken", make_shared<Key_NotTakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
   sm->addState("taken", make_shared<Key_TakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
   sm->addState("used", make_shared<Key_UsedState>());
   sm->changeState("not taken");
 
   return key;
+}
+
+shared_ptr<Entity> create_door()
+{
+  auto door = Engine::GetActiveScene()->makeEntity();
+  door->setPosition(ls::getTilePosition(ls::findTiles(ls::DOOR)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+  door->addTag("door");
+
+  auto s = door->addComponent<SpriteComponent>();
+  auto tex = Resources::load<Texture>("tex.png");
+  s->setTexture(tex);
+  s->getSprite().setTextureRect(sf::IntRect(32 * 7, 0, 32 * 3, 32 * 3));
+  // Centre origin
+  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+  auto p = door->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+
+  auto sm = door->addComponent<StateMachineComponent>();
+  sm->addState("close", make_shared<Door_CloseState>(Engine::GetActiveScene()->ents.find("player")[0], Engine::GetActiveScene()->ents.find("key")[0]));
+  sm->addState("open", make_shared<Door_OpenState>());
+  sm->changeState("close");
+
+  return door;
 }

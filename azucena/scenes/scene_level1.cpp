@@ -31,6 +31,7 @@ void Level1Scene::Load() {
 
   // Add key
   create_key();
+  create_door();
 
 	// Add UI
 	create_game_ui();

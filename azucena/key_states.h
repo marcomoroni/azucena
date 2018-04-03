@@ -31,6 +31,6 @@ class Key_UsedState : public State
 {
 public:
   Key_UsedState() {}
-  void enterState(Entity*) noexcept override {}
-  void execute(Entity*, double) noexcept override;
+  void enterState(Entity*) noexcept override;
+  void execute(Entity*, double) noexcept override {};
 };
