@@ -65,7 +65,8 @@ void Level1Scene::Update(const double& dt) {
 	
 	Engine::GetWindow().setView(view);
 
-  if (ls::getTileAt(player->getPosition()) == ls::END) {
+  // Exits
+  if (ls::getTileAt(player->getPosition()) == ls::EXIT_1) {
     Engine::ChangeScene((Scene*)&level2);
   }
 

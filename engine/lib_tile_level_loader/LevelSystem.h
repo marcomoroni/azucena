@@ -19,7 +19,16 @@ public:
   enum TILES {
     EMPTY = ' ',
     START = 's',
-    END = 'e',
+    END = 'e', // to delete
+    EXIT_1 = '1',
+    EXIT_2 = '2',
+    EXIT_3 = '3',
+    EXIT_4 = '4',
+    EXIT_5 = '5',
+    EXIT_6 = '6',
+    EXIT_7 = '7',
+    EXIT_8 = '8',
+    EXIT_9 = '9',
     WALL = 'w',
     ENEMY = 'n', // to delete
 		ENEMY_A = 'A',
