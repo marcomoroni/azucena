@@ -2,19 +2,25 @@
 #include "components/cmp_physics.h"
 #include "components/cmp_sprite.h"
 #include "key_states.h"
+#include "engine.h"
 
 using namespace sf;
 using namespace std;
 
+void Door_CloseState::enterState(Entity *owner) noexcept
+{
+  //_key = Engine::GetActiveScene()->ents.find("key")[0];
+}
+
 void Door_CloseState::execute(Entity *owner, double dt) noexcept
 {
+  _key = Engine::GetActiveScene()->ents.find("key")[0];
   auto ksm = _key->get_components<StateMachineComponent>()[0];
 
   if (
-    // Player is near door and
-    length(owner->getPosition() - _player->getPosition()) < 120.0f &&
-    // player has key
-    ksm->currentState() == "taken")
+    // key is close to door
+    length(_key->getPosition() - owner->getPosition()) < 1.0f
+    )
   {
     // Set key as used
     ksm->changeState("used");

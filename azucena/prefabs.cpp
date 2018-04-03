@@ -277,7 +277,7 @@ shared_ptr<Entity> create_door()
   auto p = door->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
 
   auto sm = door->addComponent<StateMachineComponent>();
-  sm->addState("close", make_shared<Door_CloseState>(Engine::GetActiveScene()->ents.find("player")[0], Engine::GetActiveScene()->ents.find("key")[0]));
+  sm->addState("close", make_shared<Door_CloseState>(Engine::GetActiveScene()->ents.find("player")[0]));
   sm->addState("open", make_shared<Door_OpenState>());
   sm->changeState("close");
 

@@ -9,9 +9,9 @@ private:
   std::shared_ptr<Entity> _key;
 
 public:
-  Door_CloseState(std::shared_ptr<Entity> player, std::shared_ptr<Entity> key)
-    : _player(player), _key(key) {}
-  void enterState(Entity*) noexcept override {}
+  Door_CloseState(std::shared_ptr<Entity> player)
+    : _player(player) {}
+  void enterState(Entity*) noexcept override;
   void execute(Entity*, double) noexcept override;
 };
 

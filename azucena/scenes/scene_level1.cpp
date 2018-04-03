@@ -30,8 +30,8 @@ void Level1Scene::Load() {
 	add_physics_colliders_to_tiles();
 
   // Add key
-  create_key();
   create_door();
+  create_key();
 
 	// Add UI
 	create_game_ui();

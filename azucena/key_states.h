@@ -18,12 +18,13 @@ class Key_TakenState : public State
 {
 private:
   std::shared_ptr<Entity> _player;
+  std::shared_ptr<Entity> _door;
 
 public:
   Key_TakenState(std::shared_ptr<Entity> player)
     : _player(player) {}
   Key_TakenState() {}
-  void enterState(Entity*) noexcept override {}
+  void enterState(Entity*) noexcept override;
   void execute(Entity*, double) noexcept override;
 };
 
