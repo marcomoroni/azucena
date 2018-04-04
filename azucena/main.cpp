@@ -19,5 +19,5 @@ int main() {
 	ShowWindow(hwnd, SW_HIDE);
 #endif
 
-  Engine::Start(1280, 720, "Azucena", &menu);
+  Engine::Start(1000, 600, "Azucena", &menu);
 }

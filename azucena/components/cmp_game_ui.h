@@ -11,13 +11,20 @@ private:
 
 	std::shared_ptr<sf::Texture> _tex;
 
+  float _margin;
+
 	// Player health
 	int _player_health_sprite_size;
 	std::vector<sf::Sprite> _player_health_hearts;
+
+  // Exit message
+  std::shared_ptr<Entity> _exitMessage;
+  float _exitMessageTimer;
 
 public:
 	GameUIComponent() = delete;
 	explicit GameUIComponent(Entity* p, std::shared_ptr<Entity> player);
 	void update(double dt) override;
 	void render() override;
+  void showExitMessage();
 };

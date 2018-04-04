@@ -75,7 +75,7 @@ void Level1Scene::Update(const double& dt) {
   }
 
 	// Press Esc for 1 sec button to return to menu
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu"))) _escButtonTimePressed += dt;
+  if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu"))) _escButtonTimePressed += dt;
 	else _escButtonTimePressed = 0.0f;
 	if (_escButtonTimePressed > 1.0f) Engine::ChangeScene((Scene*)&menu);
 

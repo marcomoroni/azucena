@@ -2,12 +2,14 @@
 #include "engine.h"
 #include "system_renderer.h"
 #include "system_resources.h"
+#include "../prefabs.h"
+#include "../constrols.h"
 
 using namespace std;
 using namespace sf;
 
 GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
-	: Component(p), _player(player)
+	: Component(p), _player(player), _margin(32.0f)
 {
 
 	_tex = Resources::load<Texture>("tex.png");
@@ -23,6 +25,9 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		_player_health_hearts.push_back(s);
 		// Set intrect later in update
 	}
+
+  _exitMessage = create_exit_ui_message();
+  _exitMessageTimer = 0.0f;
 }
 
 void GameUIComponent::update(double dt)
@@ -36,8 +41,12 @@ void GameUIComponent::update(double dt)
 		Engine::GetWindow().getView().getCenter().y});
 
   Vector2f top_left_corner = {
-    _parent->getPosition().x - Engine::GetWindow().getSize().x / 2 + 32,
-    _parent->getPosition().y - Engine::GetWindow().getSize().y / 2 + 32 };
+    _parent->getPosition().x - Engine::GetWindow().getSize().x / 2 + _margin,
+    _parent->getPosition().y - Engine::GetWindow().getSize().y / 2 + _margin };
+
+  Vector2f top_right_corner = {
+    _parent->getPosition().x + Engine::GetWindow().getSize().x / 2 - _margin,
+    _parent->getPosition().y - Engine::GetWindow().getSize().y / 2 + _margin };
 
 	for (int i = 0; i < _player_health_hearts.size(); i++)
 	{
@@ -60,9 +69,28 @@ void GameUIComponent::update(double dt)
 			_player_health_hearts[i].setTextureRect(IntRect(_player_health_sprite_size * 6, _player_health_sprite_size, _player_health_sprite_size, _player_health_sprite_size));
 		}
 	}
+
+  // Exit message
+  if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu"))) showExitMessage();
+  if (_exitMessageTimer >= 0.0f)
+  {
+    // Show message
+    _exitMessage->setPosition(top_right_corner);
+    _exitMessageTimer -= dt;
+  }
+  else
+  {
+    // hide message
+    _exitMessage->setPosition(Vector2f{ _parent->getPosition().x + Engine::GetWindow().getSize().x, _parent->getPosition().y + Engine::GetWindow().getSize().y });
+  }
 }
 
 void GameUIComponent::render()
 {
 	for (auto &s : _player_health_hearts) Renderer::queue(&s);
+}
+
+void GameUIComponent::showExitMessage()
+{
+  _exitMessageTimer = 3.0f;
 }
