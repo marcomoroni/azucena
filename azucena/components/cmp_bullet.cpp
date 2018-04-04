@@ -31,6 +31,8 @@ void BulletComponent::update(double dt)
   if (_lifetime <= 0.f) {
     _parent->setForDelete();
   }
+
+  if (_owner->is_fordeletion()) _parent->setForDelete();
 }
 
 BulletComponent::BulletComponent(Entity* p, shared_ptr<Entity> owner, Vector2f direction)

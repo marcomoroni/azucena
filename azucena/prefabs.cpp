@@ -223,7 +223,7 @@ shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, Vector2f
   auto s = e->addComponent<SpriteComponent>();
   auto tex = Resources::load<Texture>("tex.png");
   s->setTexture(tex);
-  s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 8, 32 * 2 + 12, 12, 12));
+  s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
   auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
