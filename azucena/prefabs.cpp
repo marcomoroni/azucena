@@ -251,8 +251,6 @@ shared_ptr<Entity> create_key()
   // Centre origin
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  //auto p = key->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
-
   auto sm = key->addComponent<StateMachineComponent>();
   sm->addState("not taken", make_shared<Key_NotTakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
   sm->addState("taken", make_shared<Key_TakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
@@ -295,4 +293,38 @@ shared_ptr<Entity> create_exit_ui_message()
   t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
 
   return message;
+}
+
+shared_ptr<Entity> create_baby_llama(int index)
+{
+  auto e = Engine::GetActiveScene()->makeEntity();
+  e->setPosition(ls::getTilePosition(ls::findTiles(ls::MAIN_COLLECTIBLE)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+  e->addTag("main collectible");
+
+  auto s = e->addComponent<SpriteComponent>();
+  auto tex = Resources::get<Texture>("tex.png");
+  s->setTexture(tex);
+  // Change sprite depending on index
+  switch (index)
+  {
+  case 1: 
+    s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 5, 32, 32));
+    break;
+  case 2:
+    s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 5, 32, 32));
+    break;
+  case 3:
+    s->getSprite().setTextureRect(sf::IntRect(32 * 9, 32 * 5, 32, 32));
+    break;
+  default:
+    break;
+  }
+  // Centre origin
+  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+  //auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+  //p->getBody()->SetSleepingAllowed(false);
+  //p->getBody()->SetFixedRotation(true);
+
+  return e;
 }

@@ -13,3 +13,5 @@ std::shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, sf::Vector2f direct
 std::shared_ptr<Entity> create_key();
 std::shared_ptr<Entity> create_door();
 std::shared_ptr<Entity> create_exit_ui_message();
+// Main collectible (must have an index)
+std::shared_ptr<Entity> create_baby_llama(int index);

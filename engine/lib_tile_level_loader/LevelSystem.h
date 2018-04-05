@@ -35,7 +35,10 @@ public:
     ENEMY = 'n', // to delete
 		ENEMY_A = 'A',
 		ENEMY_B = 'B',
-		ENEMY_C = 'C'
+		ENEMY_C = 'C',
+    // Note: decide on Scene::load which main collectible is, because
+    // there will only be one per scene
+    MAIN_COLLECTIBLE = '@'
   };
 
   static Tile getTile(sf::Vector2ul);

@@ -33,6 +33,9 @@ void Level1Scene::Load() {
   create_door();
   create_key();
 
+  // Create main collectibles
+  create_baby_llama(1);
+
 	// Add UI
 	create_game_ui();
 
