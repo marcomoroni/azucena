@@ -62,7 +62,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		enemy_A->addTag("enemy_A");
 
 		auto s = enemy_A->addComponent<SpriteComponent>();
-		auto tex = Resources::load<Texture>("tex.png");
+		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
 		s->getSprite().setTextureRect(sf::IntRect(0, 32 * 5, 32, 32 - 4));
 		// Centre origin
@@ -97,7 +97,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		enemy_B->addTag("enemy_B");
 
 		auto s = enemy_B->addComponent<SpriteComponent>();
-		auto tex = Resources::load<Texture>("tex.png");
+		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
 		s->getSprite().setTextureRect(sf::IntRect(0, 32 * 4, 32, 32));
 		// Centre origin
@@ -130,7 +130,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		enemy_C->addTag("enemy_C");
 
 		auto s = enemy_C->addComponent<SpriteComponent>();
-		auto tex = Resources::load<Texture>("invaders_sheet.png");
+		auto tex = Resources::get<Texture>("invaders_sheet.png");
 		s->setTexture(tex);
 		s->getSprite().setTextureRect(sf::IntRect(128, 0, 32, 32));
 		// Centre origin
@@ -196,7 +196,7 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	e->setPosition(pos);
 
 	auto s = e->addComponent<SpriteComponent>();
-	auto tex = Resources::load<Texture>("tex.png");
+	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
   s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 12, 32 * 3 + 12, 8, 8));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
@@ -222,7 +222,7 @@ shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, Vector2f
   e->setPosition(pos);
 
   auto s = e->addComponent<SpriteComponent>();
-  auto tex = Resources::load<Texture>("tex.png");
+  auto tex = Resources::get<Texture>("tex.png");
   s->setTexture(tex);
   s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
@@ -245,7 +245,7 @@ shared_ptr<Entity> create_key()
   key->addTag("key");
 
   auto s = key->addComponent<SpriteComponent>();
-  auto tex = Resources::load<Texture>("tex.png");
+  auto tex = Resources::get<Texture>("tex.png");
   s->setTexture(tex);
   s->getSprite().setTextureRect(sf::IntRect(0, 32 * 2 + 4, 32, 32 - 4));
   // Centre origin
@@ -269,7 +269,7 @@ shared_ptr<Entity> create_door()
   door->addTag("door");
 
   auto s = door->addComponent<SpriteComponent>();
-  auto tex = Resources::load<Texture>("tex.png");
+  auto tex = Resources::get<Texture>("tex.png");
   s->setTexture(tex);
   s->getSprite().setTextureRect(sf::IntRect(32 * 7, 0, 32 * 3, 32 * 3));
   // Centre origin

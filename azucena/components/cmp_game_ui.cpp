@@ -12,7 +12,7 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 	: Component(p), _player(player), _margin(32.0f)
 {
 
-	_tex = Resources::load<Texture>("tex.png");
+	_tex = Resources::get<Texture>("tex.png");
 	_player_health_sprite_size = 32;
 
 	// Note: creating the sptites for the hearts here means that if the player max
