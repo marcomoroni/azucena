@@ -35,7 +35,7 @@ void BulletComponent::update(double dt)
   if (_owner->is_fordeletion()) _parent->setForDelete();
 }
 
-BulletComponent::BulletComponent(Entity* p, shared_ptr<Entity> owner, Vector2f direction)
+BulletComponent::BulletComponent(Entity* p, Entity* owner, Vector2f direction)
     : Component(p), _owner(owner), _direction(direction), _lifetime(5.0f), _maxSpeed(600.0f)
 {
 }

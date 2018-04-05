@@ -207,12 +207,12 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	auto h = e->addComponent<HurtComponent>("enemy"); // NOT WORKING ?
 	h->setActive(true);
 
-	auto b = e->addComponent<BulletComponent>(player, direction);
+	auto b = e->addComponent<BulletComponent>(&(*player), direction);
 
 	return e;
 }
 
-shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, Vector2f direction)
+shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, Vector2f direction)
 {
   auto e = Engine::GetActiveScene()->makeEntity();
   e->addTag("bullet");
@@ -230,7 +230,7 @@ shared_ptr<Entity> create_enemy_B_bullet(std::shared_ptr<Entity> owner, Vector2f
   auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
   p->getBody()->SetBullet(true);
 
-  auto h = e->addComponent<HurtComponent>("player"); // NOT WORKING ?
+  auto h = e->addComponent<HurtComponent>("player");
   h->setActive(true);
 
   auto b = e->addComponent<BulletComponent>(owner, direction);

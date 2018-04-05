@@ -177,10 +177,10 @@ void EnemyB_MoveState::execute(Entity *owner, double dt) noexcept
 void EnemyB_ShootState::execute(Entity *owner, double dt) noexcept
 {
   // Shoot 4 projectiles
-  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ 1.0f, 0.0f });
-  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ -1.0f, 0.0f });
-  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ 0.0f, 1.0f });
-  create_enemy_B_bullet(std::shared_ptr<Entity>(owner), Vector2f{ 0.0f, -1.0f });
+  create_enemy_B_bullet(owner, Vector2f{ 1.0f, 0.0f });
+  create_enemy_B_bullet(owner, Vector2f{ -1.0f, 0.0f });
+  create_enemy_B_bullet(owner, Vector2f{ 0.0f, 1.0f });
+  create_enemy_B_bullet(owner, Vector2f{ 0.0f, -1.0f });
 
   auto sm = owner->get_components<StateMachineComponent>()[0];
   sm->changeState("move");
