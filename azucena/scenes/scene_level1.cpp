@@ -6,11 +6,13 @@
 #include <system_resources.h>
 #include "../constrols.h"
 #include "../prefabs.h"
+#include "../components/cmp_state_machine.h"
 
 using namespace std;
 using namespace sf;
 
 static shared_ptr<Entity> player;
+shared_ptr<Entity> door;
 Vector2f view_center;
 float _escButtonTimePressed = 0.0f;
 
@@ -27,9 +29,12 @@ void Level1Scene::Load()
   // Add physics colliders to level tiles.
 	add_physics_colliders_to_tiles();
 
-  // Add key
-  create_door();
-  create_key();
+  // Add key and door
+  if (!Data::door_right_opened)
+  {
+    door = create_door();
+    create_key();
+  }
 
   // Create main collectibles
   create_baby_llama(1);
@@ -69,6 +74,15 @@ void Level1Scene::Update(const double& dt) {
 	view.setCenter(view_center);
 	
 	Engine::GetWindow().setView(view);
+
+  // Save door as opened
+  if (!Data::door_right_opened)
+  {
+    if (door->get_components<StateMachineComponent>()[0]->currentState() == "open")
+    {
+      Data::door_right_opened = true;
+    }
+  }
 
   // Exits
   if (ls::getTileAt(player->getPosition()) == ls::EXIT_1) {

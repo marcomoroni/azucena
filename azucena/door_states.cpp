@@ -3,6 +3,7 @@
 #include "components/cmp_sprite.h"
 #include "key_states.h"
 #include "engine.h"
+#include "game.h"
 
 using namespace sf;
 using namespace std;
