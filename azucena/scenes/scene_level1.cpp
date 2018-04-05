@@ -14,10 +14,8 @@ static shared_ptr<Entity> player;
 Vector2f view_center;
 float _escButtonTimePressed = 0.0f;
 
-void Level1Scene::Load() {
-#if DEBUG
-  cout << " Scene 1 Load" << endl;
-#endif
+void Level1Scene::Load()
+{
   ls::loadLevelFile("res/level_1.txt", 32.0f);
 
   // Create player
