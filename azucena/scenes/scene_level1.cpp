@@ -24,17 +24,17 @@ void Level1Scene::Load() {
 	player = create_player();
 
 	// Create enemies
-	create_enemies();
+	//create_enemies();
 
   // Add physics colliders to level tiles.
-	add_physics_colliders_to_tiles();
+	//add_physics_colliders_to_tiles();
 
   // Add key
-  create_door();
-  create_key();
+  //create_door();
+  //create_key();
 
 	// Add UI
-	create_game_ui();
+	//create_game_ui();
 
 	// Set view
 	view_center = player->getPosition();

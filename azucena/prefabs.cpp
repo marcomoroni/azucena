@@ -28,7 +28,7 @@ shared_ptr<Entity> create_player()
 	player->addTag("player");
 
 	auto s = player->addComponent<SpriteComponent>();
-	auto tex = Resources::load<Texture>("tex.png");
+	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
 	s->getSprite().setTextureRect(sf::IntRect(0 + 4, 32 * 3, 32 - 4, 32));
 	// Centre origin
@@ -154,6 +154,7 @@ void add_physics_colliders_to_tiles()
 		auto pos = ls::getTilePosition(w);
 		pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2); //offset to center
 		auto e = Engine::GetActiveScene()->makeEntity();
+    e->addTag("wall");
 		e->setPosition(pos);
 		e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
 	}

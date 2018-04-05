@@ -5,6 +5,7 @@
 #include <iostream>
 #include "../prefabs.h"
 #include "../components/cmp_button.h"
+#include "system_resources.h"
 
 using namespace std;
 using namespace sf;
@@ -14,6 +15,9 @@ shared_ptr<Entity> btn_Options;
 shared_ptr<Entity> btn_Quit;
 
 void MenuScene::Load() {
+
+  Resources::load<Texture>("tex.png");
+
 #if DEBUG
   cout << "Menu Load \n";
 #endif

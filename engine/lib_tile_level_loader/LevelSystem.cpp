@@ -5,7 +5,7 @@
 using namespace std;
 using namespace sf;
 
-float LevelSystem::_tileSize(32.f);
+float LevelSystem::_tileSize(32);
 
 std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
 	{ EMPTY, IntRect(0, _tileSize, _tileSize, _tileSize) },
@@ -116,7 +116,8 @@ void LevelSystem::buildSprites() {
 		}
 	}
 
-	tex = Resources::load<Texture>("tex.png");
+  tex.reset();
+  tex = Resources::get<Texture>("tex.png");
 	bigMapTexture.create(_tileSize * _width, _tileSize * _height);
 	bigMapTexture.clear(Color::Red);
 
