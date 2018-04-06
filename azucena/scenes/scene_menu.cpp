@@ -60,18 +60,18 @@ void MenuScene::Update(const double& dt) {
 	if (btn_Start->get_components<ButtonComponent>()[0]->isSelected())
 	{
     Data::reset();
-		Engine::ChangeScene(&level1);
+		Engine::ChangeScene(&center);
 	}
 
   if (btn_Continue->get_components<ButtonComponent>()[0]->isSelected())
   {
-    Engine::ChangeScene(&level1);
+    Engine::ChangeScene(&center);
   }
 
   if (btn_Load->get_components<ButtonComponent>()[0]->isSelected())
   {
     Data::load();
-    Engine::ChangeScene(&level1);
+    Engine::ChangeScene(&center);
   }
 
 	if (btn_Options->get_components<ButtonComponent>()[0]->isSelected())

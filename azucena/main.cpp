@@ -8,9 +8,7 @@ using namespace std;
 MenuScene menu;
 OptionsScene options;
 GameOverScene game_over;
-Level1Scene level1;
-Level2Scene level2;
-Level3Scene level3;
+CenterScene center;
 
 int main() {
 

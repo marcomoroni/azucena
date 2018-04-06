@@ -1,4 +1,4 @@
-#include "scene_level1.h"
+#include "scene_center.h"
 #include "../game.h"
 #include <LevelSystem.h>
 #include <iostream>
@@ -17,7 +17,7 @@ shared_ptr<Entity> door;
 Vector2f view_center;
 float _escButtonTimePressed = 0.0f;
 
-void Level1Scene::Load()
+void CenterScene::Load()
 {
   ls::loadLevelFile("res/level_1.txt", 32.0f);
 
@@ -55,7 +55,7 @@ void Level1Scene::Load()
   setLoaded(true);
 }
 
-void Level1Scene::UnLoad() {
+void CenterScene::UnLoad() {
 #if DEBUG
   cout << "Scene 1 Unload" << endl;
 #endif
@@ -65,7 +65,7 @@ void Level1Scene::UnLoad() {
   Scene::UnLoad();
 }
 
-void Level1Scene::Update(const double& dt) {
+void CenterScene::Update(const double& dt) {
 
   // Note: Scenes should be changed at the very end, because the update will
   // keep running even if the scene is unloaded. If this happenes, you cannot
@@ -108,13 +108,13 @@ void Level1Scene::Update(const double& dt) {
 
   // Change scene
   if (flag_game_over) Engine::ChangeScene((Scene*)&game_over);
-  else if (flag_exit_1) Engine::ChangeScene((Scene*)&level2);
+  else if (flag_exit_1) Engine::ChangeScene((Scene*)&menu); // temporary /////////////////
   else if (flag_menu) Engine::ChangeScene((Scene*)&menu);
 
   Scene::Update(dt);
 }
 
-void Level1Scene::Render() {
+void CenterScene::Render() {
   ls::render(Engine::GetWindow());
   Scene::Render();
 }
