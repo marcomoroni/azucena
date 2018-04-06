@@ -7,7 +7,6 @@
 #include "scenes/scene_menu.h"
 #include "scenes/scene_options.h"
 
-extern Data;
 extern MenuScene menu;
 extern OptionsScene options;
 extern Level1Scene level1;

@@ -11,6 +11,7 @@ using namespace std;
 using namespace sf;
 
 shared_ptr<Entity> btn_Start;
+shared_ptr<Entity> btn_Load;
 shared_ptr<Entity> btn_Options;
 shared_ptr<Entity> btn_Quit;
 
@@ -27,14 +28,17 @@ void MenuScene::Load() {
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
   }
 
-	btn_Start = create_button("Start");
+	btn_Start = create_button("New game");
 	btn_Start->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 200.0f });
 
-	btn_Options = create_button("Options");
-	btn_Options->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 240.0f });
+  btn_Start = create_button("Load");
+  btn_Start->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 240.0f });
 
-	btn_Quit = create_button("Quit");
-	btn_Quit->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 280.0f });
+	btn_Options = create_button("Options");
+	btn_Options->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 280.0f });
+
+	btn_Quit = create_button("Save and quit");
+	btn_Quit->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 320.0f });
 
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
@@ -49,6 +53,12 @@ void MenuScene::Update(const double& dt) {
 		Engine::ChangeScene(&level1);
 	}
 
+  if (btn_Load->get_components<ButtonComponent>()[0]->isSelected())
+  {
+    Data::load();
+    Engine::ChangeScene(&level1);
+  }
+
 	if (btn_Options->get_components<ButtonComponent>()[0]->isSelected())
 	{
 		Engine::ChangeScene(&options);
@@ -56,6 +66,7 @@ void MenuScene::Update(const double& dt) {
 
 	if (btn_Quit->get_components<ButtonComponent>()[0]->isSelected())
 	{
+    Data::save();
 		Engine::GetWindow().close();
 	}
 

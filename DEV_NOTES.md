@@ -156,7 +156,7 @@ Press <kbd>Esc</kbd> for a while to return to menu.
 On runtime, data that are need to be saved and need to be known across the whole game are stored in `data.cpp`. Include `game.h` to use it:
 
 
-```
+``` cpp
 #include "game.h"
 
 Data::my_data = true;
