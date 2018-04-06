@@ -46,19 +46,10 @@ void CenterScene::Load()
 	// Set view
 	view_center = player->getPosition();
 
-#if DEBUG
-  //Simulate long loading times
-  //std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-  cout << " Scene 1 Load Done" << endl;
-#endif
-
   setLoaded(true);
 }
 
 void CenterScene::UnLoad() {
-#if DEBUG
-  cout << "Scene 1 Unload" << endl;
-#endif
   player.reset();
   door.reset();
   ls::unload();

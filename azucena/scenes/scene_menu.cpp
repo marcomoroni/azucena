@@ -20,9 +20,6 @@ void MenuScene::Load() {
 
   Resources::load<Texture>("tex.png");
 
-#if DEBUG
-  cout << "Menu Load \n";
-#endif
   {
     auto txt = makeEntity();
     auto t = txt->addComponent<TextComponent>("Azucena");
