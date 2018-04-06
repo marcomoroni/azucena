@@ -3,6 +3,15 @@
 
 using namespace std;
 
+bool Data::main_collectible_1;
+bool Data::main_collectible_2;
+bool Data::main_collectible_3;
+bool Data::door_top_opened;
+bool Data::door_right_opened;
+bool Data::door_left_opened;
+
+string Data::save_file_path = "azucena_save.txt";
+
 void Data::load()
 {
   ifstream file(save_file_path);
@@ -36,13 +45,12 @@ void Data::save()
   file.close();
 }
 
-string Data::save_file_path = "azucena_save.txt";
-//string Data::save_file_path = "%systemdrive%/users/%username%/Desktop/azucena_save.dat";
-//string Data::save_file_path = "saves/azucena_save.dat";
-
-bool Data::main_collectible_1 = false;
-bool Data::main_collectible_2 = false;
-bool Data::main_collectible_3 = false;
-bool Data::door_top_opened = false;
-bool Data::door_right_opened = false;
-bool Data::door_left_opened = false;
+void Data::reset()
+{
+  main_collectible_1 = false;
+  main_collectible_2 = false;
+  main_collectible_3 = false;
+  door_top_opened = false;
+  door_right_opened = false;
+  door_left_opened = false;
+}

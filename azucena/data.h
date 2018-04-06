@@ -6,6 +6,7 @@ class Data
 public:
   static void load();
   static void save();
+  static void reset();
   static std::string save_file_path;
 
   static bool main_collectible_1;
