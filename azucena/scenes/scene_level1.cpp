@@ -59,6 +59,7 @@ void Level1Scene::UnLoad() {
   cout << "Scene 1 Unload" << endl;
 #endif
   player.reset();
+  door.reset();
   ls::unload();
   Scene::UnLoad();
 }
