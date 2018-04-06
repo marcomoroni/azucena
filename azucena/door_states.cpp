@@ -1,6 +1,5 @@
 #include "door_states.h"
 #include "components/cmp_physics.h"
-#include "components/cmp_sprite.h"
 #include "key_states.h"
 #include "engine.h"
 #include "game.h"
@@ -37,6 +36,5 @@ void Door_OpenState::enterState(Entity *owner) noexcept
   pc->getBody()->DestroyFixture(pc->getFixture());
 
   // Make it invisible
-  auto sc = owner->get_components<SpriteComponent>()[0];
-  sc->getSprite().setTextureRect(IntRect(32 * 2, 32, 32, 32));
+  owner->setVisible(false);
 }
