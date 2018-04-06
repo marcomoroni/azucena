@@ -41,7 +41,7 @@ shared_ptr<Entity> create_player()
 	//Bullet items have higher-res collision detection
 	p->getBody()->SetBullet(true);
 
-	player->addComponent<PlayerHealthComponent>(6);
+	player->addComponent<PlayerHealthComponent>(4);
 
 	player->addComponent<PlayerControlsComponent>();
 

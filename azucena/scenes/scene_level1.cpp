@@ -7,6 +7,7 @@
 #include "../constrols.h"
 #include "../prefabs.h"
 #include "../components/cmp_state_machine.h"
+#include "../components/cmp_player_health.h"
 
 using namespace std;
 using namespace sf;
@@ -66,6 +67,12 @@ void Level1Scene::UnLoad() {
 
 void Level1Scene::Update(const double& dt) {
 
+  // Note: Scenes should be changed at the very end, because the update will
+  // keep running even if the scene is unloaded. If this happenes, you cannot
+  // use any of the entities or variable of the scene.
+  // There are flags to keep track if the scene has to be changed and they will
+  // used at the end of the function.
+
 	// Camera follows player
 	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
 	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
@@ -85,15 +92,24 @@ void Level1Scene::Update(const double& dt) {
     }
   }
 
+  // Game over
+  bool flag_game_over = false;
+  if (player->get_components<PlayerHealthComponent>()[0]->getHealth() <= 0) flag_game_over = true;
+
   // Exits
-  if (ls::getTileAt(player->getPosition()) == ls::EXIT_1) {
-    Engine::ChangeScene((Scene*)&level2);
-  }
+  bool flag_exit_1 = false;
+  if (ls::getTileAt(player->getPosition()) == ls::EXIT_1) flag_exit_1 = true;
 
 	// Press Esc for 1 sec button to return to menu
+  bool flag_menu = false;
   if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu"))) _escButtonTimePressed += dt;
 	else _escButtonTimePressed = 0.0f;
-	if (_escButtonTimePressed > 1.0f) Engine::ChangeScene((Scene*)&menu);
+  if (_escButtonTimePressed > 1.0f) flag_menu = true;
+
+  // Change scene
+  if (flag_game_over) Engine::ChangeScene((Scene*)&game_over);
+  else if (flag_exit_1) Engine::ChangeScene((Scene*)&level2);
+  else if (flag_menu) Engine::ChangeScene((Scene*)&menu);
 
   Scene::Update(dt);
 }
