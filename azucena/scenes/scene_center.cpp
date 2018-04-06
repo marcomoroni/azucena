@@ -14,12 +14,10 @@ using namespace sf;
 
 static shared_ptr<Entity> player;
 shared_ptr<Entity> door;
-Vector2f view_center;
-float _escButtonTimePressed = 0.0f;
 
 void CenterScene::Load()
 {
-  ls::loadLevelFile("res/level_1.txt", 32.0f);
+  ls::loadLevelFile("res/level_center.txt", 32.0f);
 
   // Create player
 	player = create_player();
@@ -37,14 +35,11 @@ void CenterScene::Load()
     create_key();
   }
 
-  // Create main collectibles
-  create_baby_llama(1);
-
 	// Add UI
 	create_game_ui();
 
 	// Set view
-	view_center = player->getPosition();
+	_view_center = player->getPosition();
 
   setLoaded(true);
 }
@@ -67,10 +62,10 @@ void CenterScene::Update(const double& dt) {
 	// Camera follows player
 	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
 	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
-	float view_player_distance = sqrt(((player->getPosition().x - view_center.x) * (player->getPosition().x - view_center.x)) + ((player->getPosition().y - view_center.y) * (player->getPosition().y - view_center.y)));
+	float view_player_distance = sqrt(((player->getPosition().x - _view_center.x) * (player->getPosition().x - _view_center.x)) + ((player->getPosition().y - _view_center.y) * (player->getPosition().y - _view_center.y)));
 	if (view_player_distance > 80.0f)
-		view_center += (player->getPosition() - view_center) * (float)dt * 2.3f;
-	view.setCenter(view_center);
+		_view_center += (player->getPosition() - _view_center) * (float)dt * 2.3f;
+	view.setCenter(_view_center);
 	
 	Engine::GetWindow().setView(view);
 
@@ -90,6 +85,10 @@ void CenterScene::Update(const double& dt) {
   // Exits
   bool flag_exit_1 = false;
   if (ls::getTileAt(player->getPosition()) == ls::EXIT_1) flag_exit_1 = true;
+  bool flag_exit_2 = false;
+  if (ls::getTileAt(player->getPosition()) == ls::EXIT_2) flag_exit_2 = true;
+  bool flag_exit_3 = false;
+  if (ls::getTileAt(player->getPosition()) == ls::EXIT_3) flag_exit_3 = true;
 
 	// Press Esc for 1 sec button to return to menu
   bool flag_menu = false;
@@ -98,9 +97,11 @@ void CenterScene::Update(const double& dt) {
   if (_escButtonTimePressed > 1.0f) flag_menu = true;
 
   // Change scene
-  if (flag_game_over) Engine::ChangeScene((Scene*)&game_over);
-  else if (flag_exit_1) Engine::ChangeScene((Scene*)&menu); // temporary /////////////////
-  else if (flag_menu) Engine::ChangeScene((Scene*)&menu);
+  if (flag_game_over) Engine::ChangeScene((Scene*)&scene_game_over);
+  else if (flag_exit_1) Engine::ChangeScene((Scene*)&scene_right);
+  else if (flag_exit_2) Engine::ChangeScene((Scene*)&scene_top);
+  else if (flag_exit_3) Engine::ChangeScene((Scene*)&scene_left);
+  else if (flag_menu) Engine::ChangeScene((Scene*)&scene_menu);
 
   Scene::Update(dt);
 }

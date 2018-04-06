@@ -86,7 +86,7 @@ void OptionsScene::Update(const double& dt)
 {
 	if (btn_Back->get_components<ButtonComponent>()[0]->isSelected())
 	{
-		Engine::ChangeScene(&menu);
+		Engine::ChangeScene(&scene_menu);
 	}
 
 	// Select key to be changed

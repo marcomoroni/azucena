@@ -5,10 +5,13 @@
 
 using namespace std;
 
-MenuScene menu;
-OptionsScene options;
-GameOverScene game_over;
-CenterScene center;
+MenuScene scene_menu;
+OptionsScene scene_options;
+GameOverScene scene_game_over;
+CenterScene scene_center;
+TopScene scene_top;
+LeftScene scene_left;
+RightScene scene_right;
 
 int main() {
 
@@ -18,5 +21,5 @@ int main() {
 	ShowWindow(hwnd, SW_HIDE);
 #endif
 
-  Engine::Start(1000, 600, "Azucena", &menu);
+  Engine::Start(1000, 600, "Azucena", &scene_menu);
 }

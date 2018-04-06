@@ -46,7 +46,7 @@ void GameOverScene::Update(const double& dt)
       Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) ||
       Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")))
     {
-      Engine::ChangeScene((Scene*)&menu);
+      Engine::ChangeScene((Scene*)&scene_menu);
     }
   }
 

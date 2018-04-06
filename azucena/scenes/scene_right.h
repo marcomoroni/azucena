@@ -2,7 +2,7 @@
 
 #include "engine.h"
 
-class CenterScene : public Scene {
+class RightScene : public Scene {
 public:
   void Load() override;
   void UnLoad() override;
