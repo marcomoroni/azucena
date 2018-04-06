@@ -192,7 +192,7 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	auto player = Engine::GetActiveScene()->ents.find("player")[0];
 	// Note: has to be far enough from the player because it gets destroyed when it touches
 	// something
-	Vector2f pos = player->getPosition() + (50.0f * direction);
+	Vector2f pos = player->getPosition() + (33.0f * direction);
 	e->setPosition(pos);
 
 	auto s = e->addComponent<SpriteComponent>();
@@ -218,7 +218,7 @@ shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, Vector2f direction)
   e->addTag("bullet");
 
   // Start position is near the player
-  Vector2f pos = owner->getPosition() + (50.0f * direction);
+  Vector2f pos = owner->getPosition() + (33.0f * direction);
   e->setPosition(pos);
 
   auto s = e->addComponent<SpriteComponent>();
