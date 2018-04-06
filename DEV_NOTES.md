@@ -162,6 +162,8 @@ On runtime, data that are need to be saved and need to be known across the whole
 Data::my_data = true;
 ```
 
+Data will be saved on a file before closing. This is very simple and hard-coded. Read and write need to be read/write variables in the same order.
+
 ## Resize window
 
 Changes in `Engine::Start()`.
