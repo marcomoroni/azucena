@@ -72,7 +72,7 @@ vector<shared_ptr<Entity>> create_enemies()
     sm->setName("ai");
 		sm->addState("idle", make_shared<EnemyA_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("chase", make_shared<EnemyA_ChaseState>(Engine::GetActiveScene()->ents.find("player")[0]));
-		sm->addState("return", make_shared<EnemyA_ReturnState>(enemy_A->getPosition()));
+		sm->addState("return", make_shared<EnemyA_ReturnState>(enemy_A->getPosition(), Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("prepare_attack", make_shared<EnemyA_PrepareAttackState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("attack", make_shared<EnemyA_AttackState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->changeState("idle");

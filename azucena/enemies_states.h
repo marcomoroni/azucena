@@ -31,11 +31,12 @@ public:
 class EnemyA_ReturnState : public State
 {
 private:
+  std::shared_ptr<Entity> _player;
 	sf::Vector2f _pos;
 
 public:
-	EnemyA_ReturnState(sf::Vector2f pos)
-		: _pos(pos) {}
+	EnemyA_ReturnState(sf::Vector2f pos, std::shared_ptr<Entity> player)
+		: _pos(pos), _player(player) {}
 	void enterState(Entity*) noexcept override {};
 	void execute(Entity*, double) noexcept override;
 };

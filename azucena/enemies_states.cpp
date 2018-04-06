@@ -30,7 +30,7 @@ void EnemyA_ChaseState::execute(Entity *owner, double dt) noexcept
 	// Chase player
 	Vector2f direction = normalize(_player->getPosition() - owner->getPosition());
 	direction.y *= -1; // why?
-	float speed = 100.0f;
+	float speed = 80.0f;
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(direction * speed));
 
 	// If the player is too far away retrun to initial position
@@ -41,7 +41,7 @@ void EnemyA_ChaseState::execute(Entity *owner, double dt) noexcept
 	}
 
 	// If enemy is close to player, prepare attack
-	if (length(owner->getPosition() - _player->getPosition()) < 160.0f)
+	if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
 	{
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("prepare_attack");
@@ -62,11 +62,18 @@ void EnemyA_ReturnState::execute(Entity *owner, double dt) noexcept
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("idle");
 	}
+
+  // Chase player when is sight
+  if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
+  {
+    auto sm = owner->get_components<StateMachineComponent>()[0];
+    sm->changeState("chase");
+  }
 }
 
 void EnemyA_PrepareAttackState::enterState(Entity *owner) noexcept
 {
-	_timer = 0.6f;
+	_timer = 1.0f;
 }
 
 void EnemyA_PrepareAttackState::execute(Entity *owner, double dt) noexcept
@@ -88,7 +95,7 @@ void EnemyA_PrepareAttackState::execute(Entity *owner, double dt) noexcept
 
 void EnemyA_AttackState::enterState(Entity *owner) noexcept
 {
-	_timer = 0.9f;
+	_timer = 1.6f;
 	_direction = normalize(_player->getPosition() - owner->getPosition());
 	_direction.y *= -1; // why?
 	// Can hurt player
@@ -102,7 +109,7 @@ void EnemyA_AttackState::execute(Entity *owner, double dt) noexcept
 	// Quick attack without changing direction,
 	// after a while the enemy has to rest before going back to chase
 
-	float speed = 800.0f;
+	float speed = 500.0f;
 
 	if (_timer < 0.5f)
 	{
