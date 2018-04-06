@@ -10,4 +10,11 @@ public:
   void Load() override;
 
   void Update(const double& dt) override;
+
+private:
+  std::shared_ptr<Entity> _btn_Start;
+  std::shared_ptr<Entity> _btn_Continue;
+  std::shared_ptr<Entity> _btn_Load;
+  std::shared_ptr<Entity> _btn_Options;
+  std::shared_ptr<Entity> _btn_Quit;
 };
