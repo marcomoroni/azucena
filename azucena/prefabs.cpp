@@ -258,6 +258,8 @@ shared_ptr<Entity> create_key()
   sm->addState("used", make_shared<Key_UsedState>());
   sm->changeState("not taken");
 
+  key->addComponent<InteractableComponent>();
+
   return key;
 }
 

@@ -1,13 +1,21 @@
 #include "key_states.h"
 #include "engine.h"
+#include "components/cmp_interactable.h"
 
 using namespace sf;
 using namespace std;
 
 void Key_NotTakenState::execute(Entity *owner, double dt) noexcept
 {
-  if (length(owner->getPosition() - _player->getPosition()) < 36.0f)
+  /*if (length(owner->getPosition() - _player->getPosition()) < 36.0f)
   {
+    auto sm = owner->get_components<StateMachineComponent>()[0];
+    sm->changeState("taken");
+  }*/
+  auto i = owner->get_components<InteractableComponent>()[0];
+  if (i->interacted())
+  {
+    i->setActive(false);
     auto sm = owner->get_components<StateMachineComponent>()[0];
     sm->changeState("taken");
   }
@@ -36,7 +44,7 @@ void Key_TakenState::execute(Entity *owner, double dt) noexcept
   // Faster if far away or 0 if very close to target
   if (length(target - owner->getPosition()) > 60.0f)
   {
-    speed = 4.0f;
+    speed = 6.0f;
   }
   else if (length(target - owner->getPosition()) < 0.1f)
   {

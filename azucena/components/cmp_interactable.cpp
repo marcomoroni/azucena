@@ -9,66 +9,69 @@ using namespace sf;
 
 void InteractableComponent::update(double dt)
 {
-  bool playerIsClose = false;
-
-  if (length(_parent->getPosition() - _player->getPosition()) < _playerInteractionDistance)
+  if (_active)
   {
-    playerIsClose = true;
-  }
+    bool playerIsClose = false;
 
-  _interacted = false;
-
-  if (playerIsClose)
-  {
-    _interactionTimerSprite->setVisible(true);
-    _interactionTimerSprite->setPosition(_player->getPosition() + Vector2f(0.0f, 64.0f));
-    if (Keyboard::isKeyPressed(Keyboard::E))
+    if (length(_parent->getPosition() - _player->getPosition()) < _playerInteractionDistance)
     {
-      _interactionTimer += dt;
+      playerIsClose = true;
+    }
+
+    _interacted = false;
+
+    if (playerIsClose)
+    {
+      _interactionTimerSprite->setVisible(true);
+      _interactionTimerSprite->setPosition(_player->getPosition() + Vector2f(0.0f, 64.0f));
+      if (Keyboard::isKeyPressed(Keyboard::E))
+      {
+        _interactionTimer += dt;
+      }
+      else
+      {
+        _interactionTimer = 0.0f;
+      }
+
+      // Change sprite according to timer
+      // Note: there are 4 sprites
+      auto s = _interactionTimerSprite->get_components<SpriteComponent>()[0];
+      if (_interactionTimer == 0.0f)
+      {
+        // Empty
+        s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 3, 32, 32));
+      }
+      else if (_interactionTimer <= _interactionTimeNeeded / 4)
+      {
+        // 1/4 circle
+        s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 3, 32, 32));
+      }
+      else if (_interactionTimer <= _interactionTimeNeeded / 2)
+      {
+        // half circle
+        s->getSprite().setTextureRect(sf::IntRect(32 * 9, 32 * 3, 32, 32));
+      }
+      else if (_interactionTimer <= _interactionTimeNeeded / 4 * 3)
+      {
+        // 3/4 circle
+        s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 4, 32, 32));
+      }
+      else if (_interactionTimer <= _interactionTimeNeeded - 0.2f)
+      {
+        // Full circle
+        s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 4, 32, 32));
+      }
+
+      if (_interactionTimer >= _interactionTimeNeeded)
+      {
+        _interacted = true;
+      }
     }
     else
     {
+      _interactionTimerSprite->setVisible(false);
       _interactionTimer = 0.0f;
     }
-
-    // Change sprite according to timer
-    // Note: there are 4 sprites
-    auto s = _interactionTimerSprite->get_components<SpriteComponent>()[0];
-    if (_interactionTimer == 0.0f)
-    {
-      // Empty
-      s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 3, 32, 32));
-    }
-    else if (_interactionTimer <= _interactionTimeNeeded / 4)
-    {
-      // 1/4 circle
-      s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 3, 32, 32));
-    }
-    else if (_interactionTimer <= _interactionTimeNeeded / 2)
-    {
-      // half circle
-      s->getSprite().setTextureRect(sf::IntRect(32 * 9, 32 * 3, 32, 32));
-    }
-    else if (_interactionTimer <= _interactionTimeNeeded / 4 * 3)
-    {
-      // 3/4 circle
-      s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 4, 32, 32));
-    }
-    else if (_interactionTimer <= _interactionTimeNeeded - 0.2f)
-    {
-      // Full circle
-      s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 4, 32, 32));
-    }
-
-    if (_interactionTimer >= _interactionTimeNeeded)
-    {
-      _interacted = true;
-    }
-  }
-  else
-  {
-    _interactionTimerSprite->setVisible(false);
-    _interactionTimer = 0.0f;
   }
 }
 
@@ -76,6 +79,7 @@ InteractableComponent::InteractableComponent(Entity* p, float playerInteractionD
   : Component(p), _playerInteractionDistance(playerInteractionDistance), _interactionTimeNeeded(interactionTime), _interactionTimer(0.0f)
 {
   _interacted = false;
+  _active = true;
 
   _player = &(*(Engine::GetActiveScene()->ents.find("player")[0]));
 
@@ -91,4 +95,11 @@ InteractableComponent::InteractableComponent(Entity* p, float playerInteractionD
 bool InteractableComponent::interacted()
 {
   return _interacted;
+}
+
+void InteractableComponent::setActive(bool a)
+{
+  _active = a;
+  _interactionTimerSprite->setAlive(a);
+  _interactionTimerSprite->setVisible(a);
 }

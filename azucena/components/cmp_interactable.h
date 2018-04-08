@@ -5,6 +5,7 @@
 class InteractableComponent : public Component
 {
 private:
+  bool _active;
   float _playerInteractionDistance;
   Entity* _player;
   Entity* _interactionTimerSprite;
@@ -18,4 +19,5 @@ public:
   explicit InteractableComponent(Entity* p, float playerInteractionDistance = 50.0f, float interactionTime = 1.0f);
   InteractableComponent() = delete;
   bool interacted();
+  void setActive(bool);
 };
