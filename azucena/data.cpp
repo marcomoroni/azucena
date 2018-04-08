@@ -9,6 +9,10 @@ bool Data::main_collectible_3;
 bool Data::door_top_opened;
 bool Data::door_right_opened;
 bool Data::door_left_opened;
+int Data::max_health;
+int Data::health;
+int Data::max_potions;
+int Data::potions;
 
 string Data::save_file_path = "azucena_save.txt";
 
@@ -23,6 +27,10 @@ void Data::load()
     file >> door_top_opened;
     file >> door_right_opened;
     file >> door_left_opened;
+    file >> max_health;
+    file >> health;
+    file >> max_potions;
+    file >> potions;
   }
 }
 
@@ -39,7 +47,11 @@ void Data::save()
     (int)main_collectible_3 << " " <<
     (int)door_top_opened << " " <<
     (int)door_right_opened << " " <<
-    (int)door_left_opened;
+    (int)door_left_opened << " " <<
+    max_health << " " <<
+    health << " " <<
+    max_potions << " " <<
+    potions;
 
   printf("Closing save file...\n");
   file.close();
@@ -53,4 +65,8 @@ void Data::reset()
   door_top_opened = false;
   door_right_opened = false;
   door_left_opened = false;
+  max_health = 4;
+  health = 4;
+  max_potions = 2;
+  potions = 0;
 }

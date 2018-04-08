@@ -7,16 +7,12 @@
 class PlayerHealthComponent : public Component
 {
 private:
-	int _maxHealth;
-	int _health;
-	int _maxPotions = 4;
-	int _potions = 0;
 	float _immunity = -1.0f;
 
 public:
 	void update(double) override;
 	void render() override;
-	explicit PlayerHealthComponent(Entity* p, int maxHealth, int maxPotions);
+	explicit PlayerHealthComponent(Entity* p);
 	PlayerHealthComponent() = delete;
 	void decreaseHealth();
 	void decreaseHealth(int);

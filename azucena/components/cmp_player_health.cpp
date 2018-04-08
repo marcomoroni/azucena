@@ -3,12 +3,13 @@
 #include "system_renderer.h"
 #include "cmp_interactable.h"
 #include "engine.h"
+#include "../data.h"
 
 using namespace std;
 using namespace sf;
 
-PlayerHealthComponent::PlayerHealthComponent(Entity* p, int maxHealth, int maxPotions)
-	: Component(p), _maxHealth(maxHealth), _health(maxHealth), _maxPotions(maxPotions), _potions(0)
+PlayerHealthComponent::PlayerHealthComponent(Entity* p)
+	: Component(p)
 {
 }
 
@@ -37,8 +38,8 @@ void PlayerHealthComponent::decreaseHealth(int h)
 {
 	if (_immunity < 0.0f)
 	{
-		int newHealth = _health - h;
-		if (newHealth >= 0) _health = newHealth;
+		int newHealth = Data::health - h;
+		if (newHealth >= 0) Data::health = newHealth;
 		_immunity = 0.8f;
 		printf("Player hurt.\n");
 	}
@@ -52,8 +53,8 @@ void PlayerHealthComponent::decreaseHealth()
 
 void PlayerHealthComponent::increaseHealth(int h)
 {
-	int newHealth = _health + h;
-	if (newHealth < _maxHealth) _health = newHealth;
+	int newHealth = Data::health + h;
+	if (newHealth < Data::max_health) Data::health = newHealth;
 }
 
 void PlayerHealthComponent::increaseHealth()
@@ -61,23 +62,23 @@ void PlayerHealthComponent::increaseHealth()
 	increaseHealth(1);
 }
 
-int PlayerHealthComponent::getHealth() { return _health; }
+int PlayerHealthComponent::getHealth() { return Data::health; }
 
-int PlayerHealthComponent::getMaxHealth() { return _maxHealth; }
+int PlayerHealthComponent::getMaxHealth() { return Data::max_health; }
 
 void PlayerHealthComponent::usePotion()
 {
-	if (_potions > 0)
+	if (Data::potions > 0)
 	{
-		_health = _maxHealth;
-		_potions--;
+		Data::health = Data::max_health;
+    Data::potions--;
 	}
 }
 
 void PlayerHealthComponent::addPotion(int i)
 {
-  if (_potions + 1 <= _maxPotions)
-    _potions++;
+  if (Data::potions + 1 <= Data::max_potions)
+    Data::potions++;
   else
     usePotion();
 }
@@ -89,10 +90,10 @@ void PlayerHealthComponent::addPotion()
 
 int PlayerHealthComponent::getPotions()
 {
-  return _potions;
+  return Data::potions;
 }
 
 int PlayerHealthComponent::getMaxPotions()
 {
-  return _maxPotions;
+  return Data::max_potions;
 }
