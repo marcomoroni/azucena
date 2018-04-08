@@ -65,6 +65,7 @@ void InteractableComponent::update(double dt)
       if (_interactionTimer >= _interactionTimeNeeded)
       {
         _interacted = true;
+        _interactionTimerSprite->setVisible(false);
       }
     }
     else

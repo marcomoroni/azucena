@@ -1,6 +1,8 @@
 #include "cmp_player_health.h"
 #include "system_resources.h"
 #include "system_renderer.h"
+#include "cmp_interactable.h"
+#include "engine.h"
 
 using namespace std;
 using namespace sf;
@@ -13,6 +15,18 @@ PlayerHealthComponent::PlayerHealthComponent(Entity* p, int maxHealth)
 void PlayerHealthComponent::update(double dt)
 {
 	if (_immunity >= 0.0f) _immunity -= dt;
+
+  // Pick up potion
+  auto potions = Engine::GetActiveScene()->ents.find("potion");
+  for (auto potion : potions)
+  {
+    auto i = potion->get_components<InteractableComponent>()[0];
+    if (i->interacted())
+    {
+      potion->setForDelete();
+      addPotion();
+    }
+  }
 }
 
 void PlayerHealthComponent::render()
@@ -60,8 +74,15 @@ void PlayerHealthComponent::usePotion()
 	}
 }
 
+void PlayerHealthComponent::addPotion(int i)
+{
+  if (_potions + 1 <= _maxPotions)
+    _potions++;
+  else
+    usePotion();
+}
+
 void PlayerHealthComponent::addPotion()
 {
-	if (_potions + 1 <= _maxPotions)
-		_potions++;
+  addPotion(1);
 }
