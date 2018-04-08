@@ -7,8 +7,8 @@
 using namespace std;
 using namespace sf;
 
-PlayerHealthComponent::PlayerHealthComponent(Entity* p, int maxHealth)
-	: Component(p), _maxHealth(maxHealth), _health(maxHealth)
+PlayerHealthComponent::PlayerHealthComponent(Entity* p, int maxHealth, int maxPotions)
+	: Component(p), _maxHealth(maxHealth), _health(maxHealth), _maxPotions(maxPotions), _potions(0)
 {
 }
 
@@ -85,4 +85,14 @@ void PlayerHealthComponent::addPotion(int i)
 void PlayerHealthComponent::addPotion()
 {
   addPotion(1);
+}
+
+int PlayerHealthComponent::getPotions()
+{
+  return _potions;
+}
+
+int PlayerHealthComponent::getMaxPotions()
+{
+  return _maxPotions;
 }

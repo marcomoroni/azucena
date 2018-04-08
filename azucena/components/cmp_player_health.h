@@ -16,7 +16,7 @@ private:
 public:
 	void update(double) override;
 	void render() override;
-	explicit PlayerHealthComponent(Entity* p, int maxHealth);
+	explicit PlayerHealthComponent(Entity* p, int maxHealth, int maxPotions);
 	PlayerHealthComponent() = delete;
 	void decreaseHealth();
 	void decreaseHealth(int);
@@ -27,4 +27,6 @@ public:
 	void usePotion();
 	void addPotion();
 	void addPotion(int);
+  int getPotions();
+  int getMaxPotions();
 };

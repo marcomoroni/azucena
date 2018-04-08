@@ -17,6 +17,10 @@ private:
 	int _player_health_sprite_size;
 	std::vector<sf::Sprite> _player_health_hearts;
 
+  // Potions
+  int _player_potion_sprite_size;
+  std::vector<sf::Sprite> _player_potions;
+
   // Exit message
   std::shared_ptr<Entity> _exitMessage;
   float _exitMessageTimer;
