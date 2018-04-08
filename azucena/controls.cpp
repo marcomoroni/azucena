@@ -17,6 +17,7 @@ void Controls::initialise()
 	Controls::SetKeyboardKey("Down", Keyboard::S);
 	Controls::SetKeyboardKey("Left", Keyboard::A);
 	Controls::SetKeyboardKey("Right", Keyboard::D);
+  Controls::SetKeyboardKey("Interact", Keyboard::F);
 }
 
 Keyboard::Key Controls::GetKeyboardKey(string action)

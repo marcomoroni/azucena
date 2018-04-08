@@ -49,6 +49,11 @@ void OptionsScene::Load()
 	_btns.push_back(_btn_ControlsDash);
 	_controlsBtns[_btn_ControlsDash] = "Shoot";
 
+  _btn_ControlsInteract.reset();
+  _btn_ControlsInteract = create_button("Interact");
+  _btns.push_back(_btn_ControlsInteract);
+  _controlsBtns[_btn_ControlsInteract] = "Interact";
+
   _btn_Back.reset();
 	_btn_Back = create_button("Back");
 	_btns.push_back(_btn_Back);

@@ -3,6 +3,7 @@
 #include "cmp_sprite.h"
 #include "system_resources.h"
 #include <SFML/Window/Keyboard.hpp>
+#include "../constrols.h"
 
 using namespace std;
 using namespace sf;
@@ -24,7 +25,7 @@ void InteractableComponent::update(double dt)
     {
       _interactionTimerSprite->setVisible(true);
       _interactionTimerSprite->setPosition(_player->getPosition() + Vector2f(0.0f, 64.0f));
-      if (Keyboard::isKeyPressed(Keyboard::E))
+      if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Interact")))
       {
         _interactionTimer += dt;
       }
