@@ -14,6 +14,7 @@
 #include "components/cmp_player_health.h"
 #include "components/cmp_hurt.h"
 #include "components/cmp_bullet.h"
+#include "components/cmp_interactable.h"
 #include "enemies_states.h"
 #include "key_states.h"
 #include "door_states.h"
@@ -347,7 +348,9 @@ vector<shared_ptr<Entity>> create_potions()
     // Centre origin
     s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-    auto p = potion->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+    auto p = potion->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+
+    potion->addComponent<InteractableComponent>();
 
     potions.push_back(potion);
   }
