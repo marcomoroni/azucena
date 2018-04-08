@@ -38,7 +38,8 @@ public:
 		ENEMY_C = 'C',
     // Note: decide on Scene::load which main collectible is, because
     // there will only be one per scene
-    MAIN_COLLECTIBLE = '@'
+    MAIN_COLLECTIBLE = '@',
+    POTION = 'p'
   };
 
   static Tile getTile(sf::Vector2ul);

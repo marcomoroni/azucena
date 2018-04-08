@@ -27,6 +27,7 @@ std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
 	{ ENEMY_A, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ ENEMY_B, IntRect(0, _tileSize, _tileSize, _tileSize) },
   { ENEMY_C, IntRect(0, _tileSize, _tileSize, _tileSize) },
+  { POTION, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ MAIN_COLLECTIBLE, IntRect(0, _tileSize, _tileSize, _tileSize) } };
 
 sf::IntRect LevelSystem::getSpriteRect(LevelSystem::Tile t) {

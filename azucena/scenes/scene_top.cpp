@@ -35,6 +35,9 @@ void TopScene::Load()
   // Create main collectible
   create_baby_llama(2);
 
+  // Create potions
+  create_potions();
+
   // Add UI
   create_game_ui();
 

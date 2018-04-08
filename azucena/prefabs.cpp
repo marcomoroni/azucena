@@ -328,3 +328,29 @@ shared_ptr<Entity> create_baby_llama(int index)
 
   return e;
 }
+
+vector<shared_ptr<Entity>> create_potions()
+{
+  vector<shared_ptr<Entity>> potions;
+
+  auto enemy_A_tiles = ls::findTiles(ls::POTION);
+  for (auto t : enemy_A_tiles)
+  {
+    auto potion = Engine::GetActiveScene()->makeEntity();
+    potion->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+    potion->addTag("potion");
+
+    auto s = potion->addComponent<SpriteComponent>();
+    auto tex = Resources::get<Texture>("tex.png");
+    s->setTexture(tex);
+    s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 2, 32, 32));
+    // Centre origin
+    s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+    auto p = potion->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+
+    potions.push_back(potion);
+  }
+
+  return potions;
+}
