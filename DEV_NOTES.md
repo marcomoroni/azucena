@@ -76,6 +76,12 @@ Add this component if the entity hurts something. Add a tag as a parameter when 
 
 For now it can only handle one tag.
 
+### `InteractableComponent`
+
+Add this to entities that are interactable (pick up, open door, …). The player has to go near it and press F for some time to interact with it.
+
+This component can be improved a lot (efficiency).
+
 ### `ButtonComponent`
 
 This component handles the different states of button (highlight, select).
