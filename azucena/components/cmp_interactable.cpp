@@ -16,6 +16,8 @@ void InteractableComponent::update(double dt)
     playerIsClose = true;
   }
 
+  _interacted = false;
+
   if (playerIsClose)
   {
     _interactionTimerSprite->setVisible(true);
@@ -57,6 +59,11 @@ void InteractableComponent::update(double dt)
       // Full circle
       s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 4, 32, 32));
     }
+
+    if (_interactionTimer >= _interactionTimeNeeded)
+    {
+      _interacted = true;
+    }
   }
   else
   {
@@ -68,6 +75,8 @@ void InteractableComponent::update(double dt)
 InteractableComponent::InteractableComponent(Entity* p, float playerInteractionDistance, float interactionTime)
   : Component(p), _playerInteractionDistance(playerInteractionDistance), _interactionTimeNeeded(interactionTime), _interactionTimer(0.0f)
 {
+  _interacted = false;
+
   _player = &(*(Engine::GetActiveScene()->ents.find("player")[0]));
 
   _interactionTimerSprite = &(*(Engine::GetActiveScene()->makeEntity()));
@@ -77,4 +86,9 @@ InteractableComponent::InteractableComponent(Entity* p, float playerInteractionD
   s->setTexture(tex);
   s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 3, 32, 32));
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+}
+
+bool InteractableComponent::interacted()
+{
+  return _interacted;
 }
