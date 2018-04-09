@@ -4,12 +4,8 @@
 
 class Key_NotTakenState : public State
 {
-private:
-  std::shared_ptr<Entity> _player;
-
 public:
-  Key_NotTakenState(std::shared_ptr<Entity> player)
-    : _player(player) {}
+  Key_NotTakenState() {}
   void enterState(Entity*) noexcept override {}
   void execute(Entity*, double) noexcept override;
 };

@@ -253,7 +253,7 @@ shared_ptr<Entity> create_key()
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
   auto sm = key->addComponent<StateMachineComponent>();
-  sm->addState("not taken", make_shared<Key_NotTakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
+  sm->addState("not taken", make_shared<Key_NotTakenState>());
   sm->addState("taken", make_shared<Key_TakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
   sm->addState("used", make_shared<Key_UsedState>());
   sm->changeState("not taken");

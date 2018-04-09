@@ -7,11 +7,6 @@ using namespace std;
 
 void Key_NotTakenState::execute(Entity *owner, double dt) noexcept
 {
-  /*if (length(owner->getPosition() - _player->getPosition()) < 36.0f)
-  {
-    auto sm = owner->get_components<StateMachineComponent>()[0];
-    sm->changeState("taken");
-  }*/
   auto i = owner->get_components<InteractableComponent>()[0];
   if (i->interacted())
   {
