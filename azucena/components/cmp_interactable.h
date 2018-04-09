@@ -1,6 +1,7 @@
 #pragma once
 
 #include <ecm.h>
+#include <SFML/Audio.hpp>
 
 class InteractableComponent : public Component
 {
@@ -12,6 +13,12 @@ private:
   float _interactionTimeNeeded;
   float _interactionTimer;
   bool _interacted;
+
+	// Sounds
+	sf::SoundBuffer _buffer_interactionTimer;
+	sf::Sound _sound_interactionTimer;
+	sf::SoundBuffer _buffer_interacted;
+	sf::Sound _sound_interacted;
 
 public:
   void update(double dt) override;

@@ -17,6 +17,8 @@ PlayerHealthComponent::PlayerHealthComponent(Entity* p)
 	// Sounds
 	_buffer_usePotion = *(Resources::get<SoundBuffer>("use_potion.wav"));
 	_sound_usePotion.setBuffer(_buffer_usePotion);
+	_buffer_getsHit = *(Resources::get<SoundBuffer>("player_gets_hit.wav"));
+	_sound_getsHit.setBuffer(_buffer_getsHit);
 }
 
 void PlayerHealthComponent::update(double dt)
@@ -55,6 +57,7 @@ void PlayerHealthComponent::decreaseHealth(int h)
 {
 	if (_immunity < 0.0f)
 	{
+		_sound_getsHit.play();
 		int newHealth = Data::health - h;
 		if (newHealth >= 0) Data::health = newHealth;
 		_immunity = 0.8f;

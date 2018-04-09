@@ -14,6 +14,8 @@ private:
 	// Sounds
 	sf::SoundBuffer _buffer_usePotion;
 	sf::Sound _sound_usePotion;
+	sf::SoundBuffer _buffer_getsHit;
+	sf::Sound _sound_getsHit;
 
 public:
 	void update(double) override;

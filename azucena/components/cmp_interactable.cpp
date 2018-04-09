@@ -28,6 +28,7 @@ void InteractableComponent::update(double dt)
       if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Interact")))
       {
         _interactionTimer += dt;
+				_sound_interactionTimer.play();
       }
       else
       {
@@ -63,8 +64,10 @@ void InteractableComponent::update(double dt)
         s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 4, 32, 32));
       }
 
+			// Interacted
       if (_interactionTimer >= _interactionTimeNeeded)
       {
+				_sound_interacted.play();
         _interacted = true;
         _interactionTimerSprite->setVisible(false);
       }
@@ -92,6 +95,12 @@ InteractableComponent::InteractableComponent(Entity* p, float playerInteractionD
   s->setTexture(tex);
   s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 3, 32, 32));
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+	// Sounds
+	_buffer_interactionTimer = *(Resources::get<SoundBuffer>("interaction_timer.wav"));
+	_sound_interactionTimer.setBuffer(_buffer_interactionTimer);
+	_buffer_interacted = *(Resources::get<SoundBuffer>("interacted.wav"));
+	_sound_interacted.setBuffer(_buffer_interacted);
 }
 
 bool InteractableComponent::interacted()
