@@ -35,18 +35,18 @@ void Key_TakenState::execute(Entity *owner, double dt) noexcept
     target = _door->getPosition();
   }
   Vector2f direction = normalize(target - owner->getPosition());
-  float speed = 2.0f;
+  float speed = 100.0f;
   // Faster if far away or 0 if very close to target
   if (length(target - owner->getPosition()) > 60.0f)
   {
-    speed = 6.0f;
+    speed = 300.0f;
   }
-  else if (length(target - owner->getPosition()) < 0.1f)
+  else if (length(target - owner->getPosition()) < 0.3f)
   {
     speed = 0.0f;
   }
 
-  owner->setPosition(owner->getPosition() + (direction * speed));
+  owner->setPosition(owner->getPosition() + (direction * speed * (float)dt));
 }
 
 void Key_UsedState::enterState(Entity *owner) noexcept
