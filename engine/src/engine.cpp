@@ -20,6 +20,8 @@ static float loadingspinner = 0.f;
 static float loadingTime;
 static RenderWindow* _window;
 
+bool Engine::_fullscreen = false;
+
 void Loading_update(float dt, const Scene* const scn) {
   //  cout << "Eng: Loading Screen\n";
   if (scn->isLoaded()) {
@@ -83,7 +85,8 @@ void Engine::Render(RenderWindow& window) {
 
 void Engine::Start(unsigned int width, unsigned int height,
                    const std::string& gameName, Scene* scn) {
-  RenderWindow window(VideoMode(width, height), gameName);
+	RenderWindow window;
+	window.create(VideoMode(width, height), gameName);
   _gameName = gameName;
   _window = &window;
   Renderer::initialise(window);
@@ -102,6 +105,16 @@ void Engine::Start(unsigned int width, unsigned int height,
 			{
 				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
 				window.setView(sf::View(visibleArea));
+			}
+			// Fullscreen
+			if (event.type == sf::Event::KeyReleased)
+			{
+				if (event.key.code == sf::Keyboard::F11)
+				{
+					_fullscreen = !_fullscreen;
+					window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+					_window = &window;
+				}
 			}
     }
     /*if (Keyboard::isKeyPressed(Keyboard::Escape)) {

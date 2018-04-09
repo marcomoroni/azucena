@@ -44,6 +44,7 @@ private:
   static std::string _gameName;
   static void Update();
   static void Render(sf::RenderWindow& window);
+	static bool _fullscreen;
 };
 
 namespace timing {
