@@ -13,6 +13,10 @@ PlayerHealthComponent::PlayerHealthComponent(Entity* p)
 	: Component(p)
 {
 	_usePotionButtonStillPressed = false;
+
+	// Sounds
+	_buffer_usePotion = *(Resources::get<SoundBuffer>("use_potion.wav"));
+	_sound_usePotion.setBuffer(_buffer_usePotion);
 }
 
 void PlayerHealthComponent::update(double dt)
@@ -34,7 +38,6 @@ void PlayerHealthComponent::update(double dt)
 	// Use potion
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")) && !_usePotionButtonStillPressed && Data::potions > 0)
 	{
-		printf("Using potion\n");
 		usePotion();
 		_usePotionButtonStillPressed = true;
 	}
@@ -84,6 +87,7 @@ void PlayerHealthComponent::usePotion()
 {
 	if (Data::potions > 0)
 	{
+		_sound_usePotion.play();
 		Data::health = Data::max_health;
     Data::potions--;
 	}

@@ -105,6 +105,7 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_shootCooldown = 0.0f;
 	_shootDirection = { 1.0f, 0.0f };
 
+	// Sounds
 	_buffer_shoot = *(Resources::get<SoundBuffer>("shoot.wav"));
 	_sound_shoot.setBuffer(_buffer_shoot);
 }

@@ -19,6 +19,7 @@ protected:
 	// Shooth direction (if 0.0f should be the previous one)
 	sf::Vector2f _shootDirection;
 
+	// Sounds
 	sf::SoundBuffer _buffer_shoot;
 	sf::Sound _sound_shoot;
 

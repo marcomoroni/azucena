@@ -3,12 +3,17 @@
 #include <ecm.h>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Audio.hpp>
 
 class PlayerHealthComponent : public Component
 {
 private:
 	float _immunity = -1.0f;
 	bool _usePotionButtonStillPressed;
+
+	// Sounds
+	sf::SoundBuffer _buffer_usePotion;
+	sf::Sound _sound_usePotion;
 
 public:
 	void update(double) override;
