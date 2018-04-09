@@ -202,12 +202,13 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
   s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 12, 32 * 3 + 12, 8, 8));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
 	p->getBody()->SetBullet(true);
 
-	auto h = e->addComponent<HurtComponent>("enemy"); // NOT WORKING ?
+	auto h = e->addComponent<HurtComponent>("enemy");
 	h->setActive(true);
 
+	direction.y *= -1; // physics and graphics have y inverted
 	auto b = e->addComponent<BulletComponent>(&(*player), direction);
 
 	return e;
@@ -228,12 +229,13 @@ shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, Vector2f direction)
   s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+  auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
   p->getBody()->SetBullet(true);
 
   auto h = e->addComponent<HurtComponent>("player");
   h->setActive(true);
 
+	direction.y *= -1; // physics and graphics have y inverted
   auto b = e->addComponent<BulletComponent>(owner, direction);
 
   return e;

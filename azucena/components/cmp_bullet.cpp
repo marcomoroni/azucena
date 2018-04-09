@@ -11,7 +11,8 @@ using namespace sf;
 void BulletComponent::update(double dt)
 {
 	// Use teleport because it sould alway go in a straight line
-	_parent->get_components<PhysicsComponent>()[0]->teleport(_parent->getPosition() + (normalize(_direction) * _maxSpeed * (float)dt));
+	//_parent->get_components<PhysicsComponent>()[0]->teleport(_parent->getPosition() + (normalize(_direction) * _maxSpeed * (float)dt));
+	_parent->get_components<PhysicsComponent>()[0]->setVelocity(_direction * _maxSpeed);
 
 	// Delete if hits something (but not the owner)
 	auto touching = _parent->get_components<PhysicsComponent>()[0]->getTouching();
