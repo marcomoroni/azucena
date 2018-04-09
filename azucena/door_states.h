@@ -1,6 +1,7 @@
 #pragma once
 
 #include "components/cmp_state_machine.h"
+#include <SFML/Audio.hpp>
 
 class Door_CloseState : public State
 {
@@ -17,8 +18,13 @@ public:
 
 class Door_OpenState : public State
 {
+private:
+	// Sounds
+	sf::SoundBuffer _buffer_openDoor;
+	sf::Sound _sound_openDoor;
+
 public:
-  Door_OpenState() {}
+	Door_OpenState();
   void enterState(Entity*) noexcept override;
   void execute(Entity*, double) noexcept override {}
 };
