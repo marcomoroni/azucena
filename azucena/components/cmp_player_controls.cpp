@@ -6,6 +6,7 @@
 #include "cmp_physics.h"
 #include "engine.h"
 #include "../prefabs.h"
+#include "system_resources.h"
 
 using namespace std;
 using namespace sf;
@@ -85,6 +86,7 @@ void PlayerControlsComponent::update(double dt) {
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f)
 	{
 		create_player_bullet(normalize(_shootDirection));
+		_sound_shoot.play();
 		_shootCooldown = 0.3f;
 	}
 	if (_shootCooldown > 0.0f) _shootCooldown -= dt;
@@ -102,4 +104,7 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_isStillPressingSprintKey = false;
 	_shootCooldown = 0.0f;
 	_shootDirection = { 1.0f, 0.0f };
+
+	_buffer_shoot = *(Resources::get<SoundBuffer>("shoot.wav"));
+	_sound_shoot.setBuffer(_buffer_shoot);
 }

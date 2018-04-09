@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ecm.h"
+#include <SFML/Audio.hpp>
 
 class PlayerControlsComponent : public Component {
 protected:
@@ -17,6 +18,9 @@ protected:
 	float _shootCooldown;
 	// Shooth direction (if 0.0f should be the previous one)
 	sf::Vector2f _shootDirection;
+
+	sf::SoundBuffer _buffer_shoot;
+	sf::Sound _sound_shoot;
 
 public:
   void update(double dt) override;
