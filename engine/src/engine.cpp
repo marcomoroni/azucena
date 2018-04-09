@@ -3,7 +3,7 @@
 #include "system_physics.h"
 #include "system_renderer.h"
 #include "system_resources.h"
-#include "../azucena/constrols.h"
+#include "../azucena/controls.h"
 #include <SFML/Graphics.hpp>
 #include <future>
 #include <iostream>

@@ -2,7 +2,7 @@
 #include "system_physics.h"
 #include <LevelSystem.h>
 #include <SFML/Window/Keyboard.hpp>
-#include "../constrols.h"
+#include "../controls.h"
 #include "cmp_physics.h"
 #include "engine.h"
 #include "../prefabs.h"

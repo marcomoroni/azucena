@@ -1,7 +1,7 @@
 #include "scene_game_over.h"
 #include "../components/cmp_text.h"
 #include "../game.h"
-#include "../constrols.h"
+#include "../controls.h"
 #include <SFML/Window/Keyboard.hpp>
 
 using namespace std;

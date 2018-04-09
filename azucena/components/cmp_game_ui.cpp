@@ -3,7 +3,7 @@
 #include "system_renderer.h"
 #include "system_resources.h"
 #include "../prefabs.h"
-#include "../constrols.h"
+#include "../controls.h"
 
 using namespace std;
 using namespace sf;

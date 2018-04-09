@@ -4,7 +4,7 @@
 #include "cmp_interactable.h"
 #include "engine.h"
 #include "../data.h"
-#include "../constrols.h"
+#include "../controls.h"
 
 using namespace std;
 using namespace sf;

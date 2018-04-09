@@ -4,7 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <system_resources.h>
-#include "../constrols.h"
+#include "../controls.h"
 #include "../prefabs.h"
 #include "../components/cmp_state_machine.h"
 #include "../components/cmp_player_health.h"

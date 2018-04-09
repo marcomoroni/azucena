@@ -3,7 +3,7 @@
 #include "cmp_sprite.h"
 #include "system_resources.h"
 #include <SFML/Window/Keyboard.hpp>
-#include "../constrols.h"
+#include "../controls.h"
 
 using namespace std;
 using namespace sf;

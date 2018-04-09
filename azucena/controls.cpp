@@ -1,4 +1,4 @@
-#include "constrols.h"
+#include "controls.h"
 
 #include <stdexcept>
 

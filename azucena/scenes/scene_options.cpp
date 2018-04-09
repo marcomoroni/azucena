@@ -2,7 +2,7 @@
 #include "../game.h"
 #include "SFML/Window/Keyboard.hpp"
 #include "../prefabs.h"
-#include "../constrols.h"
+#include "../controls.h"
 #include "../components/cmp_text.h"
 #include "../components/cmp_button.h"
 
