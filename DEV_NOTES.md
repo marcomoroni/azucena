@@ -78,7 +78,7 @@ For now it can only handle one tag.
 
 ### `InteractableComponent`
 
-Add this to entities that are interactable (pick up, open door, …). The player has to go near it and press F for some time to interact with it.
+Add this to entities that are interactable (pick up, open door, â€¦). The player has to go near it and press F for some time to interact with it.
 
 This component can be improved a lot (efficiency).
 
@@ -170,6 +170,10 @@ Data::my_data = true;
 
 Data will be saved on a file before closing. This is very simple and hard-coded. Read and write need to be read/write variables in the same order.
 
-## Resize window
+## Window
 
 Changes in `Engine::Start()`.
+
+Can be resized.
+
+Toggle fullscreen with <kbd>F11</kbd>.
