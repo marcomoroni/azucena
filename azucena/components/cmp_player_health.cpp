@@ -4,6 +4,7 @@
 #include "cmp_interactable.h"
 #include "engine.h"
 #include "../data.h"
+#include "../constrols.h"
 
 using namespace std;
 using namespace sf;
@@ -11,6 +12,7 @@ using namespace sf;
 PlayerHealthComponent::PlayerHealthComponent(Entity* p)
 	: Component(p)
 {
+	_usePotionButtonStillPressed = false;
 }
 
 void PlayerHealthComponent::update(double dt)
@@ -28,6 +30,18 @@ void PlayerHealthComponent::update(double dt)
       addPotion();
     }
   }
+
+	// Use potion
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")) && !_usePotionButtonStillPressed && Data::potions > 0)
+	{
+		printf("Using potion\n");
+		usePotion();
+		_usePotionButtonStillPressed = true;
+	}
+	if (!Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")))
+	{
+		_usePotionButtonStillPressed = false;
+	}
 }
 
 void PlayerHealthComponent::render()

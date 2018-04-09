@@ -54,6 +54,11 @@ void OptionsScene::Load()
   _btns.push_back(_btn_ControlsInteract);
   _controlsBtns[_btn_ControlsInteract] = "Interact";
 
+	_btn_ControlsUsePotion.reset();
+	_btn_ControlsUsePotion = create_button("Use potion");
+	_btns.push_back(_btn_ControlsUsePotion);
+	_controlsBtns[_btn_ControlsUsePotion] = "Use potion";
+
   _btn_Back.reset();
 	_btn_Back = create_button("Back");
 	_btns.push_back(_btn_Back);

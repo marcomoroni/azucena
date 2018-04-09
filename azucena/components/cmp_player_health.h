@@ -8,6 +8,7 @@ class PlayerHealthComponent : public Component
 {
 private:
 	float _immunity = -1.0f;
+	bool _usePotionButtonStillPressed;
 
 public:
 	void update(double) override;
