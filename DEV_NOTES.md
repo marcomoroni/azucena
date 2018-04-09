@@ -159,7 +159,7 @@ Press <kbd>Esc</kbd> for a while to return to menu.
 
 ## Save and load
 
-On runtime, data that are need to be saved and need to be known across the whole game are stored in `data.cpp`. Include `game.h` to use it:
+On runtime, data that are need to be saved and need to be known across the whole game are stored in `data.cpp`. Include `game.h` and use the namespace `Data` to use it:
 
 
 ``` cpp
@@ -168,7 +168,7 @@ On runtime, data that are need to be saved and need to be known across the whole
 Data::my_data = true;
 ```
 
-Data will be saved on a file before closing. This is very simple and hard-coded. Read and write need to be read/write variables in the same order.
+Data will be saved on a file before closing. This is very simple and hard-coded. `Data::load()` and `Data::save()` need to read/write variables in the same order.
 
 ## Window
 
