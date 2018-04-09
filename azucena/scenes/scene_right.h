@@ -1,6 +1,7 @@
 #pragma once
 
 #include "engine.h"
+#include <SFML/Audio.hpp>
 
 class RightScene : public Scene {
 public:
@@ -14,4 +15,7 @@ private:
   std::shared_ptr<Entity> _door;
   float _escButtonTimePressed = 0.0f;
   sf::Vector2f _view_center;
+
+	// Music
+	std::shared_ptr<sf::Music> _music_overworld;
 };

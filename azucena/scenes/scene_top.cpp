@@ -44,12 +44,19 @@ void TopScene::Load()
   // Set view
   _view_center = _player->getPosition();
 
+	// Music
+	_music_overworld = Resources::get<Music>("overworld.wav");
+	_music_overworld->play();
+	_music_overworld->setLoop(true);
+
   setLoaded(true);
 }
 
 void TopScene::UnLoad() {
   _player.reset();
   _door.reset();
+	_music_overworld->stop();
+	_music_overworld.reset();
   ls::unload();
   Scene::UnLoad();
 }
