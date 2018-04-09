@@ -22,6 +22,8 @@ protected:
 	// Sounds
 	sf::SoundBuffer _buffer_shoot;
 	sf::Sound _sound_shoot;
+	sf::SoundBuffer _buffer_dash;
+	sf::Sound _sound_dash;
 
 public:
   void update(double dt) override;

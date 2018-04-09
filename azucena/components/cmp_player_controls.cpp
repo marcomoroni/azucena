@@ -72,9 +72,7 @@ void PlayerControlsComponent::update(double dt) {
 	// Check if player starts sprinting
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey)
 	{
-#if DEBUG
-		cout << "Sprinting" << endl;
-#endif
+		_sound_dash.play();
 		_isSprinting = true;
 		_sprintCooldown = 0.4f;
 		_sprintDirection = direction;
@@ -108,4 +106,6 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	// Sounds
 	_buffer_shoot = *(Resources::get<SoundBuffer>("shoot.wav"));
 	_sound_shoot.setBuffer(_buffer_shoot);
+	_buffer_dash = *(Resources::get<SoundBuffer>("dash.wav"));
+	_sound_dash.setBuffer(_buffer_dash);
 }
