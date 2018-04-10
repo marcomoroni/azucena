@@ -18,6 +18,7 @@
 #include "enemies_states.h"
 #include "key_states.h"
 #include "door_states.h"
+#include "main_collectible_states.h"
 
 using namespace std;
 using namespace sf;
@@ -373,8 +374,14 @@ shared_ptr<Entity> create_baby_llama(int index)
 	}
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	auto p = llama->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	auto p = llama->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 	p->getBody()->SetFixedRotation(true);
+
+	auto sm = llama->addComponent<StateMachineComponent>();
+	sm->addState("lost", make_shared<MainCollectible_LostState>(Engine::GetActiveScene()->ents.find("player")[0]));
+	sm->addState("happy", make_shared<MainCollectible_HappyState>());
+	sm->addState("idle", make_shared<MainCollectible_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
+	sm->changeState("lost"); // change this depending on scene
 
 	return llama;
 }
