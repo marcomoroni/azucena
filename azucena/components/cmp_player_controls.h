@@ -2,6 +2,7 @@
 
 #include "ecm.h"
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 
 class PlayerControlsComponent : public Component {
 protected:
@@ -18,6 +19,8 @@ protected:
 	float _shootCooldown;
 	// Shooth direction (if 0.0f should be the previous one)
 	sf::Vector2f _shootDirection;
+
+	sf::IntRect _originalPlayerIntRect;
 
 	// Sounds
 	sf::SoundBuffer _buffer_shoot;

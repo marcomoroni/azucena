@@ -59,7 +59,7 @@ void PlayerControlsComponent::update(double dt) {
 		if (_sprintCooldown < 0)
 		{
 			_isSprinting = false;
-			_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(255, 255, 255));
+			_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setTextureRect(_originalPlayerIntRect);
 		}
 	}
 
@@ -77,7 +77,7 @@ void PlayerControlsComponent::update(double dt) {
 		_sprintCooldown = 0.4f;
 		_sprintDirection = direction;
 		_isStillPressingSprintKey = true;
-		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setColor(Color(180, 255, 255));
+		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 5, 32 * 3, 32, 32));
 	}
 
 	// Check if player shoots
@@ -102,6 +102,8 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_isStillPressingSprintKey = false;
 	_shootCooldown = 0.0f;
 	_shootDirection = { 1.0f, 0.0f };
+
+	_originalPlayerIntRect = _parent->get_components<SpriteComponent>()[0]->getSprite().getTextureRect();
 
 	// Sounds
 	_buffer_shoot = *(Resources::get<SoundBuffer>("shoot.wav"));
