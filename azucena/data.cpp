@@ -3,9 +3,9 @@
 
 using namespace std;
 
-bool Data::main_collectible_1;
-bool Data::main_collectible_2;
-bool Data::main_collectible_3;
+bool Data::main_collectible_right;
+bool Data::main_collectible_top;
+bool Data::main_collectible_left;
 bool Data::door_top_opened;
 bool Data::door_right_opened;
 bool Data::door_left_opened;
@@ -21,9 +21,9 @@ void Data::load()
 	ifstream file(save_file_path);
 	if (file.good())
 	{
-		file >> main_collectible_1;
-		file >> main_collectible_2;
-		file >> main_collectible_3;
+		file >> main_collectible_right;
+		file >> main_collectible_top;
+		file >> main_collectible_left;
 		file >> door_top_opened;
 		file >> door_right_opened;
 		file >> door_left_opened;
@@ -42,9 +42,9 @@ void Data::save()
 
 	printf("Saving...\n");
 	file <<
-		(int)main_collectible_1 << " " <<
-		(int)main_collectible_2 << " " <<
-		(int)main_collectible_3 << " " <<
+		(int)main_collectible_right << " " <<
+		(int)main_collectible_top << " " <<
+		(int)main_collectible_left << " " <<
 		(int)door_top_opened << " " <<
 		(int)door_right_opened << " " <<
 		(int)door_left_opened << " " <<
@@ -59,9 +59,9 @@ void Data::save()
 
 void Data::reset()
 {
-	main_collectible_1 = false;
-	main_collectible_2 = false;
-	main_collectible_3 = false;
+	main_collectible_right = false;
+	main_collectible_top = false;
+	main_collectible_left = false;
 	door_top_opened = false;
 	door_right_opened = false;
 	door_left_opened = false;

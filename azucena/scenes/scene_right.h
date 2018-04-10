@@ -13,6 +13,10 @@ public:
 private:
 	std::shared_ptr<Entity> _player;
 	std::shared_ptr<Entity> _door;
+	std::shared_ptr<Entity> _mainCollectible;
+	bool _mainCollectibleObtained;
+	// When obtain main collectible
+	float _returnToCenterIn;
 	float _escButtonTimePressed = 0.0f;
 	sf::Vector2f _view_center;
 

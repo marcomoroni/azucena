@@ -381,7 +381,7 @@ shared_ptr<Entity> create_baby_llama(int index)
 	sm->addState("lost", make_shared<MainCollectible_LostState>(Engine::GetActiveScene()->ents.find("player")[0]));
 	sm->addState("happy", make_shared<MainCollectible_HappyState>());
 	sm->addState("idle", make_shared<MainCollectible_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
-	sm->changeState("lost"); // change this depending on scene
+	sm->changeState("lost");
 
 	return llama;
 }

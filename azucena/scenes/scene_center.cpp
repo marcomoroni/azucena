@@ -23,9 +23,21 @@ void CenterScene::Load()
 	create_enemies();
 
 	// Create main collectible
-	if (Data::main_collectible_1) create_baby_llama(1);
-	if (Data::main_collectible_2) create_baby_llama(2);
-	if (Data::main_collectible_3) create_baby_llama(3);
+	if (Data::main_collectible_right)
+	{
+		auto e = create_baby_llama(1);
+		e->get_components<StateMachineComponent>()[0]->changeState("idle");
+	}
+	if (Data::main_collectible_top)
+	{
+		auto e = create_baby_llama(2);
+		e->get_components<StateMachineComponent>()[0]->changeState("idle");
+	}
+	if (Data::main_collectible_left)
+	{
+		auto e = create_baby_llama(3);
+		e->get_components<StateMachineComponent>()[0]->changeState("idle");
+	}
 
 	// Add physics colliders to level tiles.
 	add_physics_colliders_to_tiles();

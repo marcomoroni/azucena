@@ -17,7 +17,6 @@ void MainCollectible_LostState::execute(Entity *owner, double dt) noexcept
 
 void MainCollectible_HappyState::enterState(Entity *owner) noexcept
 {
-	printf("Happy\n");
 	_jumpLoop = 0.0f;
 }
 

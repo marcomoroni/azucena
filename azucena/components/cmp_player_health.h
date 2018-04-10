@@ -9,6 +9,7 @@ class PlayerHealthComponent : public Component
 {
 private:
 	float _immunity = -1.0f;
+	float _forceImmunity = false;
 	bool _usePotionButtonStillPressed;
 
 	// Sounds
@@ -33,4 +34,5 @@ public:
 	void addPotion(int);
 	int getPotions();
 	int getMaxPotions();
+	void setImmune(bool);
 };

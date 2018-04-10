@@ -55,15 +55,17 @@ void PlayerHealthComponent::render()
 
 void PlayerHealthComponent::decreaseHealth(int h)
 {
-	if (_immunity < 0.0f)
+	if (!_forceImmunity)
 	{
-		_sound_getsHit.play();
-		int newHealth = Data::health - h;
-		if (newHealth >= 0) Data::health = newHealth;
-		_immunity = 0.8f;
-		printf("Player hurt.\n");
+		if (_immunity < 0.0f)
+		{
+			_sound_getsHit.play();
+			int newHealth = Data::health - h;
+			if (newHealth >= 0) Data::health = newHealth;
+			_immunity = 0.8f;
+			printf("Player hurt.\n");
+		}
 	}
-
 }
 
 void PlayerHealthComponent::decreaseHealth()
@@ -117,4 +119,9 @@ int PlayerHealthComponent::getPotions()
 int PlayerHealthComponent::getMaxPotions()
 {
 	return Data::max_potions;
+}
+
+void PlayerHealthComponent::setImmune(bool i)
+{
+	_forceImmunity = i;
 }
