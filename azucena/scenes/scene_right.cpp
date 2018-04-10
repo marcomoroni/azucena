@@ -81,6 +81,9 @@ void RightScene::Update(const double& dt) {
 			_mainCollectibleObtained = true;
 			_sound_mainCollectibleObtained.play();
 
+			// Reward
+			Data::max_health++;
+
 			// Player doesn't get hurt anymore
 			_player->get_components<PlayerHealthComponent>()[0]->setImmune(true);
 		}
