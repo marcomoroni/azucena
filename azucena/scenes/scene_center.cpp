@@ -18,6 +18,7 @@ void CenterScene::Load()
 
 	// Create player
 	_player = create_player();
+	// Restore health
 	auto h = _player->get_components<PlayerHealthComponent>()[0];
 	h->setHealth(h->getMaxHealth());
 
@@ -67,8 +68,8 @@ void CenterScene::Update(const double& dt) {
 	// There are flags to keep track if the scene has to be changed and they will
 	// used at the end of the function.
 
-	  // Camera follows player
-	  // REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
+	// Camera follows player
+	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
 	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
 	float view_player_distance = sqrt(((_player->getPosition().x - _view_center.x) * (_player->getPosition().x - _view_center.x)) + ((_player->getPosition().y - _view_center.y) * (_player->getPosition().y - _view_center.y)));
 	if (view_player_distance > 80.0f)
