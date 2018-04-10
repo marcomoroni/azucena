@@ -104,7 +104,7 @@ Attach this to bullets. the entity will follow a straight line until it hits som
 
 ## AI
 
-For enemy _A_, see notes.
+See notes.
 
 ## Smooth camera
 
