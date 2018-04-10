@@ -57,7 +57,7 @@ vector<shared_ptr<Entity>> create_enemies()
 	auto enemy_A_tiles = ls::findTiles(ls::ENEMY_A);
 	for (auto t : enemy_A_tiles)
 	{
-		auto enemy_A = Engine::GetActiveScene()-> makeEntity();
+		auto enemy_A = Engine::GetActiveScene()->makeEntity();
 		enemy_A->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
 		enemy_A->addTag("enemy");
 		enemy_A->addTag("enemy_A");
@@ -70,7 +70,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = enemy_A->addComponent<StateMachineComponent>();
-    sm->setName("ai");
+		sm->setName("ai");
 		sm->addState("idle", make_shared<EnemyA_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("chase", make_shared<EnemyA_ChaseState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->addState("return", make_shared<EnemyA_ReturnState>(enemy_A->getPosition(), Engine::GetActiveScene()->ents.find("player")[0]));
@@ -104,14 +104,14 @@ vector<shared_ptr<Entity>> create_enemies()
 		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-    auto sm = enemy_B->addComponent<StateMachineComponent>();
-    sm->setName("ai");
-    sm->addState("idle", make_shared<EnemyB_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
-    sm->addState("move", make_shared<EnemyB_MoveState>(Engine::GetActiveScene()->ents.find("player")[0]));
-    sm->addState("shoot", make_shared<EnemyB_ShootState>());
-    sm->changeState("idle");
+		auto sm = enemy_B->addComponent<StateMachineComponent>();
+		sm->setName("ai");
+		sm->addState("idle", make_shared<EnemyB_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("move", make_shared<EnemyB_MoveState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("shoot", make_shared<EnemyB_ShootState>());
+		sm->changeState("idle");
 
-    enemy_B->addComponent<EnemyHealthComponent>(4);
+		enemy_B->addComponent<EnemyHealthComponent>(4);
 
 		auto p = enemy_B->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
@@ -162,7 +162,7 @@ void add_physics_colliders_to_tiles()
 		auto pos = ls::getTilePosition(w);
 		pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2); //offset to center
 		auto e = Engine::GetActiveScene()->makeEntity();
-    e->addTag("wall");
+		e->addTag("wall");
 		e->setPosition(pos);
 		e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
 	}
@@ -206,7 +206,7 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	auto s = e->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-  s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 12, 32 * 3 + 12, 8, 8));
+	s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 12, 32 * 3 + 12, 8, 8));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
@@ -223,29 +223,29 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 
 shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, Vector2f direction)
 {
-  auto e = Engine::GetActiveScene()->makeEntity();
-  e->addTag("bullet");
+	auto e = Engine::GetActiveScene()->makeEntity();
+	e->addTag("bullet");
 
-  // Start position is near the player
-  Vector2f pos = owner->getPosition() + (33.0f * direction);
-  e->setPosition(pos);
+	// Start position is near the player
+	Vector2f pos = owner->getPosition() + (33.0f * direction);
+	e->setPosition(pos);
 
-  auto s = e->addComponent<SpriteComponent>();
-  auto tex = Resources::get<Texture>("tex.png");
-  s->setTexture(tex);
-  s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
-  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+	auto s = e->addComponent<SpriteComponent>();
+	auto tex = Resources::get<Texture>("tex.png");
+	s->setTexture(tex);
+	s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
-  p->getBody()->SetBullet(true);
+	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
+	p->getBody()->SetBullet(true);
 
-  auto h = e->addComponent<HurtComponent>("player");
-  h->setActive(true);
+	auto h = e->addComponent<HurtComponent>("player");
+	h->setActive(true);
 
 	direction.y *= -1; // physics and graphics have y inverted
-  auto b = e->addComponent<BulletComponent>(owner, direction, 600.0f);
+	auto b = e->addComponent<BulletComponent>(owner, direction, 600.0f);
 
-  return e;
+	return e;
 }
 
 shared_ptr<Entity> create_enemy_C_bullet(Entity* owner, Vector2f direction)
@@ -260,7 +260,7 @@ shared_ptr<Entity> create_enemy_C_bullet(Entity* owner, Vector2f direction)
 	auto s = e->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12)); 
+	s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
@@ -277,121 +277,121 @@ shared_ptr<Entity> create_enemy_C_bullet(Entity* owner, Vector2f direction)
 
 shared_ptr<Entity> create_key()
 {
-  auto key = Engine::GetActiveScene()->makeEntity();
-  key->setPosition(ls::getTilePosition(ls::findTiles(ls::KEY)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
-  key->addTag("key");
+	auto key = Engine::GetActiveScene()->makeEntity();
+	key->setPosition(ls::getTilePosition(ls::findTiles(ls::KEY)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+	key->addTag("key");
 
-  auto s = key->addComponent<SpriteComponent>();
-  auto tex = Resources::get<Texture>("tex.png");
-  s->setTexture(tex);
-  s->getSprite().setTextureRect(sf::IntRect(0, 32 * 2 + 4, 32, 32 - 4));
-  // Centre origin
-  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+	auto s = key->addComponent<SpriteComponent>();
+	auto tex = Resources::get<Texture>("tex.png");
+	s->setTexture(tex);
+	s->getSprite().setTextureRect(sf::IntRect(0, 32 * 2 + 4, 32, 32 - 4));
+	// Centre origin
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  auto sm = key->addComponent<StateMachineComponent>();
-  sm->addState("not taken", make_shared<Key_NotTakenState>());
-  sm->addState("taken", make_shared<Key_TakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
-  sm->addState("used", make_shared<Key_UsedState>());
-  sm->changeState("not taken");
+	auto sm = key->addComponent<StateMachineComponent>();
+	sm->addState("not taken", make_shared<Key_NotTakenState>());
+	sm->addState("taken", make_shared<Key_TakenState>(Engine::GetActiveScene()->ents.find("player")[0]));
+	sm->addState("used", make_shared<Key_UsedState>());
+	sm->changeState("not taken");
 
-  key->addComponent<InteractableComponent>();
+	key->addComponent<InteractableComponent>();
 
-  return key;
+	return key;
 }
 
 shared_ptr<Entity> create_door()
 {
-  auto door = Engine::GetActiveScene()->makeEntity();
-  door->setPosition(ls::getTilePosition(ls::findTiles(ls::DOOR)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
-  door->addTag("door");
+	auto door = Engine::GetActiveScene()->makeEntity();
+	door->setPosition(ls::getTilePosition(ls::findTiles(ls::DOOR)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+	door->addTag("door");
 
-  auto s = door->addComponent<SpriteComponent>();
-  auto tex = Resources::get<Texture>("tex.png");
-  s->setTexture(tex);
-  s->getSprite().setTextureRect(sf::IntRect(32 * 7, 0, 32 * 3, 32 * 3));
-  // Centre origin
-  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+	auto s = door->addComponent<SpriteComponent>();
+	auto tex = Resources::get<Texture>("tex.png");
+	s->setTexture(tex);
+	s->getSprite().setTextureRect(sf::IntRect(32 * 7, 0, 32 * 3, 32 * 3));
+	// Centre origin
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  auto p = door->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+	auto p = door->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
 
-  auto sm = door->addComponent<StateMachineComponent>();
-  sm->addState("close", make_shared<Door_CloseState>(Engine::GetActiveScene()->ents.find("player")[0]));
-  sm->addState("open", make_shared<Door_OpenState>());
-  sm->changeState("close");
+	auto sm = door->addComponent<StateMachineComponent>();
+	sm->addState("close", make_shared<Door_CloseState>(Engine::GetActiveScene()->ents.find("player")[0]));
+	sm->addState("open", make_shared<Door_OpenState>());
+	sm->changeState("close");
 
-  return door;
+	return door;
 }
 
 shared_ptr<Entity> create_exit_ui_message()
 {
-  auto message = Engine::GetActiveScene()->makeEntity();
-  message->addTag("exit string");
+	auto message = Engine::GetActiveScene()->makeEntity();
+	message->addTag("exit string");
 
-  auto t = message->addComponent<TextComponent>("Hold ESC to exit.");
-  // Origin is on the top right corner
-  t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
+	auto t = message->addComponent<TextComponent>("Hold ESC to exit.");
+	// Origin is on the top right corner
+	t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
 
-  return message;
+	return message;
 }
 
 shared_ptr<Entity> create_baby_llama(int index)
 {
-  auto e = Engine::GetActiveScene()->makeEntity();
-  e->setPosition(ls::getTilePosition(ls::findTiles(ls::MAIN_COLLECTIBLE)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
-  e->addTag("main collectible");
+	auto e = Engine::GetActiveScene()->makeEntity();
+	e->setPosition(ls::getTilePosition(ls::findTiles(ls::MAIN_COLLECTIBLE)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+	e->addTag("main collectible");
 
-  auto s = e->addComponent<SpriteComponent>();
-  auto tex = Resources::get<Texture>("tex.png");
-  s->setTexture(tex);
-  // Change sprite depending on index
-  switch (index)
-  {
-  case 1: 
-    s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 5, 32, 32));
-    break;
-  case 2:
-    s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 5, 32, 32));
-    break;
-  case 3:
-    s->getSprite().setTextureRect(sf::IntRect(32 * 9, 32 * 5, 32, 32));
-    break;
-  default:
-    break;
-  }
-  // Centre origin
-  s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+	auto s = e->addComponent<SpriteComponent>();
+	auto tex = Resources::get<Texture>("tex.png");
+	s->setTexture(tex);
+	// Change sprite depending on index
+	switch (index)
+	{
+	case 1:
+		s->getSprite().setTextureRect(sf::IntRect(32 * 7, 32 * 5, 32, 32));
+		break;
+	case 2:
+		s->getSprite().setTextureRect(sf::IntRect(32 * 8, 32 * 5, 32, 32));
+		break;
+	case 3:
+		s->getSprite().setTextureRect(sf::IntRect(32 * 9, 32 * 5, 32, 32));
+		break;
+	default:
+		break;
+	}
+	// Centre origin
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  //auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
-  //p->getBody()->SetSleepingAllowed(false);
-  //p->getBody()->SetFixedRotation(true);
+	//auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	//p->getBody()->SetSleepingAllowed(false);
+	//p->getBody()->SetFixedRotation(true);
 
-  return e;
+	return e;
 }
 
 vector<shared_ptr<Entity>> create_potions()
 {
-  vector<shared_ptr<Entity>> potions;
+	vector<shared_ptr<Entity>> potions;
 
-  auto enemy_A_tiles = ls::findTiles(ls::POTION);
-  for (auto t : enemy_A_tiles)
-  {
-    auto potion = Engine::GetActiveScene()->makeEntity();
-    potion->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
-    potion->addTag("potion");
+	auto enemy_A_tiles = ls::findTiles(ls::POTION);
+	for (auto t : enemy_A_tiles)
+	{
+		auto potion = Engine::GetActiveScene()->makeEntity();
+		potion->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+		potion->addTag("potion");
 
-    auto s = potion->addComponent<SpriteComponent>();
-    auto tex = Resources::get<Texture>("tex.png");
-    s->setTexture(tex);
-    s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 2, 32, 32));
-    // Centre origin
-    s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+		auto s = potion->addComponent<SpriteComponent>();
+		auto tex = Resources::get<Texture>("tex.png");
+		s->setTexture(tex);
+		s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 2, 32, 32));
+		// Centre origin
+		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-    auto p = potion->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+		auto p = potion->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 
-    potion->addComponent<InteractableComponent>();
+		potion->addComponent<InteractableComponent>();
 
-    potions.push_back(potion);
-  }
+		potions.push_back(potion);
+	}
 
-  return potions;
+	return potions;
 }

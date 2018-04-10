@@ -27,15 +27,15 @@ void BulletComponent::update(double dt)
 	}
 
 	// Or delete if lifetime is over
-  _lifetime -= dt;
-  if (_lifetime <= 0.f) {
-    _parent->setForDelete();
-  }
+	_lifetime -= dt;
+	if (_lifetime <= 0.f) {
+		_parent->setForDelete();
+	}
 
-  if (_owner->is_fordeletion()) _parent->setForDelete();
+	if (_owner->is_fordeletion()) _parent->setForDelete();
 }
 
 BulletComponent::BulletComponent(Entity* p, Entity* owner, Vector2f direction, float maxSpeed)
-    : Component(p), _owner(owner), _direction(direction), _lifetime(5.0f), _maxSpeed(maxSpeed)
+	: Component(p), _owner(owner), _direction(direction), _lifetime(5.0f), _maxSpeed(maxSpeed)
 {
 }

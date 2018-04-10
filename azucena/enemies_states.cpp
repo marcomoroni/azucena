@@ -63,12 +63,12 @@ void EnemyA_ReturnState::execute(Entity *owner, double dt) noexcept
 		sm->changeState("idle");
 	}
 
-  // Chase player when is sight
-  if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
-  {
-    auto sm = owner->get_components<StateMachineComponent>()[0];
-    sm->changeState("chase");
-  }
+	// Chase player when is sight
+	if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
+	{
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("chase");
+	}
 }
 
 void EnemyA_PrepareAttackState::enterState(Entity *owner) noexcept
@@ -130,67 +130,67 @@ void EnemyA_AttackState::execute(Entity *owner, double dt) noexcept
 
 void EnemyB_IdleState::execute(Entity *owner, double dt) noexcept
 {
-  // Don't move
-  owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
+	// Don't move
+	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
 
-  // Move when player is sight
-  if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
-  {
-    auto sm = owner->get_components<StateMachineComponent>()[0];
-    sm->changeState("move");
-  }
+	// Move when player is sight
+	if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
+	{
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("move");
+	}
 }
 
 void EnemyB_MoveState::enterState(Entity *owner) noexcept
 {
-  _timer = 0.0f;
-  //_movementStep = 0;
-  for (int i = 0; i < 3; i++)
-  {
-    random_device dev;
-    default_random_engine engine(dev());
-    uniform_int_distribution<int> dir(0, 3);
-    _directionsStack.push_back(_directions[dir(engine)]);
-  }
+	_timer = 0.0f;
+	//_movementStep = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		random_device dev;
+		default_random_engine engine(dev());
+		uniform_int_distribution<int> dir(0, 3);
+		_directionsStack.push_back(_directions[dir(engine)]);
+	}
 }
 
 // Move three time in random orthogonal direction
 void EnemyB_MoveState::execute(Entity *owner, double dt) noexcept
 {
-  float speed = 100.0f;
+	float speed = 100.0f;
 
-  if (_timer <= 0.0f && _directionsStack.size() <= 0)
-  {
-    auto sm = owner->get_components<StateMachineComponent>()[0];
-    sm->changeState("shoot");
-  }
+	if (_timer <= 0.0f && _directionsStack.size() <= 0)
+	{
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("shoot");
+	}
 
-  if (_timer <= 0.0f && _directionsStack.size() > 0)
-  {
-    _timer = 0.8f;
-    _direction = _directionsStack[_directionsStack.size() - 1];
-    _directionsStack.pop_back();
-  }
-  else if (_timer < 0.2f)
-  {
-    speed = 0.0f;
-  }
+	if (_timer <= 0.0f && _directionsStack.size() > 0)
+	{
+		_timer = 0.8f;
+		_direction = _directionsStack[_directionsStack.size() - 1];
+		_directionsStack.pop_back();
+	}
+	else if (_timer < 0.2f)
+	{
+		speed = 0.0f;
+	}
 
-  owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(_direction * speed));
-  
-  _timer -= dt;
+	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(_direction * speed));
+
+	_timer -= dt;
 }
 
 void EnemyB_ShootState::execute(Entity *owner, double dt) noexcept
 {
-  // Shoot 4 projectiles
-  create_enemy_B_bullet(owner, Vector2f{ 1.0f, 0.0f });
-  create_enemy_B_bullet(owner, Vector2f{ -1.0f, 0.0f });
-  create_enemy_B_bullet(owner, Vector2f{ 0.0f, 1.0f });
-  create_enemy_B_bullet(owner, Vector2f{ 0.0f, -1.0f });
+	// Shoot 4 projectiles
+	create_enemy_B_bullet(owner, Vector2f{ 1.0f, 0.0f });
+	create_enemy_B_bullet(owner, Vector2f{ -1.0f, 0.0f });
+	create_enemy_B_bullet(owner, Vector2f{ 0.0f, 1.0f });
+	create_enemy_B_bullet(owner, Vector2f{ 0.0f, -1.0f });
 
-  auto sm = owner->get_components<StateMachineComponent>()[0];
-  sm->changeState("move");
+	auto sm = owner->get_components<StateMachineComponent>()[0];
+	sm->changeState("move");
 }
 
 // ENEMY C ////////////////////////////////////////////////////////////////////

@@ -31,7 +31,7 @@ public:
 class EnemyA_ReturnState : public State
 {
 private:
-  std::shared_ptr<Entity> _player;
+	std::shared_ptr<Entity> _player;
 	sf::Vector2f _pos;
 
 public:
@@ -73,42 +73,42 @@ public:
 class EnemyB_IdleState : public State
 {
 private:
-  std::shared_ptr<Entity> _player;
+	std::shared_ptr<Entity> _player;
 
 public:
-  EnemyB_IdleState(std::shared_ptr<Entity> player)
-    : _player(player) {}
-  void enterState(Entity*) noexcept override {};
-  void execute(Entity*, double) noexcept override;
+	EnemyB_IdleState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void enterState(Entity*) noexcept override {};
+	void execute(Entity*, double) noexcept override;
 };
 
 class EnemyB_MoveState : public State
 {
 private:
-  std::shared_ptr<Entity> _player;
-  float _timer;
-  std::vector<sf::Vector2f> _directions = {
-    sf::Vector2f(1.0f, 0.0f),
-    sf::Vector2f(-1.0f, 0.0f),
-    sf::Vector2f(0.0f, 1.0f),
-    sf::Vector2f(0.0f, -1.0f),
-  };
-  sf::Vector2f _direction;
-  std::vector<sf::Vector2f> _directionsStack = {};
+	std::shared_ptr<Entity> _player;
+	float _timer;
+	std::vector<sf::Vector2f> _directions = {
+	  sf::Vector2f(1.0f, 0.0f),
+	  sf::Vector2f(-1.0f, 0.0f),
+	  sf::Vector2f(0.0f, 1.0f),
+	  sf::Vector2f(0.0f, -1.0f),
+	};
+	sf::Vector2f _direction;
+	std::vector<sf::Vector2f> _directionsStack = {};
 
 public:
-  EnemyB_MoveState(std::shared_ptr<Entity> player)
-    : _player(player) {}
-  void enterState(Entity*) noexcept override;
-  void execute(Entity*, double) noexcept override;
+	EnemyB_MoveState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void enterState(Entity*) noexcept override;
+	void execute(Entity*, double) noexcept override;
 };
 
 class EnemyB_ShootState : public State
 {
 public:
-  EnemyB_ShootState() {}
-  void enterState(Entity*) noexcept override {};
-  void execute(Entity*, double) noexcept override;
+	EnemyB_ShootState() {}
+	void enterState(Entity*) noexcept override {};
+	void execute(Entity*, double) noexcept override;
 };
 
 // ENEMY C ////////////////////////////////////////////////////////////////////

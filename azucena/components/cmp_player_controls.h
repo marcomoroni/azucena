@@ -5,7 +5,7 @@
 
 class PlayerControlsComponent : public Component {
 protected:
-  float _groundspeed;
+	float _groundspeed;
 	bool _isSprinting;
 	// Timer until player can sprint again
 	double _sprintCooldown;
@@ -26,8 +26,8 @@ protected:
 	sf::Sound _sound_dash;
 
 public:
-  void update(double dt) override;
+	void update(double dt) override;
 	void render() override {};
-  explicit PlayerControlsComponent(Entity* p);
-  PlayerControlsComponent() = delete;
+	explicit PlayerControlsComponent(Entity* p);
+	PlayerControlsComponent() = delete;
 };

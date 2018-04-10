@@ -25,17 +25,17 @@ void PlayerHealthComponent::update(double dt)
 {
 	if (_immunity >= 0.0f) _immunity -= dt;
 
-  // Pick up potion
-  auto potions = Engine::GetActiveScene()->ents.find("potion");
-  for (auto potion : potions)
-  {
-    auto i = potion->get_components<InteractableComponent>()[0];
-    if (i->interacted())
-    {
-      potion->setForDelete();
-      addPotion();
-    }
-  }
+	// Pick up potion
+	auto potions = Engine::GetActiveScene()->ents.find("potion");
+	for (auto potion : potions)
+	{
+		auto i = potion->get_components<InteractableComponent>()[0];
+		if (i->interacted())
+		{
+			potion->setForDelete();
+			addPotion();
+		}
+	}
 
 	// Use potion
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")) && !_usePotionButtonStillPressed && Data::potions > 0)
@@ -92,29 +92,29 @@ void PlayerHealthComponent::usePotion()
 	{
 		_sound_usePotion.play();
 		Data::health = Data::max_health;
-    Data::potions--;
+		Data::potions--;
 	}
 }
 
 void PlayerHealthComponent::addPotion(int i)
 {
-  if (Data::potions + 1 <= Data::max_potions)
-    Data::potions++;
-  else
-    usePotion();
+	if (Data::potions + 1 <= Data::max_potions)
+		Data::potions++;
+	else
+		usePotion();
 }
 
 void PlayerHealthComponent::addPotion()
 {
-  addPotion(1);
+	addPotion(1);
 }
 
 int PlayerHealthComponent::getPotions()
 {
-  return Data::potions;
+	return Data::potions;
 }
 
 int PlayerHealthComponent::getMaxPotions()
 {
-  return Data::max_potions;
+	return Data::max_potions;
 }

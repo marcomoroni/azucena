@@ -6,14 +6,14 @@
 class Door_CloseState : public State
 {
 private:
-  std::shared_ptr<Entity> _player;
-  std::shared_ptr<Entity> _key;
+	std::shared_ptr<Entity> _player;
+	std::shared_ptr<Entity> _key;
 
 public:
-  Door_CloseState(std::shared_ptr<Entity> player)
-    : _player(player) {}
-  void enterState(Entity*) noexcept override;
-  void execute(Entity*, double) noexcept override;
+	Door_CloseState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void enterState(Entity*) noexcept override;
+	void execute(Entity*, double) noexcept override;
 };
 
 class Door_OpenState : public State
@@ -25,6 +25,6 @@ private:
 
 public:
 	Door_OpenState();
-  void enterState(Entity*) noexcept override;
-  void execute(Entity*, double) noexcept override {}
+	void enterState(Entity*) noexcept override;
+	void execute(Entity*, double) noexcept override {}
 };

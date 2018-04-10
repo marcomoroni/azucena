@@ -12,7 +12,7 @@ EnemyHealthComponent::EnemyHealthComponent(Entity* p, int maxHealth)
 	: Component(p), _maxHealth(maxHealth), _health(maxHealth)
 {
 	//_tex = Resources::load<Texture>("enemy_health.png");
-	
+
 	// Create healt bar sprite using a render texture
 	/*backTex.create(_spriteSize * _maxHealth, _spriteSize);
 	backTex.clear(Color::Yellow);

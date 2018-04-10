@@ -4,17 +4,17 @@
 
 class MenuScene : public Scene {
 public:
-  MenuScene() = default;
-  ~MenuScene() override = default;
+	MenuScene() = default;
+	~MenuScene() override = default;
 
-  void Load() override;
+	void Load() override;
 
-  void Update(const double& dt) override;
+	void Update(const double& dt) override;
 
 private:
-  std::shared_ptr<Entity> _btn_Start;
-  std::shared_ptr<Entity> _btn_Continue;
-  std::shared_ptr<Entity> _btn_Load;
-  std::shared_ptr<Entity> _btn_Options;
-  std::shared_ptr<Entity> _btn_Quit;
+	std::shared_ptr<Entity> _btn_Start;
+	std::shared_ptr<Entity> _btn_Continue;
+	std::shared_ptr<Entity> _btn_Load;
+	std::shared_ptr<Entity> _btn_Options;
+	std::shared_ptr<Entity> _btn_Quit;
 };

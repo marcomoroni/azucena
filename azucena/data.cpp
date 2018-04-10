@@ -18,55 +18,55 @@ string Data::save_file_path = "azucena_save.txt";
 
 void Data::load()
 {
-  ifstream file(save_file_path);
-  if (file.good())
-  {
-    file >> main_collectible_1;
-    file >> main_collectible_2;
-    file >> main_collectible_3;
-    file >> door_top_opened;
-    file >> door_right_opened;
-    file >> door_left_opened;
-    file >> max_health;
-    file >> health;
-    file >> max_potions;
-    file >> potions;
-  }
+	ifstream file(save_file_path);
+	if (file.good())
+	{
+		file >> main_collectible_1;
+		file >> main_collectible_2;
+		file >> main_collectible_3;
+		file >> door_top_opened;
+		file >> door_right_opened;
+		file >> door_left_opened;
+		file >> max_health;
+		file >> health;
+		file >> max_potions;
+		file >> potions;
+	}
 }
 
 void Data::save()
 {
-  printf("Opening save file...\n");
-  ofstream file;
-  file.open(save_file_path, ofstream::trunc);
+	printf("Opening save file...\n");
+	ofstream file;
+	file.open(save_file_path, ofstream::trunc);
 
-  printf("Saving...\n");
-  file <<
-    (int)main_collectible_1 << " " <<
-    (int)main_collectible_2 << " " <<
-    (int)main_collectible_3 << " " <<
-    (int)door_top_opened << " " <<
-    (int)door_right_opened << " " <<
-    (int)door_left_opened << " " <<
-    max_health << " " <<
-    health << " " <<
-    max_potions << " " <<
-    potions;
+	printf("Saving...\n");
+	file <<
+		(int)main_collectible_1 << " " <<
+		(int)main_collectible_2 << " " <<
+		(int)main_collectible_3 << " " <<
+		(int)door_top_opened << " " <<
+		(int)door_right_opened << " " <<
+		(int)door_left_opened << " " <<
+		max_health << " " <<
+		health << " " <<
+		max_potions << " " <<
+		potions;
 
-  printf("Closing save file...\n");
-  file.close();
+	printf("Closing save file...\n");
+	file.close();
 }
 
 void Data::reset()
 {
-  main_collectible_1 = false;
-  main_collectible_2 = false;
-  main_collectible_3 = false;
-  door_top_opened = false;
-  door_right_opened = false;
-  door_left_opened = false;
-  max_health = 4;
-  health = 4;
-  max_potions = 2;
-  potions = 0;
+	main_collectible_1 = false;
+	main_collectible_2 = false;
+	main_collectible_3 = false;
+	door_top_opened = false;
+	door_right_opened = false;
+	door_left_opened = false;
+	max_health = 4;
+	health = 4;
+	max_potions = 2;
+	potions = 0;
 }

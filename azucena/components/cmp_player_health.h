@@ -31,6 +31,6 @@ public:
 	void usePotion();
 	void addPotion();
 	void addPotion(int);
-  int getPotions();
-  int getMaxPotions();
+	int getPotions();
+	int getMaxPotions();
 };
