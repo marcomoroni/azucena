@@ -1,5 +1,6 @@
 #include "main_collectible_states.h"
 #include "components/cmp_physics.h"
+#include "system_resources.h"
 
 using namespace sf;
 using namespace std;
@@ -13,6 +14,14 @@ void MainCollectible_LostState::execute(Entity *owner, double dt) noexcept
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("happy");
 	}
+}
+
+MainCollectible_HappyState::MainCollectible_HappyState()
+{
+	// Sounds
+	_buffer_jump = *(Resources::get<SoundBuffer>("baby_llama_happy.wav"));
+	_sound_jump.setBuffer(_buffer_jump);
+	_sound_jump.setVolume(70);
 }
 
 void MainCollectible_HappyState::enterState(Entity *owner) noexcept
@@ -33,6 +42,7 @@ void MainCollectible_HappyState::execute(Entity *owner, double dt) noexcept
 	// 0.0 - 0.2 -> up
 	// 0.2 - 0.4 -> down
 	// 0.4 - 0.8 -> rest
+	if (_jumpLoop == 0.0f) _sound_jump.play();
 	if (_jumpLoop >= 0.0f && _jumpLoop < 0.2f)
 	{
 		direction = { 0.0f, 1.0f };

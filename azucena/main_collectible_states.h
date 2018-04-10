@@ -1,6 +1,7 @@
 #pragma once
 
 #include "components/cmp_state_machine.h"
+#include <SFML/Audio.hpp>
 
 class MainCollectible_LostState : public State
 {
@@ -19,8 +20,12 @@ class MainCollectible_HappyState : public State
 private:
 	float _jumpLoop;
 
+	// Sounds
+	sf::SoundBuffer _buffer_jump;
+	sf::Sound _sound_jump;
+
 public:
-	MainCollectible_HappyState() {}
+	MainCollectible_HappyState();
 	void enterState(Entity*) noexcept override;
 	void execute(Entity*, double) noexcept override;
 };
