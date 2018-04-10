@@ -330,14 +330,33 @@ shared_ptr<Entity> create_exit_ui_message()
 
 shared_ptr<Entity> create_baby_llama(int index)
 {
-	auto e = Engine::GetActiveScene()->makeEntity();
-	e->setPosition(ls::getTilePosition(ls::findTiles(ls::MAIN_COLLECTIBLE)[0]) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
-	e->addTag("main collectible");
+	// 1 -> right
+	// 2 -> top
+	// 3 -> left
 
-	auto s = e->addComponent<SpriteComponent>();
+	Vector2ul llama_tile;
+	switch (index)
+	{
+	case 1:
+		llama_tile = ls::findTiles(ls::MAIN_COLLECTIBLE_RIGHT)[0];
+		break;
+	case 2:
+		llama_tile = ls::findTiles(ls::MAIN_COLLECTIBLE_TOP)[0];
+		break;
+	case 3:
+		llama_tile = ls::findTiles(ls::MAIN_COLLECTIBLE_LEFT)[0];
+		break;
+	default:
+		break;
+	}
+
+	auto llama = Engine::GetActiveScene()->makeEntity();
+	llama->setPosition(ls::getTilePosition(llama_tile) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+	llama->addTag("main collectible");
+
+	auto s = llama->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	// Change sprite depending on index
 	switch (index)
 	{
 	case 1:
@@ -352,13 +371,12 @@ shared_ptr<Entity> create_baby_llama(int index)
 	default:
 		break;
 	}
-	// Centre origin
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	auto p = llama->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 	p->getBody()->SetFixedRotation(true);
 
-	return e;
+	return llama;
 }
 
 vector<shared_ptr<Entity>> create_potions()

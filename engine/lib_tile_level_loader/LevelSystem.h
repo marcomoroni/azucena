@@ -19,7 +19,6 @@ public:
 	enum TILES {
 		EMPTY = ' ',
 		START = 's',
-		END = 'e', // to delete
 		EXIT_1 = '1',
 		EXIT_2 = '2',
 		EXIT_3 = '3',
@@ -32,13 +31,12 @@ public:
 		KEY = 'k',
 		DOOR = 'd',
 		WALL = 'w',
-		ENEMY = 'n', // to delete
 		ENEMY_A = 'A',
 		ENEMY_B = 'B',
 		ENEMY_C = 'C',
-		// Note: decide on Scene::load which main collectible is, because
-		// there will only be one per scene
-		MAIN_COLLECTIBLE = '@',
+		MAIN_COLLECTIBLE_LEFT = '£',
+		MAIN_COLLECTIBLE_TOP = '$',
+		MAIN_COLLECTIBLE_RIGHT = '&',
 		POTION = 'p'
 	};
 

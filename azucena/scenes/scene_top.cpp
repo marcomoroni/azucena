@@ -33,7 +33,7 @@ void TopScene::Load()
 	}
 
 	// Create main collectible
-	create_baby_llama(2);
+	if (!Data::main_collectible_2) create_baby_llama(2);
 
 	// Create potions
 	create_potions();

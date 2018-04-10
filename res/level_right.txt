@@ -5,7 +5,7 @@ wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 wwwww                w        wwwww
 w1                            wwwww
-w1 s     k           d    @   wwwww
+w1 s     k           d    &   wwwww
 w1                            wwwww
 wwwww                w        wwwww
 wwwww                w        wwwww

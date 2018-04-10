@@ -33,7 +33,7 @@ void LeftScene::Load()
 	}
 
 	// Create main collectible
-	create_baby_llama(3);
+	if (!Data::main_collectible_3) create_baby_llama(3);
 
 	// Add UI
 	create_game_ui();

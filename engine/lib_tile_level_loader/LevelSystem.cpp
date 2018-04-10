@@ -9,8 +9,7 @@ float LevelSystem::_tileSize(32);
 
 std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
 	{ EMPTY, IntRect(0, _tileSize, _tileSize, _tileSize) },
-	{ START, IntRect(0, _tileSize, _tileSize, _tileSize) }, // Same as empty
-	{ END, IntRect(_tileSize * 4, _tileSize * 2, _tileSize, _tileSize) },
+	{ START, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ EXIT_1, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ EXIT_2, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ EXIT_3, IntRect(0, _tileSize, _tileSize, _tileSize) },
@@ -23,12 +22,13 @@ std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
 	{ KEY, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ DOOR, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ WALL, IntRect(0, 0, _tileSize, _tileSize) },
-	// All enemies have empty below them
 	{ ENEMY_A, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ ENEMY_B, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ ENEMY_C, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ POTION, IntRect(0, _tileSize, _tileSize, _tileSize) },
-	{ MAIN_COLLECTIBLE, IntRect(0, _tileSize, _tileSize, _tileSize) } };
+	{ MAIN_COLLECTIBLE_LEFT, IntRect(0, _tileSize, _tileSize, _tileSize) },
+	{ MAIN_COLLECTIBLE_TOP, IntRect(0, _tileSize, _tileSize, _tileSize) },
+	{ MAIN_COLLECTIBLE_RIGHT, IntRect(0, _tileSize, _tileSize, _tileSize) } };
 
 sf::IntRect LevelSystem::getSpriteRect(LevelSystem::Tile t) {
 	auto it = _rectMap.find(t);
