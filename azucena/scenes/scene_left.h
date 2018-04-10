@@ -22,4 +22,8 @@ private:
 
 	// Music
 	std::shared_ptr<sf::Music> _music_overworld;
+
+	// Sounds
+	sf::SoundBuffer _buffer_mainCollectibleObtained;
+	sf::Sound _sound_mainCollectibleObtained;
 };

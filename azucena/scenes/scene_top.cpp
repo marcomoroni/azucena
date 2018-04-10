@@ -49,6 +49,10 @@ void TopScene::Load()
 	_music_overworld->play();
 	_music_overworld->setLoop(true);
 
+	// Sounds
+	_buffer_mainCollectibleObtained = *(Resources::get<SoundBuffer>("baby_llama_obtained.wav"));
+	_sound_mainCollectibleObtained.setBuffer(_buffer_mainCollectibleObtained);
+
 	_returnToCenterIn = 3.0f;
 	_mainCollectibleObtained = false;
 
@@ -78,6 +82,7 @@ void TopScene::Update(const double& dt) {
 		{
 			Data::main_collectible_top = true;
 			_mainCollectibleObtained = true;
+			_sound_mainCollectibleObtained.play();
 
 			// Player doesn't get hurt anymore
 			_player->get_components<PlayerHealthComponent>()[0]->setImmune(true);
