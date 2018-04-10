@@ -18,6 +18,8 @@ void CenterScene::Load()
 
 	// Create player
 	_player = create_player();
+	auto h = _player->get_components<PlayerHealthComponent>()[0];
+	h->setHealth(h->getMaxHealth());
 
 	// Create enemies
 	create_enemies();

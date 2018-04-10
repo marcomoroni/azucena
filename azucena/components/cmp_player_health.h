@@ -35,4 +35,5 @@ public:
 	int getPotions();
 	int getMaxPotions();
 	void setImmune(bool);
+	void setHealth(int);
 };

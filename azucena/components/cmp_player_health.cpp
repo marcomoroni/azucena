@@ -125,3 +125,8 @@ void PlayerHealthComponent::setImmune(bool i)
 {
 	_forceImmunity = i;
 }
+
+void PlayerHealthComponent::setHealth(int h)
+{
+	Data::health = h;
+}
