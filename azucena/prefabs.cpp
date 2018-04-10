@@ -32,10 +32,8 @@ shared_ptr<Entity> create_player()
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
 	s->getSprite().setTextureRect(sf::IntRect(0 + 4, 32 * 3, 32 - 4, 32));
-	// Centre origin
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	//player->addComponent<PlayerControlsComponent>(Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 	auto p = player->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 	p->getBody()->SetSleepingAllowed(false);
 	p->getBody()->SetFixedRotation(true);
@@ -66,7 +64,6 @@ vector<shared_ptr<Entity>> create_enemies()
 		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
 		s->getSprite().setTextureRect(sf::IntRect(0, 32 * 5, 32, 32 - 4));
-		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = enemy_A->addComponent<StateMachineComponent>();
@@ -101,7 +98,6 @@ vector<shared_ptr<Entity>> create_enemies()
 		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
 		s->getSprite().setTextureRect(sf::IntRect(0, 32 * 4, 32, 32));
-		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = enemy_B->addComponent<StateMachineComponent>();
@@ -134,7 +130,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		auto s = enemy_C->addComponent<SpriteComponent>();
 		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
-		s->getSprite().setTextureRect(sf::IntRect(0, 32 * 4, 32, 32)); // TEMPORARY
+		s->getSprite().setTextureRect(sf::IntRect(32 * 2, 32 * 5, 32, 32)); // TEMPORARY
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = enemy_C->addComponent<StateMachineComponent>();
@@ -206,7 +202,7 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
 	auto s = e->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 12, 32 * 3 + 12, 8, 8));
+	s->getSprite().setTextureRect(sf::IntRect(32 * 4, 32 * 3, 32, 32));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
@@ -233,7 +229,7 @@ shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, Vector2f direction)
 	auto s = e->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
+	s->getSprite().setTextureRect(sf::IntRect(32 * 2, 32 * 4, 32, 32));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
@@ -260,7 +256,7 @@ shared_ptr<Entity> create_enemy_C_bullet(Entity* owner, Vector2f direction)
 	auto s = e->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
+	s->getSprite().setTextureRect(sf::IntRect(32 * 4, 32 * 5, 32, 32));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
@@ -285,7 +281,6 @@ shared_ptr<Entity> create_key()
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
 	s->getSprite().setTextureRect(sf::IntRect(0, 32 * 2 + 4, 32, 32 - 4));
-	// Centre origin
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto sm = key->addComponent<StateMachineComponent>();
@@ -309,7 +304,6 @@ shared_ptr<Entity> create_door()
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
 	s->getSprite().setTextureRect(sf::IntRect(32 * 7, 0, 32 * 3, 32 * 3));
-	// Centre origin
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 	auto p = door->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
@@ -361,9 +355,8 @@ shared_ptr<Entity> create_baby_llama(int index)
 	// Centre origin
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	//auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
-	//p->getBody()->SetSleepingAllowed(false);
-	//p->getBody()->SetFixedRotation(true);
+	auto p = e->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	p->getBody()->SetFixedRotation(true);
 
 	return e;
 }
@@ -383,7 +376,6 @@ vector<shared_ptr<Entity>> create_potions()
 		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
 		s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 2, 32, 32));
-		// Centre origin
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto p = potion->addComponent<PhysicsComponent>(false, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
