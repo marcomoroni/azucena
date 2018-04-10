@@ -95,7 +95,6 @@ void EnemyHealthComponent::decreaseHealth(int h)
 {
 	if (_immunity < 0.0f)
 	{
-		printf("Enemy decrease health.\n");
 		int newHealth = _health - h;
 		if (newHealth >= 0) _health = newHealth;
 		_immunity = 0.2f;

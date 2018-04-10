@@ -111,12 +111,13 @@ vector<shared_ptr<Entity>> create_enemies()
     sm->addState("shoot", make_shared<EnemyB_ShootState>());
     sm->changeState("idle");
 
-    auto h = enemy_B->addComponent<EnemyHealthComponent>(2);
+    enemy_B->addComponent<EnemyHealthComponent>(4);
 
 		auto p = enemy_B->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
 
-    enemy_B->addComponent<HurtComponent>("player");
+		auto h = enemy_B->addComponent<HurtComponent>("player");
+		h->setActive(true);
 
 		enemies.push_back(enemy_B);
 	}
@@ -131,11 +132,17 @@ vector<shared_ptr<Entity>> create_enemies()
 		enemy_C->addTag("enemy_C");
 
 		auto s = enemy_C->addComponent<SpriteComponent>();
-		auto tex = Resources::get<Texture>("invaders_sheet.png");
+		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
-		s->getSprite().setTextureRect(sf::IntRect(128, 0, 32, 32));
-		// Centre origin
+		s->getSprite().setTextureRect(sf::IntRect(0, 32 * 4, 32, 32)); // TEMPORARY
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+		auto sm = enemy_C->addComponent<StateMachineComponent>();
+		sm->setName("ai");
+		sm->addState("idle", make_shared<EnemyC_IdleState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("flee", make_shared<EnemyC_FleeState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("shoot", make_shared<EnemyC_ShootState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->changeState("idle");
 
 		auto h = enemy_C->addComponent<EnemyHealthComponent>(2);
 
@@ -202,14 +209,14 @@ shared_ptr<Entity> create_player_bullet(Vector2f direction)
   s->getSprite().setTextureRect(sf::IntRect(32 * 4 + 12, 32 * 3 + 12, 8, 8));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
 	p->getBody()->SetBullet(true);
 
 	auto h = e->addComponent<HurtComponent>("enemy");
 	h->setActive(true);
 
 	direction.y *= -1; // physics and graphics have y inverted
-	auto b = e->addComponent<BulletComponent>(&(*player), direction);
+	auto b = e->addComponent<BulletComponent>(&(*player), direction, 600.0f);
 
 	return e;
 }
@@ -229,16 +236,43 @@ shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, Vector2f direction)
   s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12));
   s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-  auto p = e->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getGlobalBounds().width, s->getSprite().getGlobalBounds().height));
+  auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
   p->getBody()->SetBullet(true);
 
   auto h = e->addComponent<HurtComponent>("player");
   h->setActive(true);
 
 	direction.y *= -1; // physics and graphics have y inverted
-  auto b = e->addComponent<BulletComponent>(owner, direction);
+  auto b = e->addComponent<BulletComponent>(owner, direction, 600.0f);
 
   return e;
+}
+
+shared_ptr<Entity> create_enemy_C_bullet(Entity* owner, Vector2f direction)
+{
+	auto e = Engine::GetActiveScene()->makeEntity();
+	e->addTag("bullet");
+
+	// Start position is near the player
+	Vector2f pos = owner->getPosition() + (33.0f * direction);
+	e->setPosition(pos);
+
+	auto s = e->addComponent<SpriteComponent>();
+	auto tex = Resources::get<Texture>("tex.png");
+	s->setTexture(tex);
+	s->getSprite().setTextureRect(sf::IntRect(32 * 2 + 8, 32 * 4 + 12, 12, 12)); 
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+	auto p = e->addComponent<PhysicsComponent>(true, Vector2f(1.0f, 1.0f));
+	p->getBody()->SetBullet(true);
+
+	auto h = e->addComponent<HurtComponent>("player");
+	h->setActive(true);
+
+	direction.y *= -1; // physics and graphics have y inverted
+	auto b = e->addComponent<BulletComponent>(owner, direction, 500.0f);
+
+	return e;
 }
 
 shared_ptr<Entity> create_key()

@@ -192,3 +192,67 @@ void EnemyB_ShootState::execute(Entity *owner, double dt) noexcept
   auto sm = owner->get_components<StateMachineComponent>()[0];
   sm->changeState("move");
 }
+
+// ENEMY C ////////////////////////////////////////////////////////////////////
+
+void EnemyC_IdleState::execute(Entity *owner, double dt) noexcept
+{
+	// Don't move
+	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
+
+	// Move when player is sight
+	if (length(owner->getPosition() - _player->getPosition()) < 400.0f)
+	{
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("flee");
+	}
+}
+
+void EnemyC_FleeState::enterState(Entity *owner) noexcept
+{
+	_timer = 3.0f;
+}
+
+void EnemyC_FleeState::execute(Entity *owner, double dt) noexcept
+{
+	// Flee from player
+	Vector2f direction = normalize(_player->getPosition() - owner->getPosition());
+	direction.y *= -1; // why?
+
+	// Move by 90 degrees
+	Transform rotation;
+	rotation.rotate(90, 0, 0);
+	direction = rotation.transformPoint(direction);
+
+	float speed = 40.0f;
+	if (_timer < 1.0f) speed = 0.0f;
+	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(direction * speed));
+
+	_timer -= dt;
+
+	// If enemy is close to player, prepare attack
+	if (_timer <= 0.0f)
+	{
+		auto sm = owner->get_components<StateMachineComponent>()[0];
+		sm->changeState("shoot");
+	}
+}
+
+void EnemyC_ShootState::execute(Entity *owner, double dt) noexcept
+{
+	// Don't move
+	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
+
+	// Shoot 3 projectiles
+	Vector2f direction = normalize(_player->getPosition() - owner->getPosition());
+	Transform rotation1;
+	rotation1.rotate(_angle, 0, 0);
+	Transform rotation2;
+	rotation2.rotate(-_angle, 0, 0);
+	create_enemy_C_bullet(owner, direction);
+	create_enemy_C_bullet(owner, rotation1.transformPoint(direction));
+	create_enemy_C_bullet(owner, rotation2.transformPoint(direction));
+
+	auto sm = owner->get_components<StateMachineComponent>()[0];
+	sm->changeState("flee");
+}

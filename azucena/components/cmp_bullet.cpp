@@ -10,8 +10,7 @@ using namespace sf;
 
 void BulletComponent::update(double dt)
 {
-	// Use teleport because it sould alway go in a straight line
-	//_parent->get_components<PhysicsComponent>()[0]->teleport(_parent->getPosition() + (normalize(_direction) * _maxSpeed * (float)dt));
+	// Move it
 	_parent->get_components<PhysicsComponent>()[0]->setVelocity(_direction * _maxSpeed);
 
 	// Delete if hits something (but not the owner)
@@ -36,7 +35,7 @@ void BulletComponent::update(double dt)
   if (_owner->is_fordeletion()) _parent->setForDelete();
 }
 
-BulletComponent::BulletComponent(Entity* p, Entity* owner, Vector2f direction)
-    : Component(p), _owner(owner), _direction(direction), _lifetime(5.0f), _maxSpeed(600.0f)
+BulletComponent::BulletComponent(Entity* p, Entity* owner, Vector2f direction, float maxSpeed)
+    : Component(p), _owner(owner), _direction(direction), _lifetime(5.0f), _maxSpeed(maxSpeed)
 {
 }

@@ -12,6 +12,6 @@ protected:
 public:
   void update(double dt) override;
   void render() override {}
-  explicit BulletComponent(Entity* p, Entity* owner, sf::Vector2f direction);
+  explicit BulletComponent(Entity* p, Entity* owner, sf::Vector2f direction, float maxSpeed);
   BulletComponent() = delete;
 };

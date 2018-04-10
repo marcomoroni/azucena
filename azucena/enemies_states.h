@@ -105,10 +105,48 @@ public:
 
 class EnemyB_ShootState : public State
 {
-private:
-
 public:
   EnemyB_ShootState() {}
   void enterState(Entity*) noexcept override {};
   void execute(Entity*, double) noexcept override;
+};
+
+// ENEMY C ////////////////////////////////////////////////////////////////////
+
+class EnemyC_IdleState : public State
+{
+private:
+	std::shared_ptr<Entity> _player;
+
+public:
+	EnemyC_IdleState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void enterState(Entity*) noexcept override {};
+	void execute(Entity*, double) noexcept override;
+};
+
+class EnemyC_FleeState : public State
+{
+private:
+	std::shared_ptr<Entity> _player;
+	float _timer;
+
+public:
+	EnemyC_FleeState(std::shared_ptr<Entity> player)
+		: _player(player) {}
+	void enterState(Entity*) noexcept override;
+	void execute(Entity*, double) noexcept override;
+};
+
+class EnemyC_ShootState : public State
+{
+private:
+	std::shared_ptr<Entity> _player;
+	float _angle;
+
+public:
+	EnemyC_ShootState(std::shared_ptr<Entity> player)
+		: _player(player), _angle(10.0f) {}
+	void enterState(Entity*) noexcept override {};
+	void execute(Entity*, double) noexcept override;
 };
