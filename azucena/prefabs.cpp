@@ -19,6 +19,7 @@
 #include "key_states.h"
 #include "door_states.h"
 #include "main_collectible_states.h"
+#include "fake_wall_states.h"
 
 using namespace std;
 using namespace sf;
@@ -152,16 +153,35 @@ vector<shared_ptr<Entity>> create_enemies()
 	return enemies;
 }
 
-void add_physics_colliders_to_tiles()
+void create_walls()
 {
 	auto walls = ls::findTiles(ls::WALL);
 	for (auto w : walls) {
 		auto pos = ls::getTilePosition(w);
-		pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2); //offset to center
+		pos += Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2);
 		auto e = Engine::GetActiveScene()->makeEntity();
 		e->addTag("wall");
 		e->setPosition(pos);
 		e->addComponent<PhysicsComponent>(false, Vector2f(ls::getTileSize(), ls::getTileSize()));
+	}
+
+	auto fake_walls = ls::findTiles(ls::FAKE_WALL);
+	for (auto w : fake_walls)
+	{
+		auto e = Engine::GetActiveScene()->makeEntity();
+		e->setPosition(ls::getTilePosition(w) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
+		e->addTag("fake wall");
+
+		auto s = e->addComponent<SpriteComponent>();
+		auto tex = Resources::get<Texture>("tex.png");
+		s->setTexture(tex);
+		s->getSprite().setTextureRect(sf::IntRect(0, 0, 32, 32));
+		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+
+		auto sm = e->addComponent<StateMachineComponent>();
+		sm->addState("hidden", make_shared<FakeWall_HiddenState>(Engine::GetActiveScene()->ents.find("player")[0]));
+		sm->addState("revealed", make_shared<FakeWall_RevealedState>());
+		sm->changeState("hidden");
 	}
 }
 

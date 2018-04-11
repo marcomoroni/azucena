@@ -22,6 +22,7 @@ std::map<LevelSystem::Tile, sf::IntRect> LevelSystem::_rectMap{
 	{ KEY, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ DOOR, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ WALL, IntRect(0, 0, _tileSize, _tileSize) },
+	{ FAKE_WALL, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ ENEMY_A, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ ENEMY_B, IntRect(0, _tileSize, _tileSize, _tileSize) },
 	{ ENEMY_C, IntRect(0, _tileSize, _tileSize, _tileSize) },

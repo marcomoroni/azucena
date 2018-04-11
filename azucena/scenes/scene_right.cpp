@@ -23,7 +23,7 @@ void RightScene::Load()
 	create_enemies();
 
 	// Add physics colliders to level tiles.
-	add_physics_colliders_to_tiles();
+	create_walls();
 
 	// Add key and door
 	if (!Data::door_right_opened)

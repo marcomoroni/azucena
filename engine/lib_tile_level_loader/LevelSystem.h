@@ -31,6 +31,7 @@ public:
 		KEY = 'k',
 		DOOR = 'd',
 		WALL = 'w',
+		FAKE_WALL = ':',
 		ENEMY_A = 'A',
 		ENEMY_B = 'B',
 		ENEMY_C = 'C',

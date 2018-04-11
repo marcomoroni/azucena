@@ -43,7 +43,7 @@ void CenterScene::Load()
 	}
 
 	// Add physics colliders to level tiles.
-	add_physics_colliders_to_tiles();
+	create_walls();
 
 	// Add UI
 	create_game_ui();
