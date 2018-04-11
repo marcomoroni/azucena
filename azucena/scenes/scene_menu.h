@@ -17,4 +17,6 @@ private:
 	std::shared_ptr<Entity> _btn_Load;
 	std::shared_ptr<Entity> _btn_Options;
 	std::shared_ptr<Entity> _btn_Quit;
+	// All buttons
+	std::vector<std::shared_ptr<Entity>> _btns;
 };

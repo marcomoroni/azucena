@@ -18,25 +18,33 @@ void MenuScene::Load() {
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
 	}
 
+	_btns.clear();
+
 	_btn_Start.reset();
 	_btn_Start = create_button("New game");
-	_btn_Start->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 200.0f });
+	_btns.push_back(_btn_Start);
 
 	_btn_Continue.reset();
 	_btn_Continue = create_button("Continue");
-	_btn_Continue->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 240.0f });
+	_btns.push_back(_btn_Continue);
 
 	_btn_Load.reset();
 	_btn_Load = create_button("Load");
-	_btn_Load->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 280.0f });
+	_btns.push_back(_btn_Load);
 
 	_btn_Options.reset();
 	_btn_Options = create_button("Options");
-	_btn_Options->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 320.0f });
+	_btns.push_back(_btn_Options);
 
 	_btn_Quit.reset();
 	_btn_Quit = create_button("Save and quit");
-	_btn_Quit->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 360.0f });
+	_btns.push_back(_btn_Quit);
+
+	// Set buttons position
+	for (int i = 0; i < _btns.size(); i++)
+	{
+		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (40.0f * i) + 200.0f });
+	}
 
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
