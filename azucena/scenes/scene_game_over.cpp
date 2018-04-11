@@ -15,9 +15,9 @@ void GameOverScene::Load()
 	{
 		auto txt = makeEntity();
 		auto t = txt->addComponent<TextComponent>("Game over");
-		t->getText()->setCharacterSize(40.0f);
+		//t->getText()->setCharacterSize(40.0f);
 		t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().height / 2);
-		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, ((float)Engine::GetWindow().getSize().y / 2) - 40.0f });
+		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, ((float)Engine::GetWindow().getSize().y / 2) - 50.0f });
 	}
 
 	{
