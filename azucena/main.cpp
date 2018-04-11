@@ -21,5 +21,5 @@ int main() {
 	ShowWindow(hwnd, SW_HIDE);
 #endif
 
-	Engine::Start(game_width, game_heigth, "Azucena", &scene_menu);
+	Engine::Start(1000, 600, "Azucena", &scene_menu);
 }

@@ -90,7 +90,6 @@ void Engine::Start(unsigned int width, unsigned int height,
 	const std::string& gameName, Scene* scn) {
 	RenderWindow window;
 	window.create(VideoMode(width, height), gameName);
-	//window.create(VideoMode(width, height), gameName, Style::Titlebar | Style::Close);
 	_gameName = gameName;
 	_window = &window;
 	Renderer::initialise(window);
@@ -117,7 +116,6 @@ void Engine::Start(unsigned int width, unsigned int height,
 				{
 					_fullscreen = !_fullscreen;
 					window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
-					//window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
 					_window = &window;
 				}
 			}
