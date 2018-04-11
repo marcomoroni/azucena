@@ -78,7 +78,7 @@ For now it can only handle one tag.
 
 ### `InteractableComponent`
 
-Add this to entities that are interactable (pick up, open door, …). The player has to go near it and press F for some time to interact with it.
+Add this to entities that are interactable (pick up, open door, …). The player has to go near it and press <kbd>Q</kbd> for some time to interact with it.
 
 This component can be improved a lot (efficiency).
 
