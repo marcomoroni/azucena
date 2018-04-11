@@ -18,6 +18,7 @@ void OptionsScene::Load()
 	}
 
 	_btns.clear();
+	_changingControl.reset();
 
 	_btn_ControlsUp.reset();
 	_btn_ControlsUp = create_button("Up");
