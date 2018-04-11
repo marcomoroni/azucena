@@ -191,10 +191,12 @@ shared_ptr<Entity> create_button(string text)
 	button->addTag("button");
 
 	auto s = button->addComponent<ShapeComponent>();
-	s->setShape<RectangleShape>(Vector2f(300.0f, 30.0f));
+	s->setShape<RectangleShape>(Vector2f(300.0f, 60.0f));
 	s->getShape().setOrigin(s->getShape().getLocalBounds().width / 2, s->getShape().getLocalBounds().height / 2);
 
 	auto t = button->addComponent<TextComponent>(text);
+	// For some reason text is not centered
+	t->getText()->setOrigin(t->getText()->getOrigin().x, t->getText()->getOrigin().y + 12.0f);
 
 	button->addComponent<ButtonComponent>(s, t);
 

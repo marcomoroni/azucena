@@ -43,7 +43,7 @@ void MenuScene::Load() {
 	// Set buttons position
 	for (int i = 0; i < _btns.size(); i++)
 	{
-		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (40.0f * i) + 200.0f });
+		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (70.0f * i) + 200.0f });
 	}
 
 	// Set view
