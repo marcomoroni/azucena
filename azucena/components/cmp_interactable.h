@@ -23,7 +23,7 @@ private:
 public:
 	void update(double dt) override;
 	void render() override {}
-	explicit InteractableComponent(Entity* p, float playerInteractionDistance = 50.0f, float interactionTime = 1.0f);
+	explicit InteractableComponent(Entity* p, float playerInteractionDistance = 50.0f, float interactionTime = 1.4f);
 	InteractableComponent() = delete;
 	bool interacted();
 	void setActive(bool);

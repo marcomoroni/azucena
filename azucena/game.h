@@ -9,6 +9,9 @@
 #include "scenes/scene_menu.h"
 #include "scenes/scene_options.h"
 
+static uint16_t game_width = 1280;
+static uint16_t game_heigth = 720;
+
 extern MenuScene scene_menu;
 extern OptionsScene scene_options;
 extern GameOverScene scene_game_over;
