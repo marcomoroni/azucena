@@ -6,8 +6,15 @@ Games Engineering coursework.
 
 ---
 
-After you clone this repo run
+Instructions to build the repo:
 
-```
-git submodule update --init --recursive
-```
+1. Clone it
+2. Run
+
+    ```
+    git submodule update --init --recursive
+    ```
+    
+3. Use [CMake](https://cmake.org/) to generate a Visual Studio project on a new folder
+4. Open the Visual Studio project and set `AZUCENA` as startup project
+5. Build it
