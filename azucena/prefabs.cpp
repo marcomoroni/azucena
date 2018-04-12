@@ -412,8 +412,8 @@ vector<shared_ptr<Entity>> create_potions()
 {
 	vector<shared_ptr<Entity>> potions;
 
-	auto enemy_A_tiles = ls::findTiles(ls::POTION);
-	for (auto t : enemy_A_tiles)
+	auto potion_tiles = ls::findTiles(ls::POTION);
+	for (auto t : potion_tiles)
 	{
 		auto potion = Engine::GetActiveScene()->makeEntity();
 		potion->setPosition(ls::getTilePosition(t) + Vector2f(ls::getTileSize() / 2, ls::getTileSize() / 2));
