@@ -80,14 +80,32 @@ void PlayerControlsComponent::update(double dt) {
 		_parent->GetCompatibleComponent<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 5, 32 * 3, 32, 32));
 	}
 
+	// Shoot cooldown timer position
+	_playerShootCooldownTimerUI->setPosition(Vector2f(_parent->getPosition().x, _parent->getPosition().y + 32.0f));
+
 	// Check if player shoots
 	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f)
 	{
 		create_player_bullet(normalize(_shootDirection));
 		_sound_shoot.play();
-		_shootCooldown = 0.3f;
+		_shootCooldown = _shootCooldownTime;
+		_playerShootCooldownTimerUI->setVisible(true);
 	}
 	if (_shootCooldown > 0.0f) _shootCooldown -= dt;
+
+	// Shoot cooldown timer sprite
+	if (_shootCooldown >= _shootCooldownTime / 5 * 4)
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 4, 32, 4));
+	else if (_shootCooldown >= _shootCooldownTime / 5 * 3)
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 3, 32, 4));
+	else if (_shootCooldown >= _shootCooldownTime / 5 * 2)
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 2, 32, 4));
+	else if (_shootCooldown >= _shootCooldownTime / 5 * 1)
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 1, 32, 4));
+	else if (_shootCooldown >= _shootCooldownTime / 5 * 0)
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 0, 32, 4));
+	else
+		_playerShootCooldownTimerUI->setVisible(false);
 
 	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction) * speed));
 }
@@ -104,6 +122,15 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	_shootDirection = { 1.0f, 0.0f };
 
 	_originalPlayerIntRect = _parent->get_components<SpriteComponent>()[0]->getSprite().getTextureRect();
+
+	// Player shoot cooldown timer
+	_playerShootCooldownTimerUI = &(*(Engine::GetActiveScene()->makeEntity()));
+	auto s = _playerShootCooldownTimerUI->addComponent<SpriteComponent>();
+	auto tex = Resources::get<Texture>("tex.png");
+	s->setTexture(tex);
+	s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 4, 32, 4));
+	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+	_playerShootCooldownTimerUI->setVisible(false);
 
 	// Sounds
 	_buffer_shoot = *(Resources::get<SoundBuffer>("shoot.wav"));
