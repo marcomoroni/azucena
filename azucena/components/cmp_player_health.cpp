@@ -103,7 +103,10 @@ void PlayerHealthComponent::addPotion(int i)
 	if (Data::potions + 1 <= Data::max_potions)
 		Data::potions++;
 	else
+	{
 		usePotion();
+		Data::potions++;
+	}
 }
 
 void PlayerHealthComponent::addPotion()
