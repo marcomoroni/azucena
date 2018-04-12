@@ -45,6 +45,5 @@ void Door_OpenState::enterState(Entity *owner) noexcept
 	auto pc = owner->get_components<PhysicsComponent>()[0];
 	pc->getBody()->DestroyFixture(pc->getFixture());
 
-	// Make it invisible
-	owner->setVisible(false);
+	owner->setForDelete();
 }

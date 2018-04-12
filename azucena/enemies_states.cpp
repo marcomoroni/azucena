@@ -18,7 +18,7 @@ void EnemyA_IdleState::execute(Entity *owner, double dt) noexcept
 	owner->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0, 0));
 
 	// Chase player when is sight
-	if (length(owner->getPosition() - _player->getPosition()) < 200.0f)
+	if (length(owner->getPosition() - _player->getPosition()) < 300.0f)
 	{
 		auto sm = owner->get_components<StateMachineComponent>()[0];
 		sm->changeState("chase");
