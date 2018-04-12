@@ -77,7 +77,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		sm->addState("attack", make_shared<EnemyA_AttackState>(Engine::GetActiveScene()->ents.find("player")[0]));
 		sm->changeState("idle");
 
-		auto h = enemy_A->addComponent<EnemyHealthComponent>(2);
+		auto h = enemy_A->addComponent<EnemyHealthComponent>(3);
 
 		auto p = enemy_A->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);
@@ -109,7 +109,7 @@ vector<shared_ptr<Entity>> create_enemies()
 		sm->addState("shoot", make_shared<EnemyB_ShootState>());
 		sm->changeState("idle");
 
-		enemy_B->addComponent<EnemyHealthComponent>(4);
+		enemy_B->addComponent<EnemyHealthComponent>(3);
 
 		auto p = enemy_B->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
 		p->getBody()->SetBullet(true);

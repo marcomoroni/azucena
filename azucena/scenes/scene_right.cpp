@@ -35,6 +35,9 @@ void RightScene::Load()
 	// Create main collectible
 	if (!Data::main_collectible_right) _mainCollectible = create_baby_llama(1);
 
+	// Create potions
+	create_potions();
+
 	// Add UI
 	create_game_ui();
 
