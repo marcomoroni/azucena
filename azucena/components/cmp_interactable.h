@@ -17,6 +17,7 @@ private:
 	// Sounds
 	sf::SoundBuffer _buffer_interactionTimer;
 	sf::Sound _sound_interactionTimer;
+	float _playInteractionSoundAgainIn;
 	sf::SoundBuffer _buffer_interacted;
 	sf::Sound _sound_interacted;
 
