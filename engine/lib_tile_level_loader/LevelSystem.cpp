@@ -102,7 +102,6 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 	buildSprites();
 }
 
-shared_ptr<Texture> tex;
 RenderTexture bigMapTexture;
 
 void LevelSystem::buildSprites() {
@@ -119,8 +118,7 @@ void LevelSystem::buildSprites() {
 		}
 	}
 
-	tex.reset();
-	tex = Resources::get<Texture>("tex.png");
+	auto tex = Resources::get<Texture>("tex.png");
 	bigMapTexture.create(_tileSize * _width, _tileSize * _height);
 	bigMapTexture.clear(Color::Red);
 

@@ -55,10 +55,8 @@ public:
 
 	static std::vector<sf::Vector2ul> findTiles(Tile);
 
-	//static sf::Color getColor(Tile t);
 	static sf::IntRect getSpriteRect(Tile t);
 
-	//static void setColor(Tile t, sf::Color c);
 	static void setSpriteRect(Tile t, sf::IntRect r);
 
 	static void setOffset(const sf::Vector2f& _offset);

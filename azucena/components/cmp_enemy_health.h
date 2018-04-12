@@ -12,7 +12,7 @@ private:
 	float _immunity = -1.0f;
 
 	// For health bar
-	// ...
+	std::vector<Entity*> _healthSprites;
 
 public:
 	void update(double) override;
