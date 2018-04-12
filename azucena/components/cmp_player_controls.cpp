@@ -7,6 +7,7 @@
 #include "engine.h"
 #include "../prefabs.h"
 #include "system_resources.h"
+#include "../data.h"
 
 using namespace std;
 using namespace sf;
@@ -88,21 +89,21 @@ void PlayerControlsComponent::update(double dt) {
 	{
 		create_player_bullet(normalize(_shootDirection));
 		_sound_shoot.play();
-		_shootCooldown = _shootCooldownTime;
+		_shootCooldown = Data::shootCooldownTime;
 		_playerShootCooldownTimerUI->setVisible(true);
 	}
 	if (_shootCooldown > 0.0f) _shootCooldown -= dt;
 
 	// Shoot cooldown timer sprite
-	if (_shootCooldown >= _shootCooldownTime / 5 * 4)
+	if (_shootCooldown >= Data::shootCooldownTime / 5 * 4)
 		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 4, 32, 8));
-	else if (_shootCooldown >= _shootCooldownTime / 5 * 3)
+	else if (_shootCooldown >= Data::shootCooldownTime / 5 * 3)
 		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 3, 32, 8));
-	else if (_shootCooldown >= _shootCooldownTime / 5 * 2)
+	else if (_shootCooldown >= Data::shootCooldownTime / 5 * 2)
 		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 2, 32, 8));
-	else if (_shootCooldown >= _shootCooldownTime / 5 * 1)
+	else if (_shootCooldown >= Data::shootCooldownTime / 5 * 1)
 		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 1, 32, 8));
-	else if (_shootCooldown >= _shootCooldownTime / 5 * 0)
+	else if (_shootCooldown >= Data::shootCooldownTime / 5 * 0)
 		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 0, 32, 8));
 	else
 		_playerShootCooldownTimerUI->setVisible(false);

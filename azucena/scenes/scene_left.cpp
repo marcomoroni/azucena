@@ -85,7 +85,7 @@ void LeftScene::Update(const double& dt) {
 			_sound_mainCollectibleObtained.play();
 
 			// Reward
-			Data::max_health++;
+			Data::shootCooldownTime = 0.6f;
 
 			// Player doesn't get hurt anymore
 			_player->get_components<PlayerHealthComponent>()[0]->setImmune(true);

@@ -19,4 +19,5 @@ public:
 	static int health;
 	static int max_potions;
 	static int potions;
+	static float shootCooldownTime;
 };

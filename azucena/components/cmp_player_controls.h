@@ -17,7 +17,6 @@ protected:
 	bool _isStillPressingSprintKey;
 	// Shoot cooldown
 	float _shootCooldown; // current time
-	float _shootCooldownTime = 1.2; // max time
 	// Shooth direction (if 0.0f should be the previous one)
 	sf::Vector2f _shootDirection;
 
