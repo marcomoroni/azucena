@@ -95,15 +95,15 @@ void PlayerControlsComponent::update(double dt) {
 
 	// Shoot cooldown timer sprite
 	if (_shootCooldown >= _shootCooldownTime / 5 * 4)
-		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 4, 32, 4));
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 4, 32, 8));
 	else if (_shootCooldown >= _shootCooldownTime / 5 * 3)
-		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 3, 32, 4));
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 3, 32, 8));
 	else if (_shootCooldown >= _shootCooldownTime / 5 * 2)
-		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 2, 32, 4));
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 2, 32, 8));
 	else if (_shootCooldown >= _shootCooldownTime / 5 * 1)
-		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 1, 32, 4));
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 1, 32, 8));
 	else if (_shootCooldown >= _shootCooldownTime / 5 * 0)
-		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 0, 32, 4));
+		_playerShootCooldownTimerUI->get_components<SpriteComponent>()[0]->getSprite().setTextureRect(IntRect(32 * 6, 32 * 4 + 8 * 0, 32, 8));
 	else
 		_playerShootCooldownTimerUI->setVisible(false);
 
@@ -128,7 +128,7 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	auto s = _playerShootCooldownTimerUI->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 4, 32, 4));
+	s->getSprite().setTextureRect(sf::IntRect(32 * 6, 32 * 4, 32, 8));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 	_playerShootCooldownTimerUI->setVisible(false);
 
