@@ -12,10 +12,7 @@ private:
 	float _immunity = -1.0f;
 
 	// For health bar
-	int _spriteSize = 16;
-	/*std::shared_ptr<sf::Texture> _tex = std::make_shared<sf::Texture>();
-	std::shared_ptr<sf::Sprite> _backSprite;
-	std::vector<std::shared_ptr<sf::Sprite>> _heartSprites;*/
+	// ...
 
 public:
 	void update(double) override;
