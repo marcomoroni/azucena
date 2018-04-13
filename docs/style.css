@@ -1,0 +1,48 @@
+/*
+#FFFCF2 floral white
+#CCC5B9 pale silver
+#403D39 black olive
+#252422 raisin black
+#CDEF5D inchworm
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	background-color: #252422;
+	color: #CCC5B9;
+	font-family: 'Hind Madurai', sans-serif;
+	font-weight: 400;
+	font-size: 100%;
+	text-decoration: none;
+	line-height: 180%
+}
+
+.container {
+	max-width: 850px;
+	margin: auto;
+	margin-top: 200px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+h1 {
+	color: #FFFCF2;
+	margin-bottom: 20px;
+	font-weight: 700;
+	font-size: 180%;
+}
+
+p {
+	margin-bottom: 10px;
+}
+
+a {
+	color: #CDEF5D;
+	transition: all 0.2s ease;
+	transition-delay: 0s;
+}
+
+a:hover {
+	color: #edb642;
+}
