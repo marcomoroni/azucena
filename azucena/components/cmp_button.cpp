@@ -34,12 +34,12 @@ void ButtonComponent::setHighlight(bool h, bool force)
 		if (h)
 		{
 			// Highlithed button
-			_shapeCmp->getShape().setFillColor(Color(255, 255, 255, 150));
+			_shapeCmp->getShape().setFillColor(Color(233, 219, 204));
 		}
 		else
 		{
 			// Non highlithed button
-			_shapeCmp->getShape().setFillColor(Color(255, 255, 255, 80));
+			_shapeCmp->getShape().setFillColor(Color(216, 192, 182));
 		}
 	}
 }

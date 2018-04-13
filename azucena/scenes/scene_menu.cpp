@@ -16,6 +16,7 @@ void MenuScene::Load() {
 		auto txt = makeEntity();
 		auto t = txt->addComponent<TextComponent>("Azucena");
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
+		t->getText()->setColor(Color(233, 219, 204));
 	}
 
 	_btns.clear();

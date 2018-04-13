@@ -123,7 +123,7 @@ void Engine::Start(unsigned int width, unsigned int height,
 			}
 		}
 
-		window.clear();
+		window.clear(Color(90, 73, 67));
 		Update();
 		Render(window);
 		window.display();
