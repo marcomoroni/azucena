@@ -1,21 +1,35 @@
 /*
-#FFFCF2 floral white
-#CCC5B9 pale silver
-#403D39 black olive
-#252422 raisin black
-#CDEF5D inchworm
+http://simurai.com/duotone-dark-earth-syntax/
+
+#2c2826
+
+#ffdac2
+#bd987f
+#98755d
+#705e51
+#564b43
+
+#fecb52
+#b09045
+#726546
 */
+
+@font-face {
+	font-family: 'Monogram';
+	src: url(fonts/monogram.ttf);
+}
 
 * {
 	margin: 0;
 	padding: 0;
-	background-color: #252422;
-	color: #CCC5B9;
-	font-family: 'Hind Madurai', sans-serif;
+	background-color: #2c2826;
+	color: #705e51;
+	font-family: 'Monogram', sans-serif;
 	font-weight: 400;
-	font-size: 100%;
+	font-size: 118%;
 	text-decoration: none;
-	line-height: 180%
+	line-height: 120%;
+	letter-spacing: 1px;
 }
 
 .container {
@@ -27,10 +41,8 @@
 }
 
 h1 {
-	color: #FFFCF2;
-	margin-bottom: 20px;
-	font-weight: 700;
-	font-size: 180%;
+	color: #ffdac2;
+	margin-bottom: 30px;
 }
 
 p {
@@ -38,11 +50,11 @@ p {
 }
 
 a {
-	color: #CDEF5D;
+	color: #98755d;
 	transition: all 0.2s ease;
 	transition-delay: 0s;
 }
 
 a:hover {
-	color: #edb642;
+	color: #fecb52;
 }
