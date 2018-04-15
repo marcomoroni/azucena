@@ -188,7 +188,7 @@ void create_walls()
 shared_ptr<Entity> create_button(string text)
 {
 	auto button = Engine::GetActiveScene()->makeEntity();
-	button->addTag("button");
+	button->addTag("ui button");
 
 	auto s = button->addComponent<ShapeComponent>();
 	s->setShape<RectangleShape>(Vector2f(500.0f, 60.0f));
