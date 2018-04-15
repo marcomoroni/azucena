@@ -46,10 +46,10 @@ void OptionsScene::Load()
 	_btns.push_back(_btn_ControlsDash);
 	_controlsBtns[_btn_ControlsDash] = "Sprint";
 
-	_btn_ControlsDash.reset();
-	_btn_ControlsDash = create_button("Shoot");
-	_btns.push_back(_btn_ControlsDash);
-	_controlsBtns[_btn_ControlsDash] = "Shoot";
+	_btn_ControlsShoot.reset();
+	_btn_ControlsShoot = create_button("Shoot");
+	_btns.push_back(_btn_ControlsShoot);
+	_controlsBtns[_btn_ControlsShoot] = "Shoot";
 
 	_btn_ControlsInteract.reset();
 	_btn_ControlsInteract = create_button("Interact");
