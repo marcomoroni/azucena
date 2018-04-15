@@ -47,6 +47,8 @@ void MenuScene::Load() {
 		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (38.0f * i) + 200.0f });
 	}
 
+	_clickCooldown = 0.2f;
+
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
 
@@ -55,32 +57,37 @@ void MenuScene::Load() {
 
 void MenuScene::Update(const double& dt) {
 
-	if (_btn_Start->get_components<ButtonComponent>()[0]->isSelected())
-	{
-		Data::reset();
-		Engine::ChangeScene(&scene_center);
-	}
+	if (_clickCooldown >= 0.0f) _clickCooldown -= dt;
 
-	if (_btn_Continue->get_components<ButtonComponent>()[0]->isSelected())
+	if (_clickCooldown < 0.0f)
 	{
-		Engine::ChangeScene(&scene_center);
-	}
+		if (_btn_Start->get_components<ButtonComponent>()[0]->isSelected())
+		{
+			Data::reset();
+			Engine::ChangeScene(&scene_center);
+		}
 
-	if (_btn_Load->get_components<ButtonComponent>()[0]->isSelected())
-	{
-		Data::load();
-		Engine::ChangeScene(&scene_center);
-	}
+		if (_btn_Continue->get_components<ButtonComponent>()[0]->isSelected())
+		{
+			Engine::ChangeScene(&scene_center);
+		}
 
-	if (_btn_Options->get_components<ButtonComponent>()[0]->isSelected())
-	{
-		Engine::ChangeScene(&scene_options);
-	}
+		if (_btn_Load->get_components<ButtonComponent>()[0]->isSelected())
+		{
+			Data::load();
+			Engine::ChangeScene(&scene_center);
+		}
 
-	if (_btn_Quit->get_components<ButtonComponent>()[0]->isSelected())
-	{
-		Data::save();
-		Engine::GetWindow().close();
+		if (_btn_Options->get_components<ButtonComponent>()[0]->isSelected())
+		{
+			Engine::ChangeScene(&scene_options);
+		}
+
+		if (_btn_Quit->get_components<ButtonComponent>()[0]->isSelected())
+		{
+			Data::save();
+			Engine::GetWindow().close();
+		}
 	}
 
 	Scene::Update(dt);

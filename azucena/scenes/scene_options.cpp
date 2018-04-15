@@ -71,6 +71,8 @@ void OptionsScene::Load()
 		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (38.0f * i) + 200.0f });
 	}
 
+	_clickCooldown = 0.2f;
+
 	// Show corresponding keys
 	// ...
 
@@ -82,21 +84,26 @@ void OptionsScene::Load()
 
 void OptionsScene::Update(const double& dt)
 {
-	if (_btn_Back->get_components<ButtonComponent>()[0]->isSelected())
-	{
-		Engine::ChangeScene(&scene_menu);
-	}
+	if (_clickCooldown >= 0.0f) _clickCooldown -= dt;
 
-	// Select key to be changed
-	if (_changingControl == nullptr)
+	if (_clickCooldown < 0.0f)
 	{
-		for (auto b : _controlsBtns)
+		if (_btn_Back->get_components<ButtonComponent>()[0]->isSelected())
 		{
-			if (b.first->get_components<ButtonComponent>()[0]->isSelected())
+			Engine::ChangeScene(&scene_menu);
+		}
+
+		// Select key to be changed
+		if (_changingControl == nullptr)
+		{
+			for (auto b : _controlsBtns)
 			{
-				_changingControl = b.first;
-				// Change text colour
-				b.first->get_components<TextComponent>()[0]->getText()->setColor(Color(254, 203, 82));
+				if (b.first->get_components<ButtonComponent>()[0]->isSelected())
+				{
+					_changingControl = b.first;
+					// Change text colour
+					b.first->get_components<TextComponent>()[0]->getText()->setColor(Color(254, 203, 82));
+				}
 			}
 		}
 	}

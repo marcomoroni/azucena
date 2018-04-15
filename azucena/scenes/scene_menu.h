@@ -19,4 +19,6 @@ private:
 	std::shared_ptr<Entity> _btn_Quit;
 	// All buttons
 	std::vector<std::shared_ptr<Entity>> _btns;
+
+	float _clickCooldown;
 };

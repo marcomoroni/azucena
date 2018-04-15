@@ -28,4 +28,6 @@ private:
 	std::map<std::shared_ptr<Entity>, std::string> _controlsBtns;
 	// The control being changed
 	std::shared_ptr<Entity> _changingControl = nullptr;
+
+	float _clickCooldown;
 };
