@@ -11,7 +11,6 @@ public:
 	explicit UIButtonComponent(Entity* p, std::string label);
 	UIButtonComponent() = delete;
 	void setHighlighted(bool);
-	void setSelected(bool);
 	bool isHighlighted();
 	bool isSelected();
 
