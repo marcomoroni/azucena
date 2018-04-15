@@ -15,7 +15,7 @@ void OptionsScene::Load()
 		auto txt = makeEntity();
 		auto t = txt->addComponent<TextComponent>("Options");
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
-		t->getText()->setColor(Color(233, 219, 204));
+		t->getText()->setColor(Color(255, 218, 194));
 	}
 
 	_btns.clear();
@@ -68,7 +68,7 @@ void OptionsScene::Load()
 	// Set buttons position
 	for (int i = 0; i < _btns.size(); i++)
 	{
-		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (70.0f * i) + 200.0f });
+		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (38.0f * i) + 200.0f });
 	}
 
 	// Show corresponding keys
@@ -96,7 +96,7 @@ void OptionsScene::Update(const double& dt)
 			{
 				_changingControl = b.first;
 				// Change text colour
-				b.first->get_components<TextComponent>()[0]->getText()->setColor(Color(32, 128, 106));
+				b.first->get_components<TextComponent>()[0]->getText()->setColor(Color(254, 203, 82));
 			}
 		}
 	}
@@ -113,7 +113,7 @@ void OptionsScene::Update(const double& dt)
 			{
 				Controls::SetKeyboardKey(_controlsBtns[_changingControl], k);
 				// Change back text colour
-				_changingControl->get_components<TextComponent>()[0]->getText()->setColor(Color(68, 53, 51));
+				_changingControl->get_components<TextComponent>()[0]->getText()->setColor(Color(198, 152, 127));
 				_changingControl = nullptr;
 			}
 		}

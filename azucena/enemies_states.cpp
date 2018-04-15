@@ -221,7 +221,7 @@ void EnemyC_FleeState::execute(Entity *owner, double dt) noexcept
 
 	// Move by 90 degrees
 	Transform rotation;
-	rotation.rotate(90, 0, 0);
+	rotation.rotate(60, 0, 0);
 	direction = rotation.transformPoint(direction);
 
 	float speed = 40.0f;

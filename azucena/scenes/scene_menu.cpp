@@ -16,7 +16,7 @@ void MenuScene::Load() {
 		auto txt = makeEntity();
 		auto t = txt->addComponent<TextComponent>("Azucena");
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
-		t->getText()->setColor(Color(233, 219, 204));
+		t->getText()->setColor(Color(255, 218, 194));
 	}
 
 	_btns.clear();
@@ -44,7 +44,7 @@ void MenuScene::Load() {
 	// Set buttons position
 	for (int i = 0; i < _btns.size(); i++)
 	{
-		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (70.0f * i) + 200.0f });
+		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (38.0f * i) + 200.0f });
 	}
 
 	// Set view

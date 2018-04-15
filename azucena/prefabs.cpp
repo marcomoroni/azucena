@@ -33,10 +33,10 @@ shared_ptr<Entity> create_player()
 	auto s = player->addComponent<SpriteComponent>();
 	auto tex = Resources::get<Texture>("tex.png");
 	s->setTexture(tex);
-	s->getSprite().setTextureRect(sf::IntRect(0 + 4, 32 * 3, 32 - 4, 32));
+	s->getSprite().setTextureRect(sf::IntRect(0, 32 * 3, 32, 32));
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
-	auto p = player->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width, s->getSprite().getLocalBounds().height));
+	auto p = player->addComponent<PhysicsComponent>(true, Vector2f(s->getSprite().getLocalBounds().width - 8, s->getSprite().getLocalBounds().height));
 	p->getBody()->SetSleepingAllowed(false);
 	p->getBody()->SetFixedRotation(true);
 	//Bullet items have higher-res collision detection
@@ -191,13 +191,13 @@ shared_ptr<Entity> create_button(string text)
 	button->addTag("button");
 
 	auto s = button->addComponent<ShapeComponent>();
-	s->setShape<RectangleShape>(Vector2f(500.0f, 60.0f));
+	s->setShape<RectangleShape>(Vector2f(500.0f, 34.0f));
 	s->getShape().setOrigin(s->getShape().getLocalBounds().width / 2, s->getShape().getLocalBounds().height / 2);
 
 	auto t = button->addComponent<TextComponent>(text);
 	// For some reason text is not centered
-	t->getText()->setOrigin(t->getText()->getOrigin().x, t->getText()->getOrigin().y + 12.0f);
-	t->getText()->setColor(Color(68, 53, 51));
+	t->getText()->setOrigin(t->getText()->getOrigin().x, t->getText()->getOrigin().y + 14.0f);
+	t->getText()->setColor(Color(198, 152, 127));
 
 	button->addComponent<ButtonComponent>(s, t);
 
