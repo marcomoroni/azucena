@@ -5,6 +5,8 @@
 
 using namespace std;
 
+MenuMainScene scene_menu_main;
+
 MenuScene scene_menu;
 OptionsScene scene_options;
 GameOverScene scene_game_over;
@@ -21,5 +23,6 @@ int main() {
 	ShowWindow(hwnd, SW_HIDE);
 #endif
 
-	Engine::Start(game_width, game_heigth, "Azucena", &scene_menu);
+	//Engine::Start(game_width, game_heigth, "Azucena", &scene_menu);
+	Engine::Start(game_width, game_heigth, "Azucena", &scene_menu_main);
 }

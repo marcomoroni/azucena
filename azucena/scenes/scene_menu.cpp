@@ -6,6 +6,7 @@
 #include "../prefabs.h"
 #include "../components/cmp_button.h"
 #include "system_resources.h"
+#include "SFML/Graphics.hpp" // include to use events
 
 using namespace std;
 using namespace sf;
@@ -82,6 +83,17 @@ void MenuScene::Update(const double& dt) {
 		Data::save();
 		Engine::GetWindow().close();
 	}
+
+	////////////////
+	/*Event event;
+	while (Engine::GetWindow().pollEvent(event))
+	{
+		if (event.type == Event::MouseButtonReleased)
+		{
+			Engine::ChangeScene(&scene_options);
+		}
+	}*/
+	////////////////
 
 	Scene::Update(dt);
 }

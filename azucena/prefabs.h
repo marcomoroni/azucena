@@ -6,7 +6,7 @@
 std::shared_ptr<Entity> create_player();
 std::vector<std::shared_ptr<Entity>> create_enemies();
 void create_walls();
-std::shared_ptr<Entity> create_button(std::string);
+std::shared_ptr<Entity> create_button(std::string); // TO DELETE
 std::shared_ptr<Entity> create_game_ui();
 std::shared_ptr<Entity> create_player_bullet(sf::Vector2f direction);
 std::shared_ptr<Entity> create_enemy_B_bullet(Entity* owner, sf::Vector2f direction);
@@ -17,3 +17,5 @@ std::shared_ptr<Entity> create_exit_ui_message();
 // Main collectible (must have an index)
 std::shared_ptr<Entity> create_baby_llama(int index);
 std::vector<std::shared_ptr<Entity>> create_potions();
+
+std::shared_ptr<Entity> create_ui_button(std::string);

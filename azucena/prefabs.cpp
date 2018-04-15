@@ -21,6 +21,8 @@
 #include "main_collectible_states.h"
 #include "fake_wall_states.h"
 
+#include "components/cmp_ui_button.h"
+
 using namespace std;
 using namespace sf;
 
@@ -434,4 +436,14 @@ vector<shared_ptr<Entity>> create_potions()
 	}
 
 	return potions;
+}
+
+shared_ptr<Entity> create_ui_button(string s)
+{
+	auto button = Engine::GetActiveScene()->makeEntity();
+	button->addTag("ui button");
+
+	button->addComponent<UIButtonComponent>(s);
+
+	return button;
 }

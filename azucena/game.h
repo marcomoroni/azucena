@@ -9,6 +9,8 @@
 #include "scenes/scene_menu.h"
 #include "scenes/scene_options.h"
 
+#include "scenes/scene_menu_main.h"
+
 static uint16_t game_width = 1280;
 static uint16_t game_heigth = 720;
 
@@ -19,3 +21,5 @@ extern CenterScene scene_center;
 extern TopScene scene_top;
 extern LeftScene scene_left;
 extern RightScene scene_right;
+
+extern MenuMainScene scene_menu_main;
