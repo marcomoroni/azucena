@@ -29,22 +29,23 @@ void Loading_update(float dt, const Scene* const scn) {
 		loading = false;
 	}
 	else {
-		loadingspinner += 220.0f * dt;
+		loadingspinner += 180.0f * dt;
 		loadingTime += dt;
 	}
 }
 void Loading_render() {
 	// cout << "Eng: Loading Screen Render\n";
-	static CircleShape octagon(80, 8);
-	octagon.setOrigin(80, 80);
-	octagon.setRotation(loadingspinner);
-	octagon.setPosition(Vcast<float>(Engine::getWindowSize()) * .5f);
-	octagon.setFillColor(Color(255, 255, 255, min(255.f, 40.f*loadingTime)));
-	static Text t("Loading", *Resources::get<sf::Font>("monogram.ttf"));
-	t.setFillColor(Color(255, 255, 255, min(255.f, 40.f*loadingTime)));
-	t.setPosition(Vcast<float>(Engine::getWindowSize()) * Vector2f(0.4f, 0.3f));
-	Renderer::queue(&t);
-	Renderer::queue(&octagon);
+
+	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
+
+	static Sprite loadingSprite;
+	static Texture tex(*Resources::get<sf::Texture>("tex.png"));
+	loadingSprite.setTexture(tex);
+	loadingSprite.setTextureRect(sf::IntRect(0, 32 * 3, 32, 32));
+	loadingSprite.setOrigin(loadingSprite.getLocalBounds().width / 2, loadingSprite.getLocalBounds().height / 2);
+	loadingSprite.setPosition(Vcast<float>(Engine::getWindowSize()).x - 64.0f, Vcast<float>(Engine::getWindowSize()).y - 64.0f);
+	loadingSprite.setRotation(loadingspinner);
+	Renderer::queue(&loadingSprite);
 }
 
 float frametimes[256] = {};
