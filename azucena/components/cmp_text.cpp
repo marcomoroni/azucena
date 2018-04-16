@@ -16,7 +16,7 @@ void TextComponent::setText(const std::string& str) {
 
 TextComponent::TextComponent(Entity* const p, const std::string& str)
 	: Component(p), _string(str) {
-	_font = Resources::get<sf::Font>("monogram.ttf");
+	_font = Resources::get<sf::Font>("monogram_extended.ttf");
 	_text.setFont(*_font);
 	setText(_string);
 }
