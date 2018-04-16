@@ -56,7 +56,7 @@ I'm not using impulses because I couldn't get the movement I wanted. Instead, I'
 
 The player can sprint by pressing <kbd>Space</kbd>. You have to release the button and press it again to sprint again. You need to wait a little bit until you can sprint again.
 
-Right now, player can shoot bullet entities by pressing <kbd>RShift</kbd>. These entities are created in real-time, but if we have time we can try to avoid this.
+Right now, player can shoot bullet entities by pressing <kbd>/</kbd>. These entities are created in real-time, but if we have time we can try to avoid this.
 
 ### `StateMachineComponent`
 

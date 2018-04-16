@@ -22,42 +22,42 @@ void OptionsScene::Load()
 	_changingControl.reset();
 
 	_btn_ControlsUp.reset();
-	_btn_ControlsUp = create_button("Up");
+	_btn_ControlsUp = create_button("Up [W]");
 	_btns.push_back(_btn_ControlsUp);
 	_controlsBtns[_btn_ControlsUp] = "Up";
 
 	_btn_ControlsDown.reset();
-	_btn_ControlsDown = create_button("Down");
+	_btn_ControlsDown = create_button("Down [S]");
 	_btns.push_back(_btn_ControlsDown);
 	_controlsBtns[_btn_ControlsDown] = "Down";
 
 	_btn_ControlsLeft.reset();
-	_btn_ControlsLeft = create_button("Left");
+	_btn_ControlsLeft = create_button("Left [A]");
 	_btns.push_back(_btn_ControlsLeft);
 	_controlsBtns[_btn_ControlsLeft] = "Left";
 
 	_btn_ControlsRight.reset();
-	_btn_ControlsRight = create_button("Right");
+	_btn_ControlsRight = create_button("Right [D]");
 	_btns.push_back(_btn_ControlsRight);
 	_controlsBtns[_btn_ControlsRight] = "Right";
 
 	_btn_ControlsDash.reset();
-	_btn_ControlsDash = create_button("Dash");
+	_btn_ControlsDash = create_button("Dash [Space]");
 	_btns.push_back(_btn_ControlsDash);
 	_controlsBtns[_btn_ControlsDash] = "Sprint";
 
-	_btn_ControlsDash.reset();
-	_btn_ControlsDash = create_button("Shoot");
-	_btns.push_back(_btn_ControlsDash);
-	_controlsBtns[_btn_ControlsDash] = "Shoot";
+	_btn_ControlsShoot.reset();
+	_btn_ControlsShoot = create_button("Spit [RShift]");
+	_btns.push_back(_btn_ControlsShoot);
+	_controlsBtns[_btn_ControlsShoot] = "Shoot";
 
 	_btn_ControlsInteract.reset();
-	_btn_ControlsInteract = create_button("Interact");
+	_btn_ControlsInteract = create_button("Interact [Q]");
 	_btns.push_back(_btn_ControlsInteract);
 	_controlsBtns[_btn_ControlsInteract] = "Interact";
 
 	_btn_ControlsUsePotion.reset();
-	_btn_ControlsUsePotion = create_button("Use potion");
+	_btn_ControlsUsePotion = create_button("Use potion [/]");
 	_btns.push_back(_btn_ControlsUsePotion);
 	_controlsBtns[_btn_ControlsUsePotion] = "Use potion";
 
@@ -72,9 +72,6 @@ void OptionsScene::Load()
 	}
 
 	_clickCooldown = 0.2f;
-
-	// Show corresponding keys
-	// ...
 
 	// Set view
 	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
