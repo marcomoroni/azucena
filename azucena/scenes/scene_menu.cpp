@@ -13,10 +13,13 @@ using namespace sf;
 void MenuScene::Load() {
 
 	{
-		auto txt = makeEntity();
-		auto t = txt->addComponent<TextComponent>("Azucena");
-		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
-		t->getText()->setColor(Color(255, 218, 194));
+		// Logo
+		auto logo = makeEntity();
+		auto s = logo->addComponent<SpriteComponent>();
+		auto t = Resources::get<Texture>("logo.png");
+		s->setTexture(t);
+		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
+		logo->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
 	}
 
 	_btns.clear();
