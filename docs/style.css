@@ -64,6 +64,18 @@ figure {
 	text-align: center;
 }
 
+img {
+	max-width: 100%;
+}
+
+.figure-capture {
+	margin-bottom: 2.0em;
+}
+
+.figure-capture img {
+	border: .2em solid #564b43;
+}
+
 .game-description {
 	color: #ffdac2;
 }
