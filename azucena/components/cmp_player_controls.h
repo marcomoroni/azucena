@@ -25,6 +25,9 @@ protected:
 
 	sf::IntRect _originalPlayerIntRect;
 
+	// To use for example in cutscenes
+	bool _canMove;
+
 	// Sounds
 	sf::SoundBuffer _buffer_shoot;
 	sf::Sound _sound_shoot;
@@ -36,4 +39,5 @@ public:
 	void render() override {};
 	explicit PlayerControlsComponent(Entity* p);
 	PlayerControlsComponent() = delete;
+	void setCanMove(bool);
 };

@@ -14,6 +14,7 @@ int Data::health;
 int Data::max_potions;
 int Data::potions;
 float Data::shootCooldownTime;
+bool Data::introPlayed;
 
 string Data::save_file_path = "azucena_save.txt";
 
@@ -33,6 +34,7 @@ void Data::load()
 		file >> max_potions;
 		file >> potions;
 		file >> (float)shootCooldownTime;
+		file >> introPlayed;
 	}
 }
 
@@ -54,7 +56,8 @@ void Data::save()
 		health << " " <<
 		max_potions << " " <<
 		potions << " " <<
-		(int)shootCooldownTime;
+		(int)shootCooldownTime << " " <<
+		(int)introPlayed;
 
 	printf("Closing save file...\n");
 	file.close();
@@ -73,4 +76,5 @@ void Data::reset()
 	max_potions = 2;
 	potions = 0;
 	shootCooldownTime = 1.2f;
+	introPlayed = false;
 }

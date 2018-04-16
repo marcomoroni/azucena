@@ -20,4 +20,5 @@ public:
 	static int max_potions;
 	static int potions;
 	static float shootCooldownTime;
+	static bool introPlayed;
 };

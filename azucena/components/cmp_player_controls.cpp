@@ -71,7 +71,7 @@ void PlayerControlsComponent::update(double dt) {
 	}
 
 	// Check if player starts sprinting
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey)
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey && _canMove)
 	{
 		_sound_dash.play();
 		_isSprinting = true;
@@ -85,7 +85,7 @@ void PlayerControlsComponent::update(double dt) {
 	_playerShootCooldownTimerUI->setPosition(Vector2f(_parent->getPosition().x, _parent->getPosition().y + 32.0f));
 
 	// Check if player shoots
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f)
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f && _canMove)
 	{
 		create_player_bullet(normalize(_shootDirection));
 		_sound_shoot.play();
@@ -108,7 +108,8 @@ void PlayerControlsComponent::update(double dt) {
 	else
 		_playerShootCooldownTimerUI->setVisible(false);
 
-	_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction) * speed));
+	if (_canMove)
+		_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction) * speed));
 }
 
 PlayerControlsComponent::PlayerControlsComponent(Entity* p)
@@ -133,9 +134,16 @@ PlayerControlsComponent::PlayerControlsComponent(Entity* p)
 	s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 	_playerShootCooldownTimerUI->setVisible(false);
 
+	_canMove = true;
+
 	// Sounds
 	_buffer_shoot = *(Resources::get<SoundBuffer>("shoot.wav"));
 	_sound_shoot.setBuffer(_buffer_shoot);
 	_buffer_dash = *(Resources::get<SoundBuffer>("dash.wav"));
 	_sound_dash.setBuffer(_buffer_dash);
+}
+
+void PlayerControlsComponent::setCanMove(bool m)
+{
+	_canMove = m;
 }
