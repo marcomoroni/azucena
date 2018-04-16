@@ -24,13 +24,13 @@ void MenuScene::Load() {
 
 	_btns.clear();
 
-	_btn_Start.reset();
-	_btn_Start = create_button("New game");
-	_btns.push_back(_btn_Start);
-
 	_btn_Continue.reset();
 	_btn_Continue = create_button("Continue");
 	_btns.push_back(_btn_Continue);
+
+	_btn_Start.reset();
+	_btn_Start = create_button("New game");
+	_btns.push_back(_btn_Start);
 
 	_btn_Load.reset();
 	_btn_Load = create_button("Load");
