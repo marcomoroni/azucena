@@ -24,6 +24,7 @@ void GameOverScene::Load()
 		txt_return_to_menu.reset();
 		txt_return_to_menu = makeEntity();
 		auto t = txt_return_to_menu->addComponent<TextComponent>("Press \"Sprint\" to return to menu.");
+		t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().height / 2);
 		txt_return_to_menu->setPosition({ (float)Engine::GetWindow().getSize().x / 2, ((float)Engine::GetWindow().getSize().y / 2) + 10.0f });
 		txt_return_to_menu->setVisible(false);
 	}
