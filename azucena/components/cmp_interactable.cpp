@@ -39,11 +39,9 @@ void InteractableComponent::update(double dt)
 				_interactionTimer += dt;
 
 				// Sound (keep playing it)
-				_playInteractionSoundAgainIn -= dt;
-				if (_playInteractionSoundAgainIn < 0.0f)
+				if (_sound_interactionTimer.getStatus() != SoundSource::Status::Playing)
 				{
 					_sound_interactionTimer.play();
-					_playInteractionSoundAgainIn = 0.05f;
 				}
 			}
 			else
@@ -115,7 +113,6 @@ InteractableComponent::InteractableComponent(Entity* p, float playerInteractionD
 	// Sounds
 	_buffer_interactionTimer = *(Resources::get<SoundBuffer>("interaction_timer.wav"));
 	_sound_interactionTimer.setBuffer(_buffer_interactionTimer);
-	_playInteractionSoundAgainIn = 0.0f;
 	_buffer_interacted = *(Resources::get<SoundBuffer>("interacted.wav"));
 	_sound_interacted.setBuffer(_buffer_interacted);
 }
