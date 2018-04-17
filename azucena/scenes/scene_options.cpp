@@ -81,6 +81,9 @@ void OptionsScene::Load()
 
 void OptionsScene::Update(const double& dt)
 {
+	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	Engine::GetWindow().setView(view);
+
 	if (_clickCooldown >= 0.0f) _clickCooldown -= dt;
 
 	if (_clickCooldown < 0.0f)
