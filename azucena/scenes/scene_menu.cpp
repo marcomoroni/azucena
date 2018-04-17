@@ -19,7 +19,7 @@ void MenuScene::Load() {
 		auto t = Resources::get<Texture>("logo.png");
 		s->setTexture(t);
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
-		logo->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
+		logo->setPosition({ (float)Engine::GetWindow().getSize().x / 2 - s->getSprite().getGlobalBounds().width / 2 - 80.0f , (float)Engine::GetWindow().getSize().y / 2 });
 	}
 
 	_btns.clear();
@@ -47,7 +47,17 @@ void MenuScene::Load() {
 	// Set buttons position
 	for (int i = 0; i < _btns.size(); i++)
 	{
-		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (38.0f * i) + 200.0f });
+		if (i == 0)
+		{
+			_btns[i]->setPosition({
+				(float)Engine::GetWindow().getSize().x / 2 + (500.0f / 2) + 10.0f,
+				(float)Engine::GetWindow().getSize().y / 2 - ((38.0f * (_btns.size() - 1)) / 2)
+			});
+		}
+		else
+		{
+			_btns[i]->setPosition({ _btns[i - 1]->getPosition().x, _btns[i - 1]->getPosition().y + 38.0f });
+		}
 	}
 
 	_clickCooldown = 0.2f;

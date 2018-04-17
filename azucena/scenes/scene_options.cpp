@@ -16,6 +16,8 @@ void OptionsScene::Load()
 		auto t = txt->addComponent<TextComponent>("Options");
 		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2, 100.0f });
 		t->getText()->setColor(Color(255, 218, 194));
+		t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().height / 2 + 14.0f);
+		txt->setPosition({ (float)Engine::GetWindow().getSize().x / 2 - t->getText()->getGlobalBounds().width / 2 - 80.0f , (float)Engine::GetWindow().getSize().y / 2 });
 	}
 
 	_btns.clear();
@@ -47,7 +49,7 @@ void OptionsScene::Load()
 	_controlsBtns[_btn_ControlsDash] = "Sprint";
 
 	_btn_ControlsShoot.reset();
-	_btn_ControlsShoot = create_button("Spit [RShift]");
+	_btn_ControlsShoot = create_button("Spit [/]");
 	_btns.push_back(_btn_ControlsShoot);
 	_controlsBtns[_btn_ControlsShoot] = "Shoot";
 
@@ -57,7 +59,7 @@ void OptionsScene::Load()
 	_controlsBtns[_btn_ControlsInteract] = "Interact";
 
 	_btn_ControlsUsePotion.reset();
-	_btn_ControlsUsePotion = create_button("Use potion [/]");
+	_btn_ControlsUsePotion = create_button("Use potion [E]");
 	_btns.push_back(_btn_ControlsUsePotion);
 	_controlsBtns[_btn_ControlsUsePotion] = "Use potion";
 
@@ -68,7 +70,17 @@ void OptionsScene::Load()
 	// Set buttons position
 	for (int i = 0; i < _btns.size(); i++)
 	{
-		_btns[i]->setPosition({ (float)Engine::GetWindow().getSize().x / 2, (38.0f * i) + 200.0f });
+		if (i == 0)
+		{
+			_btns[i]->setPosition({
+				(float)Engine::GetWindow().getSize().x / 2 + (500.0f / 2) + 10.0f,
+				(float)Engine::GetWindow().getSize().y / 2 - ((38.0f * (_btns.size() - 1)) / 2)
+			});
+		}
+		else
+		{
+			_btns[i]->setPosition({ _btns[i - 1]->getPosition().x, _btns[i - 1]->getPosition().y + 38.0f });
+		}
 	}
 
 	_clickCooldown = 0.2f;
