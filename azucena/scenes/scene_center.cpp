@@ -267,17 +267,17 @@ void CenterScene::Update(const double& dt) {
 	Engine::GetWindow().setView(view);
 
 	// Show rewards messages
-	if (Data::main_collectible_right && !Data::messageShown_useHealingHerb)
+	if (Data::main_collectible_right && !Data::messageShown_useHealingHerb && _outroTime <= 0.0f)
 	{
 		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(4);
 		Data::messageShown_useHealingHerb = true;
 	}
-	if (Data::main_collectible_left && !Data::messageShown_rewardSpit)
+	if (Data::main_collectible_left && !Data::messageShown_rewardSpit && _outroTime <= 0.0f)
 	{
 		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(5);
 		Data::messageShown_rewardSpit = true;
 	}
-	if (Data::main_collectible_top && !Data::messageShown_rewardHealth)
+	if (Data::main_collectible_top && !Data::messageShown_rewardHealth && _outroTime <= 0.0f)
 	{
 		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(3);
 		Data::messageShown_rewardHealth = true;
