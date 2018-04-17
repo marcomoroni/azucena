@@ -21,4 +21,7 @@ private:
 	std::shared_ptr<Entity> _zzz;
 	std::shared_ptr<Entity> _ohmy;
 	float _intoTime = 0.0f;
+
+	// Outro cutscene time
+	float _outroTime = 0.0f;
 };

@@ -70,7 +70,7 @@ void Data::save()
 		health << " " <<
 		max_potions << " " <<
 		potions << " " <<
-		(int)shootCooldownTime << " " <<
+		shootCooldownTime << " " <<
 		(int)introPlayed << " " <<
 		(int)outroPlayed << " " <<
 		(int)messageShown_basicControls << " " << 
