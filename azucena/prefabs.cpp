@@ -175,7 +175,7 @@ void create_walls()
 		auto s = e->addComponent<SpriteComponent>();
 		auto tex = Resources::get<Texture>("tex.png");
 		s->setTexture(tex);
-		s->getSprite().setTextureRect(sf::IntRect(0, 0, 32, 32));
+		s->getSprite().setTextureRect(sf::IntRect(32, 0, 32, 32));
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 
 		auto sm = e->addComponent<StateMachineComponent>();
