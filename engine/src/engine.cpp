@@ -17,6 +17,7 @@ std::string Engine::_gameName;
 
 static bool loading = false;
 static float loadingspinner = 0.f;
+static Sprite loadingSprite;
 static float loadingTime;
 static RenderWindow* _window;
 
@@ -29,6 +30,10 @@ void Loading_update(float dt, const Scene* const scn) {
 		loading = false;
 	}
 	else {
+		Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
+		View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+		Engine::GetWindow().setView(view);
+		loadingSprite.setPosition(Vcast<float>(Engine::getWindowSize()).x - 64.0f, Vcast<float>(Engine::getWindowSize()).y - 64.0f);
 		loadingspinner += 180.0f * dt;
 		loadingTime += dt;
 	}
@@ -36,14 +41,13 @@ void Loading_update(float dt, const Scene* const scn) {
 void Loading_render() {
 	// cout << "Eng: Loading Screen Render\n";
 
-	Engine::GetWindow().setView(Engine::GetWindow().getDefaultView());
+	
 
-	static Sprite loadingSprite;
 	static Texture tex(*Resources::get<sf::Texture>("tex.png"));
 	loadingSprite.setTexture(tex);
 	loadingSprite.setTextureRect(sf::IntRect(0, 32 * 3, 32, 32));
 	loadingSprite.setOrigin(loadingSprite.getLocalBounds().width / 2, loadingSprite.getLocalBounds().height / 2);
-	loadingSprite.setPosition(Vcast<float>(Engine::getWindowSize()).x - 64.0f, Vcast<float>(Engine::getWindowSize()).y - 64.0f);
+	
 	loadingSprite.setRotation(loadingspinner);
 	Renderer::queue(&loadingSprite);
 }
