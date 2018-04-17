@@ -27,11 +27,9 @@ private:
 
 	// Messages
 	std::vector<std::string> _bottomMessages = {
-		"Use [W] [A] [D] [S] to move.", // 0
-		"Use [Space] to dash.", // 1
-		"Use [/] to spit.", // 2
-		"Hold [Q] to pick up.", // 3
-		"Use the heling herb with [E]." // 4
+		"Use [W] [A] [D] [S] to move.\nUse [Space] to dash.\nUse [/] to spit.", // 0
+		"Hold [Q] to pick up.", // 1
+		"Use the heling herb with [E]." // 2
 	};
 	std::shared_ptr<Entity> _bottomMessage;
 	float _bottomMessageTimer;

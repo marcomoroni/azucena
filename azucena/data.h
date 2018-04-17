@@ -21,4 +21,7 @@ public:
 	static int potions;
 	static float shootCooldownTime;
 	static bool introPlayed;
+	static bool messageShown_basicControls;
+	static bool messageShown_pickup;
+	static bool messageShown_useHealingHerb;
 };

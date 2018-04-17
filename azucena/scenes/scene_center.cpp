@@ -10,6 +10,7 @@
 #include "../components/cmp_player_health.h"
 #include "../components/cmp_player_controls.h"
 #include "../components/cmp_physics.h"
+#include "../components/cmp_game_ui.h"
 
 using namespace std;
 using namespace sf;
@@ -48,7 +49,7 @@ void CenterScene::Load()
 	create_walls();
 
 	// Add UI
-	create_game_ui();
+	_ui = create_game_ui();
 
 	// For intro cutscene
 	if (!Data::introPlayed)
@@ -168,6 +169,13 @@ void CenterScene::Update(const double& dt) {
 			_baby2->setPosition({ -100.0f, -100.0f });
 			_baby3->setPosition({ -100.0f, -100.0f });
 			Data::introPlayed = true;
+
+			// Show controls string
+			if (!Data::messageShown_basicControls)
+			{
+				_ui->get_components<GameUIComponent>()[0]->showBottomMessage(0);
+				Data::messageShown_basicControls = true;
+			}
 		}
 	}
 	else

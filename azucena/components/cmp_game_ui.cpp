@@ -144,7 +144,6 @@ void GameUIComponent::update(double dt)
 	}
 
 	// Bottom message
-	if (Keyboard::isKeyPressed(Keyboard::L)) showBottomMessage(0);
 	if (_bottomMessageTimer >= 0.0f)
 	{
 		// Show message
@@ -171,7 +170,7 @@ void GameUIComponent::showExitMessage()
 
 void GameUIComponent::showBottomMessage(int i)
 {
-	_bottomMessageTimer = 4.0f;
+	_bottomMessageTimer = 7.0f;
 	auto t = _bottomMessage->get_components<TextComponent>()[0];
 	t->getText()->setString(_bottomMessages[i]);
 	t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().width / 2);

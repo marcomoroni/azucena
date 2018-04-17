@@ -15,6 +15,9 @@ int Data::max_potions;
 int Data::potions;
 float Data::shootCooldownTime;
 bool Data::introPlayed;
+bool Data::messageShown_basicControls;
+bool Data::messageShown_pickup;
+bool Data::messageShown_useHealingHerb;
 
 string Data::save_file_path = "azucena_save.txt";
 
@@ -35,6 +38,9 @@ void Data::load()
 		file >> potions;
 		file >> (float)shootCooldownTime;
 		file >> introPlayed;
+		file >> messageShown_basicControls;
+		file >> messageShown_pickup;
+		file >> messageShown_useHealingHerb;
 	}
 }
 
@@ -57,7 +63,10 @@ void Data::save()
 		max_potions << " " <<
 		potions << " " <<
 		(int)shootCooldownTime << " " <<
-		(int)introPlayed;
+		(int)introPlayed << " " <<
+		(int)messageShown_basicControls << " " << 
+		(int)messageShown_pickup << " " << 
+		(int)messageShown_useHealingHerb;
 
 	printf("Closing save file...\n");
 	file.close();
@@ -77,4 +86,7 @@ void Data::reset()
 	potions = 0;
 	shootCooldownTime = 1.2f;
 	introPlayed = false;
+	messageShown_basicControls = false;
+	messageShown_pickup = false;
+	messageShown_useHealingHerb = false;
 }

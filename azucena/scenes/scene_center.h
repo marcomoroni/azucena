@@ -14,6 +14,7 @@ private:
 	std::shared_ptr<Entity> _baby1;
 	std::shared_ptr<Entity> _baby2;
 	std::shared_ptr<Entity> _baby3;
+	std::shared_ptr<Entity> _ui;
 	float _escButtonTimePressed = 0.0f;
 	sf::Vector2f _view_center;
 
