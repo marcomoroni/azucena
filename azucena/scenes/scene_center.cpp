@@ -185,10 +185,10 @@ void CenterScene::Update(const double& dt) {
 		}
 
 		// Azucena ohmy
-		if (_introTime > 8.0f && _introTime < 8.6f)
+		if (_introTime > 8.0f && _introTime < 8.4f)
 		{
 			_ohmy->setPosition(_player->getPosition() + Vector2f(0.0f, -32.0f));
-			auto newVis = (int)(_introTime * 10) % 2 == 0 ? true : false;
+			auto newVis = (int)(_introTime * 20) % 2 == 0 ? true : false;
 			_ohmy->setVisible(newVis);
 
 			// Sound
