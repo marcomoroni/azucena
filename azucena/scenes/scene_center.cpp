@@ -94,6 +94,17 @@ void CenterScene::UnLoad() {
 
 void CenterScene::Update(const double& dt) {
 
+#ifdef _DEBUG
+	// GOD MODE ////////////////////
+	if (Keyboard::isKeyPressed(Keyboard::P))
+	{
+		printf("Getting all babies\n");
+		Data::main_collectible_left = true;
+		Data::main_collectible_right = true;
+		Data::main_collectible_top = true;
+	}
+#endif
+
 	// Note: Scenes should be changed at the very end, because the update will
 	// keep running even if the scene is unloaded. If this happenes, you cannot
 	// use any of the entities or variable of the scene.
@@ -184,6 +195,38 @@ void CenterScene::Update(const double& dt) {
 	}
 	///////////////////////////////////////
 
+	// Outro cutscene /////////////////////
+	bool flag_game_end = false;
+	if (!Data::outroPlayed && Data::main_collectible_left && Data::main_collectible_right && Data::main_collectible_top)
+	{
+		_outroTime += dt;
+
+		view.zoom(0.8f);
+		//_player->get_components<PlayerControlsComponent>()[0]->setCanMove(false);
+
+		// Make babies happy
+		if (_outroTime > 0.0f && _baby1->get_components<StateMachineComponent>()[0]->currentState() != "happy")
+		{
+			_baby1->get_components<StateMachineComponent>()[0]->changeState("happy");
+		}
+		if (_outroTime > 0.3f && _baby2->get_components<StateMachineComponent>()[0]->currentState() != "happy")
+		{
+			_baby2->get_components<StateMachineComponent>()[0]->changeState("happy");
+		}
+		if (_outroTime > 0.5f && _baby3->get_components<StateMachineComponent>()[0]->currentState() != "happy")
+		{
+			_baby3->get_components<StateMachineComponent>()[0]->changeState("happy");
+		}
+
+		// End cutscene
+		if (_outroTime > 5.0f)
+		{
+			Data::outroPlayed = true;
+			flag_game_end = true;
+		}
+	}
+	///////////////////////////////////////
+
 	// Camera follows player
 	// REMEMBER TO PUT THIS BEFORE YOU CHECK FOR CHANGING SCENE
 	float view_player_distance = sqrt(((_player->getPosition().x - _view_center.x) * (_player->getPosition().x - _view_center.x)) + ((_player->getPosition().y - _view_center.y) * (_player->getPosition().y - _view_center.y)));
@@ -234,6 +277,7 @@ void CenterScene::Update(const double& dt) {
 	else if (flag_exit_2) Engine::ChangeScene((Scene*)&scene_top);
 	else if (flag_exit_3) Engine::ChangeScene((Scene*)&scene_left);
 	else if (flag_menu) Engine::ChangeScene((Scene*)&scene_menu);
+	else if (flag_game_end) Engine::ChangeScene((Scene*)&scene_menu);
 
 	Scene::Update(dt);
 }

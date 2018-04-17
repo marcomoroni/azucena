@@ -15,6 +15,7 @@ int Data::max_potions;
 int Data::potions;
 float Data::shootCooldownTime;
 bool Data::introPlayed;
+bool Data::outroPlayed;
 bool Data::messageShown_basicControls;
 bool Data::messageShown_pickup;
 bool Data::messageShown_useHealingHerb;
@@ -41,6 +42,7 @@ void Data::load()
 		file >> potions;
 		file >> (float)shootCooldownTime;
 		file >> introPlayed;
+		file >> outroPlayed;
 		file >> messageShown_basicControls;
 		file >> messageShown_pickup;
 		file >> messageShown_useHealingHerb;
@@ -68,8 +70,9 @@ void Data::save()
 		health << " " <<
 		max_potions << " " <<
 		potions << " " <<
-		(int)shootCooldownTime << " " <<
+		shootCooldownTime << " " <<
 		(int)introPlayed << " " <<
+		(int)outroPlayed << " " <<
 		(int)messageShown_basicControls << " " << 
 		(int)messageShown_pickup << " " << 
 		(int)messageShown_useHealingHerb << " " <<
@@ -95,6 +98,7 @@ void Data::reset()
 	potions = 0;
 	shootCooldownTime = 1.2f;
 	introPlayed = false;
+	introPlayed = outroPlayed;
 	messageShown_basicControls = false;
 	messageShown_pickup = false;
 	messageShown_useHealingHerb = false;

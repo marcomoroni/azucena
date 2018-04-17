@@ -68,6 +68,9 @@ void PlayerHealthComponent::decreaseHealth(int h)
 			printf("Player hurt.\n");
 		}
 	}
+#ifdef _DEBUG
+	increaseHealth();
+#endif
 }
 
 void PlayerHealthComponent::decreaseHealth()
