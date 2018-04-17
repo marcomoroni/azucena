@@ -110,6 +110,8 @@ void PlayerControlsComponent::update(double dt) {
 
 	if (_canMove)
 		_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(normalize(direction) * speed));
+	else
+		_parent->get_components<PhysicsComponent>()[0]->setVelocity(Vector2f(0.0f, 0.0f));
 }
 
 PlayerControlsComponent::PlayerControlsComponent(Entity* p)

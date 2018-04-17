@@ -8,6 +8,7 @@
 #include "../prefabs.h"
 #include "../components/cmp_state_machine.h"
 #include "../components/cmp_player_health.h"
+#include "../components/cmp_player_controls.h"
 
 using namespace std;
 using namespace sf;
@@ -89,6 +90,7 @@ void TopScene::Update(const double& dt) {
 
 			// Player doesn't get hurt anymore
 			_player->get_components<PlayerHealthComponent>()[0]->setImmune(true);
+			_player->get_components<PlayerControlsComponent>()[0]->setCanMove(false);
 		}
 	}
 	if (_mainCollectibleObtained)
