@@ -45,7 +45,7 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		_exitMessage = Engine::GetActiveScene()->makeEntity();
 		_exitMessage->addTag("exit string");
 		auto t = _exitMessage->addComponent<TextComponent>("Hold [Esc] to exit.");
-		//t->getText()->setCharacterSize(40);
+		t->getText()->setCharacterSize(40);
 		// Origin is on the top right corner
 		t->getText()->setOrigin(t->getText()->getLocalBounds().width, 14.0f);
 		t->getText()->setColor(Color(255, 218, 194));
@@ -57,7 +57,7 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		_bottomMessage = Engine::GetActiveScene()->makeEntity();
 		_bottomMessage->addTag("bottom string");
 		auto t = _bottomMessage->addComponent<TextComponent>("");
-		//t->getText()->setCharacterSize(40);
+		t->getText()->setCharacterSize(40);
 		t->getText()->setColor(Color(255, 218, 194));
 		_bottomMessageTimer = 0.0f;
 	}
