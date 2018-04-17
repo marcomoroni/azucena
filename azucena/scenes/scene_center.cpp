@@ -78,6 +78,9 @@ void CenterScene::Load()
 	// Set view
 	_view_center = _player->getPosition();
 
+	_intoTime = 0.0f;
+	_outroTime = 0.0f;
+
 	setLoaded(true);
 }
 

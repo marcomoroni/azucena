@@ -36,6 +36,9 @@ void GameOverScene::Load()
 
 void GameOverScene::Update(const double& dt)
 {
+	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
+	Engine::GetWindow().setView(view);
+
 	timer_before_can_change_scene -= dt;
 
 	if (timer_before_can_change_scene <= 0.0f)

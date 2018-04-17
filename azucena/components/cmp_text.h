@@ -8,16 +8,11 @@ public:
 	TextComponent() = delete;
 	explicit TextComponent(Entity* p, const std::string& str = "");
 	void update(double dt) override;
-
 	void render() override;
-
 	~TextComponent() override = default;
-
-	void setText(const std::string& str);
 	sf::Text* getText() { return &_text; }
 
 protected:
 	std::shared_ptr<sf::Font> _font;
-	std::string _string;
 	sf::Text _text;
 };

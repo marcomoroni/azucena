@@ -196,7 +196,7 @@ shared_ptr<Entity> create_button(string text)
 
 	auto t = button->addComponent<TextComponent>(text);
 	// For some reason text is not centered
-	t->getText()->setOrigin(t->getText()->getOrigin().x, t->getText()->getOrigin().y + 14.0f);
+	t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().height / 2 + 14.0f);
 	t->getText()->setColor(Color(198, 152, 127));
 
 	button->addComponent<ButtonComponent>(s, t);

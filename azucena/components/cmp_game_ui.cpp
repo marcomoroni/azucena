@@ -45,8 +45,9 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		_exitMessage = Engine::GetActiveScene()->makeEntity();
 		_exitMessage->addTag("exit string");
 		auto t = _exitMessage->addComponent<TextComponent>("Hold [Esc] to exit.");
+		//t->getText()->setCharacterSize(40);
 		// Origin is on the top right corner
-		t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
+		t->getText()->setOrigin(t->getText()->getLocalBounds().width, 14.0f);
 		t->getText()->setColor(Color(255, 218, 194));
 		_exitMessageTimer = 0.0f;
 	}
@@ -56,6 +57,7 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		_bottomMessage = Engine::GetActiveScene()->makeEntity();
 		_bottomMessage->addTag("bottom string");
 		auto t = _bottomMessage->addComponent<TextComponent>("");
+		//t->getText()->setCharacterSize(40);
 		t->getText()->setColor(Color(255, 218, 194));
 		_bottomMessageTimer = 0.0f;
 	}
@@ -81,7 +83,7 @@ void GameUIComponent::update(double dt)
 
 	Vector2f bottom_center_corner = {
 		_parent->getPosition().x,
-		_parent->getPosition().y + Engine::GetWindow().getSize().y / 2 + _margin }; // [?] not where it should be
+		_parent->getPosition().y + Engine::GetWindow().getSize().y / 2 - 128.0f };
 
 	// Hearts position
 	for (int i = 0; i < _player_health_hearts.size(); i++)
@@ -153,7 +155,7 @@ void GameUIComponent::update(double dt)
 	else
 	{
 		// hide message
-		_bottomMessage->setPosition(Vector2f{ _parent->getPosition().x + Engine::GetWindow().getSize().x, _parent->getPosition().y + Engine::GetWindow().getSize().y });
+		_bottomMessage->get_components<TextComponent>()[0]->getText()->setString("");
 	}
 }
 
@@ -170,8 +172,8 @@ void GameUIComponent::showExitMessage()
 
 void GameUIComponent::showBottomMessage(int i)
 {
-	_bottomMessageTimer = 7.0f;
+	_bottomMessageTimer = 14.0f;
 	auto t = _bottomMessage->get_components<TextComponent>()[0];
 	t->getText()->setString(_bottomMessages[i]);
-	t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().width / 2);
+	t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().height / 2 + 14.0f);
 }
