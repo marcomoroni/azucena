@@ -13,6 +13,7 @@ private:
 
 	// For health bar
 	std::vector<Entity*> _healthSprites;
+	bool _showHealthBar;
 
 public:
 	void update(double) override;

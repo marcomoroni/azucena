@@ -11,7 +11,7 @@ using namespace sf;
 bool _flagHeathChanged = false;
 
 EnemyHealthComponent::EnemyHealthComponent(Entity* p, int maxHealth)
-	: Component(p), _maxHealth(maxHealth), _health(maxHealth)
+	: Component(p), _maxHealth(maxHealth), _health(maxHealth), _showHealthBar(false)
 {
 	int heartSpriteSize = 8;
 	for (int i = 0; i < _maxHealth; i++)
@@ -23,6 +23,7 @@ EnemyHealthComponent::EnemyHealthComponent(Entity* p, int maxHealth)
 		s->getSprite().setTextureRect(sf::IntRect(32 * 5, 32 * 4, heartSpriteSize, heartSpriteSize));
 		s->getSprite().setOrigin(s->getSprite().getLocalBounds().width / 2, s->getSprite().getLocalBounds().height / 2);
 		s->getSprite().setOrigin(s->getSprite().getOrigin().x - ((_maxHealth * heartSpriteSize / 2) - heartSpriteSize / 2) + (heartSpriteSize * i), s->getSprite().getOrigin().y);
+		e->setVisible(false); // Hide until gets hit
 
 		_healthSprites.push_back(&(*e));
 	}
@@ -52,6 +53,16 @@ void EnemyHealthComponent::render()
 
 void EnemyHealthComponent::decreaseHealth(int h)
 {
+	// Show health bar
+	if (!_showHealthBar)
+	{
+		_showHealthBar = true;
+		for (auto& e : _healthSprites)
+		{
+			e->setVisible(true);
+		}
+	}
+
 	if (_immunity < 0.0f)
 	{
 		int newHealth = _health - h;
