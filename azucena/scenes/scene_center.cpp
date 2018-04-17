@@ -49,7 +49,7 @@ void CenterScene::Load()
 	create_walls();
 
 	// Add UI
-	_ui = create_game_ui();
+	create_game_ui();
 
 	// For intro cutscene
 	if (!Data::introPlayed)
@@ -173,7 +173,7 @@ void CenterScene::Update(const double& dt) {
 			// Show controls string
 			if (!Data::messageShown_basicControls)
 			{
-				_ui->get_components<GameUIComponent>()[0]->showBottomMessage(0);
+				Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(0);
 				Data::messageShown_basicControls = true;
 			}
 		}
@@ -192,6 +192,23 @@ void CenterScene::Update(const double& dt) {
 	view.setCenter(_view_center);
 
 	Engine::GetWindow().setView(view);
+
+	// Show rewards messages
+	if (Data::main_collectible_right && !Data::messageShown_useHealingHerb)
+	{
+		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(4);
+		Data::messageShown_useHealingHerb = true;
+	}
+	if (Data::main_collectible_left && !Data::messageShown_rewardSpit)
+	{
+		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(5);
+		Data::messageShown_rewardSpit = true;
+	}
+	if (Data::main_collectible_top && !Data::messageShown_rewardHealth)
+	{
+		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(3);
+		Data::messageShown_rewardHealth = true;
+	}
 
 	// Game over
 	bool flag_game_over = false;

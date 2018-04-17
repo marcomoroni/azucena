@@ -24,4 +24,7 @@ public:
 	static bool messageShown_basicControls;
 	static bool messageShown_pickup;
 	static bool messageShown_useHealingHerb;
+	static bool messageShown_rewardHealth;
+	static bool messageShown_rewardHealingHerb;
+	static bool messageShown_rewardSpit;
 };

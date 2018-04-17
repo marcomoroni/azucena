@@ -29,7 +29,10 @@ private:
 	std::vector<std::string> _bottomMessages = {
 		"Use [W] [A] [D] [S] to move.\nUse [Space] to dash.\nUse [/] to spit.", // 0
 		"Hold [Q] to pick up.", // 1
-		"Use the heling herb with [E]." // 2
+		"Use the heling herb with [E].", // 2
+		"Your health increased!", // 3
+		"You can carry one more healing herb!", // 4
+		"You can spit quicker!" // 5
 	};
 	std::shared_ptr<Entity> _bottomMessage;
 	float _bottomMessageTimer;

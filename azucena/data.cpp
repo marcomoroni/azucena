@@ -18,6 +18,9 @@ bool Data::introPlayed;
 bool Data::messageShown_basicControls;
 bool Data::messageShown_pickup;
 bool Data::messageShown_useHealingHerb;
+bool Data::messageShown_rewardHealth;
+bool Data::messageShown_rewardHealingHerb;
+bool Data::messageShown_rewardSpit;
 
 string Data::save_file_path = "azucena_save.txt";
 
@@ -41,6 +44,9 @@ void Data::load()
 		file >> messageShown_basicControls;
 		file >> messageShown_pickup;
 		file >> messageShown_useHealingHerb;
+		file >> messageShown_rewardHealth;
+		file >> messageShown_useHealingHerb;
+		file >> messageShown_rewardSpit;
 	}
 }
 
@@ -66,7 +72,10 @@ void Data::save()
 		(int)introPlayed << " " <<
 		(int)messageShown_basicControls << " " << 
 		(int)messageShown_pickup << " " << 
-		(int)messageShown_useHealingHerb;
+		(int)messageShown_useHealingHerb << " " <<
+		(int)messageShown_rewardHealth << " " << 
+		(int)messageShown_useHealingHerb << " " << 
+		(int)messageShown_rewardSpit;
 
 	printf("Closing save file...\n");
 	file.close();
@@ -89,4 +98,7 @@ void Data::reset()
 	messageShown_basicControls = false;
 	messageShown_pickup = false;
 	messageShown_useHealingHerb = false;
+	messageShown_rewardHealth = false;
+	messageShown_useHealingHerb = false;
+	messageShown_rewardSpit = false;
 }
