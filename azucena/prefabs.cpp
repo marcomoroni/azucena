@@ -340,18 +340,6 @@ shared_ptr<Entity> create_door()
 	return door;
 }
 
-shared_ptr<Entity> create_exit_ui_message()
-{
-	auto message = Engine::GetActiveScene()->makeEntity();
-	message->addTag("exit string");
-
-	auto t = message->addComponent<TextComponent>("Hold ESC to exit.");
-	// Origin is on the top right corner
-	t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
-
-	return message;
-}
-
 shared_ptr<Entity> create_baby_llama(int index)
 {
 	// 1 -> right

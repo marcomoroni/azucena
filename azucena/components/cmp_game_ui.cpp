@@ -4,6 +4,7 @@
 #include "system_resources.h"
 #include "../prefabs.h"
 #include "../controls.h"
+#include "cmp_text.h"
 
 using namespace std;
 using namespace sf;
@@ -39,7 +40,13 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		}
 	}
 
-	_exitMessage = create_exit_ui_message();
+	// Exit message
+	_exitMessage = Engine::GetActiveScene()->makeEntity();
+	_exitMessage->addTag("exit string");
+	auto t = _exitMessage->addComponent<TextComponent>("Hold [Esc] to exit.");
+	// Origin is on the top right corner
+	t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
+	t->getText()->setColor(Color(255, 218, 194));
 	_exitMessageTimer = 0.0f;
 }
 
