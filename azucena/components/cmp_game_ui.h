@@ -25,10 +25,22 @@ private:
 	std::shared_ptr<Entity> _exitMessage;
 	float _exitMessageTimer;
 
+	// Messages
+	std::vector<std::string> _bottomMessages = {
+		"Use [W] [A] [D] [S] to move.", // 0
+		"Use [Space] to dash.", // 1
+		"Use [/] to spit.", // 2
+		"Hold [Q] to pick up.", // 3
+		"Use the heling herb with [E]." // 4
+	};
+	std::shared_ptr<Entity> _bottomMessage;
+	float _bottomMessageTimer;
+
 public:
 	GameUIComponent() = delete;
 	explicit GameUIComponent(Entity* p, std::shared_ptr<Entity> player);
 	void update(double dt) override;
 	void render() override;
 	void showExitMessage();
+	void showBottomMessage(int);
 };

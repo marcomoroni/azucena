@@ -40,14 +40,25 @@ GameUIComponent::GameUIComponent(Entity* p, shared_ptr<Entity> player)
 		}
 	}
 
-	// Exit message
-	_exitMessage = Engine::GetActiveScene()->makeEntity();
-	_exitMessage->addTag("exit string");
-	auto t = _exitMessage->addComponent<TextComponent>("Hold [Esc] to exit.");
-	// Origin is on the top right corner
-	t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
-	t->getText()->setColor(Color(255, 218, 194));
-	_exitMessageTimer = 0.0f;
+	{
+		// Exit message
+		_exitMessage = Engine::GetActiveScene()->makeEntity();
+		_exitMessage->addTag("exit string");
+		auto t = _exitMessage->addComponent<TextComponent>("Hold [Esc] to exit.");
+		// Origin is on the top right corner
+		t->getText()->setOrigin(t->getText()->getLocalBounds().width, 0);
+		t->getText()->setColor(Color(255, 218, 194));
+		_exitMessageTimer = 0.0f;
+	}
+
+	{
+		// Bottom message
+		_bottomMessage = Engine::GetActiveScene()->makeEntity();
+		_bottomMessage->addTag("bottom string");
+		auto t = _bottomMessage->addComponent<TextComponent>("");
+		t->getText()->setColor(Color(255, 218, 194));
+		_bottomMessageTimer = 0.0f;
+	}
 }
 
 void GameUIComponent::update(double dt)
@@ -67,6 +78,10 @@ void GameUIComponent::update(double dt)
 	Vector2f top_right_corner = {
 	  _parent->getPosition().x + Engine::GetWindow().getSize().x / 2 - _margin,
 	  _parent->getPosition().y - Engine::GetWindow().getSize().y / 2 + _margin };
+
+	Vector2f bottom_center_corner = {
+		_parent->getPosition().x,
+		_parent->getPosition().y + Engine::GetWindow().getSize().y / 2 + _margin }; // [?] not where it should be
 
 	// Hearts position
 	for (int i = 0; i < _player_health_hearts.size(); i++)
@@ -127,6 +142,20 @@ void GameUIComponent::update(double dt)
 		// hide message
 		_exitMessage->setPosition(Vector2f{ _parent->getPosition().x + Engine::GetWindow().getSize().x, _parent->getPosition().y + Engine::GetWindow().getSize().y });
 	}
+
+	// Bottom message
+	if (Keyboard::isKeyPressed(Keyboard::L)) showBottomMessage(0);
+	if (_bottomMessageTimer >= 0.0f)
+	{
+		// Show message
+		_bottomMessage->setPosition(bottom_center_corner);
+		_bottomMessageTimer -= dt;
+	}
+	else
+	{
+		// hide message
+		_bottomMessage->setPosition(Vector2f{ _parent->getPosition().x + Engine::GetWindow().getSize().x, _parent->getPosition().y + Engine::GetWindow().getSize().y });
+	}
 }
 
 void GameUIComponent::render()
@@ -138,4 +167,12 @@ void GameUIComponent::render()
 void GameUIComponent::showExitMessage()
 {
 	_exitMessageTimer = 3.0f;
+}
+
+void GameUIComponent::showBottomMessage(int i)
+{
+	_bottomMessageTimer = 4.0f;
+	auto t = _bottomMessage->get_components<TextComponent>()[0];
+	t->getText()->setString(_bottomMessages[i]);
+	t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().width / 2);
 }
