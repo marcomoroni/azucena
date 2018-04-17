@@ -207,6 +207,7 @@ shared_ptr<Entity> create_button(string text)
 shared_ptr<Entity> create_game_ui()
 {
 	auto e = Engine::GetActiveScene()->makeEntity();
+	e->addTag("game ui");
 	e->addComponent<GameUIComponent>(Engine::GetActiveScene()->ents.find("player")[0]);
 	return e;
 }

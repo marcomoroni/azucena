@@ -5,6 +5,8 @@
 #include "engine.h"
 #include "../data.h"
 #include "../controls.h"
+#include "cmp_game_ui.h"
+#include "../data.h"
 
 using namespace std;
 using namespace sf;
@@ -100,6 +102,13 @@ void PlayerHealthComponent::usePotion()
 
 void PlayerHealthComponent::addPotion(int i)
 {
+	// Tutorial message
+	if (!Data::messageShown_useHealingHerb)
+	{
+		Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(2);
+		Data::messageShown_useHealingHerb = true;
+	}
+
 	if (Data::potions + 1 <= Data::max_potions)
 		Data::potions++;
 	else

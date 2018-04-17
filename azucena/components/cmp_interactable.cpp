@@ -4,6 +4,8 @@
 #include "system_resources.h"
 #include <SFML/Window/Keyboard.hpp>
 #include "../controls.h"
+#include "cmp_game_ui.h"
+#include "../data.h"
 
 using namespace std;
 using namespace sf;
@@ -23,6 +25,13 @@ void InteractableComponent::update(double dt)
 
 		if (playerIsClose)
 		{
+			// Tutorial message
+			if (!Data::messageShown_pickup)
+			{
+				Engine::GetActiveScene()->ents.find("game ui")[0]->get_components<GameUIComponent>()[0]->showBottomMessage(1);
+				Data::messageShown_pickup = true;
+			}
+
 			_interactionTimerSprite->setVisible(true);
 			_interactionTimerSprite->setPosition(_player->getPosition() + Vector2f(0.0f, 64.0f));
 			if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Interact")))

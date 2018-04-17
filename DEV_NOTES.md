@@ -94,6 +94,8 @@ Only used for in-game UI, not main menu (for now).
 
 Changing the renderer system to allow rendering things on different views is too complicated, so we can attach this component to an empty entity. In the `update` function this component will change its `_parent` position to the center of the current view. In this way it looks like is not moving.
 
+Messages...
+
 ### `StateMachineComponent`
 
 Since there are no ways to reset values (for example a timer) in a `State` I had to add a `enterState()` virtual function. This function gets called every we change state.
