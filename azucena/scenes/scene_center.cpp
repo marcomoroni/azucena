@@ -78,7 +78,16 @@ void CenterScene::Load()
 	// Set view
 	_view_center = _player->getPosition();
 
-	_intoTime = 0.0f;
+	// Cutscenes
+	_introTime = 0.0f;
+	_buffer_ohmy = *(Resources::get<SoundBuffer>("bip_10.wav"));
+	_sound_ohmy.setBuffer(_buffer_ohmy);
+	_ohmy_prevVis = false;
+	_buffer_zzz = *(Resources::get<SoundBuffer>("bip_07.wav"));
+	_sound_zzz.setBuffer(_buffer_zzz);
+	_zzz_prevPos = { 0, 0 };
+	_buffer_babyRun = *(Resources::get<SoundBuffer>("baby_llama_happy.wav"));
+	_sound_babyRun.setBuffer(_buffer_babyRun);
 	_outroTime = 0.0f;
 
 	setLoaded(true);
@@ -119,24 +128,27 @@ void CenterScene::Update(const double& dt) {
 	// Intro cutscene /////////////////////
 	if (!Data::introPlayed)
 	{
-		_intoTime += dt;
+		_introTime += dt;
 
 		view.zoom(0.8f);
 		_player->get_components<PlayerControlsComponent>()[0]->setCanMove(false);
 
 		// Baby llamas move
 		float speed = 200.0f;
-		if (_intoTime > 4.0f)
+		if (_introTime > 3.6f)
 		{
 			_baby1->get_components<PhysicsComponent>()[0]->teleport(_baby1->getPosition() + (Vector2f(1.0f, 0.0f) * speed * (float)dt));
+			if (_sound_babyRun.getStatus() != sf::SoundSource::Playing && _baby1->isVisible()) _sound_babyRun.play();
 		}
-		if (_intoTime > 5.4f)
+		if (_introTime > 4.8f)
 		{
 			_baby2->get_components<PhysicsComponent>()[0]->teleport(_baby2->getPosition() + (Vector2f(0.0f, -1.0f) * speed * (float)dt));
+			if (_sound_babyRun.getStatus() != sf::SoundSource::Playing && _baby2->isVisible()) _sound_babyRun.play();
 		}
-		if (_intoTime > 4.2f)
+		if (_introTime > 4.2f)
 		{
 			_baby3->get_components<PhysicsComponent>()[0]->teleport(_baby3->getPosition() + (Vector2f(-1.0f, 0.0f) * speed * (float)dt));
+			if (_sound_babyRun.getStatus() != sf::SoundSource::Playing && _baby3->isVisible()) _sound_babyRun.play();
 		}
 
 		// Babies disappear
@@ -154,10 +166,18 @@ void CenterScene::Update(const double& dt) {
 		}
 
 		// Azucena ZZZ
-		if (_intoTime < 7.0f)
+		if (_introTime < 7.0f)
 		{
 			_zzz->setVisible(true);
-			_zzz->setPosition(_player->getPosition() + Vector2f(0.0f, (int)(_intoTime * 2) % 2 == 0 ? -40.0f : -44.0f));
+			auto newPos = _player->getPosition() + Vector2f((int)(_introTime * 2) % 2 == 0 ? -4.0f : 4.0f, (int)(_introTime * 2) % 2 == 0 ? -40.0f : -44.0f);
+			_zzz->setPosition(newPos);
+
+			// Sound
+			if (newPos != _zzz_prevPos)
+			{
+				_sound_zzz.play();
+				_zzz_prevPos = newPos;
+			}
 		}
 		else
 		{
@@ -165,11 +185,18 @@ void CenterScene::Update(const double& dt) {
 		}
 
 		// Azucena ohmy
-		if (_intoTime > 8.0f && _intoTime < 8.4f)
+		if (_introTime > 8.0f && _introTime < 8.6f)
 		{
-			//_ohmy->setVisible(true);
 			_ohmy->setPosition(_player->getPosition() + Vector2f(0.0f, -32.0f));
-			_ohmy->setVisible((int)(_intoTime * 10) % 2 == 0 ? true : false);
+			auto newVis = (int)(_introTime * 10) % 2 == 0 ? true : false;
+			_ohmy->setVisible(newVis);
+
+			// Sound
+			if (newVis != _ohmy_prevVis)
+			{
+				if (newVis == true) _sound_ohmy.play();
+				_ohmy_prevVis = newVis;
+			}
 		}
 		else
 		{
@@ -177,7 +204,7 @@ void CenterScene::Update(const double& dt) {
 		}
 
 		// End cutscene
-		if (_intoTime > 9.0f)
+		if (_introTime > 9.0f)
 		{
 			_baby1->setPosition({ -100.0f, -100.0f });
 			_baby2->setPosition({ -100.0f, -100.0f });
