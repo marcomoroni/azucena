@@ -1,12 +1,14 @@
-# Azucena
+<p align="center">
+	<img src="https://raw.githubusercontent.com/marcomoroni/azucena/master/docs/img/logo_big.png" alt="logo" />
+</p>
 
-[![Build status](https://ci.appveyor.com/api/projects/status/8sqlliuqw0d2a50g?svg=true)](https://ci.appveyor.com/project/marcomoroni/azucena)
+# [Azucena](https://marcomoroni.github.io/azucena/)
 
-Games Engineering coursework.
+<p align="center">
+	<a href="https://ci.appveyor.com/project/marcomoroni/azucena"><img src="https://ci.appveyor.com/api/projects/status/8sqlliuqw0d2a50g?svg=true" alt="Build status" /></a>
+</p>
 
----
-
-Instructions to build the repo:
+### Instructions to build the repo
 
 1. Clone it
 2. Run
