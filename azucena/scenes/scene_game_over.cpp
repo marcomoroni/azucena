@@ -48,7 +48,11 @@ void GameOverScene::Update(const double& dt)
 
 		if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu")) ||
 			Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) ||
-			Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")))
+			Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) ||
+			Joystick::isButtonPressed(0, 7) ||
+			Joystick::isButtonPressed(0, 0) ||
+			Joystick::isButtonPressed(0, 5) ||
+			Joystick::isButtonPressed(0, 1))
 		{
 			Engine::ChangeScene((Scene*)&scene_menu);
 		}
