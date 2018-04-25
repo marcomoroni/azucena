@@ -38,6 +38,7 @@ public:
 	static sf::Vector2u getWindowSize();
 	static void setVsync(bool b);
 	static Scene* GetActiveScene();
+	static std::vector<std::pair<int, int>> resolutions;
 
 private:
 	static Scene* _activeScene;

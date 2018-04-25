@@ -22,6 +22,23 @@ static float loadingTime;
 static RenderWindow* _window;
 
 bool Engine::_fullscreen = false;
+vector<pair<int, int>> Engine::resolutions{
+	make_pair(1920, 1080),
+	make_pair(1680, 1050),
+	make_pair(1600, 1024),
+	make_pair(1600, 900),
+	make_pair(1440, 900),
+	make_pair(1366, 768),
+	make_pair(1360, 768),
+	make_pair(1280, 1024),
+	make_pair(1280, 960),
+	make_pair(1280, 800),
+	make_pair(1280, 768),
+	make_pair(1280, 720),
+	make_pair(1152, 864),
+	make_pair(1024, 768),
+	make_pair(800, 600)
+};
 
 void Loading_update(float dt, const Scene* const scn) {
 	//  cout << "Eng: Loading Screen\n";
@@ -123,14 +140,6 @@ void Engine::Start(unsigned int width, unsigned int height,
 					_fullscreen = !_fullscreen;
 					//window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
 					window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
-					_window = &window;
-				}
-			}
-			if (_fullscreen && event.type == sf::Event::KeyReleased)
-			{
-				if (event.key.code == sf::Keyboard::Num1)
-				{
-					window.create(VideoMode(1366, 768), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
 					_window = &window;
 				}
 			}
