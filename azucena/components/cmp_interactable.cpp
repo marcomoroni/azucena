@@ -34,7 +34,7 @@ void InteractableComponent::update(double dt)
 
 			_interactionTimerSprite->setVisible(true);
 			_interactionTimerSprite->setPosition(_player->getPosition() + Vector2f(0.0f, 64.0f));
-			if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Interact")))
+			if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Interact")) || Joystick::isButtonPressed(0, 3))
 			{
 				_interactionTimer += dt;
 

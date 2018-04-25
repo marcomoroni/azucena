@@ -32,7 +32,10 @@ private:
 		"Use the heling herb with [E].", // 2
 		"Your health increased!", // 3
 		"You can carry one more healing herb!", // 4
-		"Now you can spit quicker!" // 5
+		"Now you can spit quicker!", // 5
+		"Use [Left stick] to move.\nUse [RB] to dash.\nUse [A] to spit.", // 6 do not use this
+		"Hold [Y] to pick up.", // 7 do not use this
+		"Use the heling herb with [X]." // 8 do not use this
 	};
 	std::shared_ptr<Entity> _bottomMessage;
 	float _bottomMessageTimer;

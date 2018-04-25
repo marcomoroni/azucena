@@ -21,21 +21,30 @@ void PlayerControlsComponent::update(double dt) {
 
 	Vector2f direction = { 0, 0 };
 
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Right")))
+	if (Joystick::isConnected(0))
 	{
-		direction.x += 1.0f;
+		float x = Joystick::getAxisPosition(0, Joystick::X);
+		float y = Joystick::getAxisPosition(0, Joystick::Y);
+		direction = normalize(Vector2f(abs(x) > 10.0f ? x : 0, abs(y) > 10.0f ? -y : 0));
 	}
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Left")))
+	else
 	{
-		direction.x -= 1.0f;
-	}
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Up")))
-	{
-		direction.y += 1.0f;
-	}
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Down")))
-	{
-		direction.y -= 1.0f;
+		if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Right")))
+		{
+			direction.x += 1.0f;
+		}
+		if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Left")))
+		{
+			direction.x -= 1.0f;
+		}
+		if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Up")))
+		{
+			direction.y += 1.0f;
+		}
+		if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Down")))
+		{
+			direction.y -= 1.0f;
+		}
 	}
 
 	if (direction != Vector2f(0.0, 0.0f))
@@ -65,13 +74,20 @@ void PlayerControlsComponent::update(double dt) {
 	}
 
 	// Check if player is still pressing Sprint key
-	if (!Keyboard::isKeyPressed(Keyboard::Space))
+	if (Joystick::isConnected(0))
+	{
+		if (!Joystick::isButtonPressed(0, 5))
+		{
+			_isStillPressingSprintKey = false;
+		}
+	}
+	else if (!Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		_isStillPressingSprintKey = false;
 	}
 
 	// Check if player starts sprinting
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey && _canMove)
+	if ((Keyboard::isKeyPressed(Controls::GetKeyboardKey("Sprint")) || Joystick::isButtonPressed(0, 5)) && !_isSprinting && direction != Vector2f(0, 0) && !_isStillPressingSprintKey && _canMove)
 	{
 		_sound_dash.play();
 		_isSprinting = true;
@@ -85,7 +101,7 @@ void PlayerControlsComponent::update(double dt) {
 	_playerShootCooldownTimerUI->setPosition(Vector2f(_parent->getPosition().x, _parent->getPosition().y + 32.0f));
 
 	// Check if player shoots
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) && _shootCooldown <= 0.0f && _canMove)
+	if ((Keyboard::isKeyPressed(Controls::GetKeyboardKey("Shoot")) || Joystick::isButtonPressed(0, 0)) && _shootCooldown <= 0.0f && _canMove)
 	{
 		create_player_bullet(normalize(_shootDirection));
 		_sound_shoot.play();

@@ -40,12 +40,19 @@ void PlayerHealthComponent::update(double dt)
 	}
 
 	// Use potion
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")) && !_usePotionButtonStillPressed && Data::potions > 0)
+	if ((Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")) || Joystick::isButtonPressed(0, 2)) && !_usePotionButtonStillPressed && Data::potions > 0)
 	{
 		usePotion();
 		_usePotionButtonStillPressed = true;
 	}
-	if (!Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")))
+	if (Joystick::isConnected(0))
+	{
+		if (!Joystick::isButtonPressed(0, 2))
+		{
+			_usePotionButtonStillPressed = false;
+		}
+	}
+	else if (!Keyboard::isKeyPressed(Controls::GetKeyboardKey("Use potion")))
 	{
 		_usePotionButtonStillPressed = false;
 	}

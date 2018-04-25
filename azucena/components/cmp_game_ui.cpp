@@ -132,7 +132,7 @@ void GameUIComponent::update(double dt)
 	}
 
 	// Exit message
-	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu"))) showExitMessage();
+	if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Return to menu")) || Joystick::isButtonPressed(0, 7)) showExitMessage();
 	if (_exitMessageTimer >= 0.0f)
 	{
 		// Show message
@@ -172,6 +172,18 @@ void GameUIComponent::showExitMessage()
 
 void GameUIComponent::showBottomMessage(int i)
 {
+	// Change messages if using controller
+	if (Joystick::isConnected(0))
+	{
+		switch (i)
+		{
+		case 0: i = 6; break;
+		case 1: i = 7; break;
+		case 2: i = 8; break;
+		default: break;
+		}
+	}
+
 	_bottomMessageTimer = 14.0f;
 	auto t = _bottomMessage->get_components<TextComponent>()[0];
 	t->getText()->setString(_bottomMessages[i]);
