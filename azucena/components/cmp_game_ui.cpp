@@ -184,7 +184,7 @@ void GameUIComponent::showBottomMessage(int i)
 		}
 	}
 
-	_bottomMessageTimer = 14.0f;
+	_bottomMessageTimer = 8.0f;
 	auto t = _bottomMessage->get_components<TextComponent>()[0];
 	t->getText()->setString(_bottomMessages[i]);
 	t->getText()->setOrigin(t->getText()->getLocalBounds().width / 2, t->getText()->getLocalBounds().height / 2 + 14.0f);

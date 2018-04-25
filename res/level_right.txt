@@ -11,9 +11,9 @@ wwwwwwwwww   www   www   www:::wwwww
 wwww                           wwwww
 wwww                      B    wwwww
 wwww                           wwwww
-wwww   wwwwwwwwwwwwwww   www   wwwww
-wwww   wwwwwwwwwwwwwww   www   wwwww
-wwww   wwwwwwwwwwwwwww   www   wwwww
+wwww             C       www   wwwww
+wwww                     www   wwwww
+wwww                     www   wwwww
 1                              wwwww
 1 s                            wwwww
 1                              wwwww
@@ -27,7 +27,7 @@ wwww   www   www:::www   wwwwwwwwwww
 wwww   www   www:::www d wwwwwwwwwww
 wwww   www   www:::www   wwwwwwwwwww
 wwww               www         wwwww
-wwww       B       www    &    wwwww
+wwww       B       www      &  wwwww
 wwww               www         wwwww
 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
