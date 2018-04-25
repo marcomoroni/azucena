@@ -94,8 +94,8 @@ void Engine::Render(RenderWindow& window) {
 void Engine::Start(unsigned int width, unsigned int height,
 	const std::string& gameName, Scene* scn) {
 	RenderWindow window;
-	window.create(VideoMode(width, height), gameName);
-	//window.create(VideoMode(width, height), gameName, Style::Titlebar | Style::Close);
+	//window.create(VideoMode(width, height), gameName);
+	window.create(VideoMode(width, height), gameName, Style::Titlebar | Style::Close);
 	_gameName = gameName;
 	_window = &window;
 	Renderer::initialise(window);
@@ -110,19 +110,27 @@ void Engine::Start(unsigned int width, unsigned int height,
 				window.close();
 			}
 			// Resize window
-			if (event.type == sf::Event::Resized)
+			/*if (event.type == sf::Event::Resized)
 			{
 				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
 				window.setView(sf::View(visibleArea));
-			}
+			}*/
 			// Fullscreen
 			if (event.type == sf::Event::KeyReleased)
 			{
 				if (event.key.code == sf::Keyboard::F11)
 				{
 					_fullscreen = !_fullscreen;
-					window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
-					//window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
+					//window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
+					window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
+					_window = &window;
+				}
+			}
+			if (_fullscreen && event.type == sf::Event::KeyReleased)
+			{
+				if (event.key.code == sf::Keyboard::Num1)
+				{
+					window.create(VideoMode(1366, 768), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
 					_window = &window;
 				}
 			}
