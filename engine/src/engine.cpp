@@ -23,7 +23,7 @@ static RenderWindow* _window;
 
 bool Engine::_fullscreen = false;
 bool Engine::_flagChangeResolution = false;
-int Engine::_currentResolutionIndex;
+int Engine::_currentResolutionIndex = 0;
 vector<pair<int, int>> Engine::resolutions{
 	make_pair(1920, 1080),
 	make_pair(1680, 1050),

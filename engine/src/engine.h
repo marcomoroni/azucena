@@ -40,6 +40,7 @@ public:
 	static Scene* GetActiveScene();
 	static std::vector<std::pair<int, int>> resolutions;
 	static void ChangeResolution(int index);
+	static int ResolutionIndex() { return _currentResolutionIndex; }
 
 private:
 	static Scene* _activeScene;

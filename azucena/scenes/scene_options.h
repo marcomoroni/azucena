@@ -21,6 +21,7 @@ private:
 	std::shared_ptr<Entity> _btn_ControlsShoot;
 	std::shared_ptr<Entity> _btn_ControlsInteract;
 	std::shared_ptr<Entity> _btn_ControlsUsePotion;
+	std::shared_ptr<Entity> _btn_Resolution;
 	std::shared_ptr<Entity> _btn_Back;
 	// All buttons
 	std::vector<std::shared_ptr<Entity>> _btns;
@@ -30,4 +31,7 @@ private:
 	std::shared_ptr<Entity> _changingControl = nullptr;
 
 	float _clickCooldown;
+
+	int _tempResolutionIndex;
+	std::string writeResolutionButtonText(int index);
 };

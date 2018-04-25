@@ -9,6 +9,12 @@
 using namespace std;
 using namespace sf;
 
+string OptionsScene::writeResolutionButtonText(int index)
+{
+	string s = "Resolution: " + to_string(Engine::resolutions[index].first) + " x " + to_string(Engine::resolutions[index].second);
+	return s;
+}
+
 void OptionsScene::Load()
 {
 	{
@@ -63,6 +69,11 @@ void OptionsScene::Load()
 	_btns.push_back(_btn_ControlsUsePotion);
 	_controlsBtns[_btn_ControlsUsePotion] = "Use potion";
 
+	_btn_Resolution.reset();
+	_tempResolutionIndex = Engine::ResolutionIndex();
+	_btn_Resolution = create_button(writeResolutionButtonText(_tempResolutionIndex));
+	_btns.push_back(_btn_Resolution);
+
 	_btn_Back.reset();
 	_btn_Back = create_button("Back");
 	_btns.push_back(_btn_Back);
@@ -93,6 +104,8 @@ void OptionsScene::Load()
 
 void OptionsScene::Update(const double& dt)
 {
+	bool flag_back = false;
+
 	View view(FloatRect(0, 0, Engine::GetWindow().getSize().x, Engine::GetWindow().getSize().y));
 	Engine::GetWindow().setView(view);
 
@@ -100,9 +113,10 @@ void OptionsScene::Update(const double& dt)
 
 	if (_clickCooldown < 0.0f)
 	{
+		// Back to menu
 		if (_btn_Back->get_components<ButtonComponent>()[0]->isSelected())
 		{
-			Engine::ChangeScene(&scene_menu);
+			flag_back = true;
 		}
 
 		// Select key to be changed
@@ -117,6 +131,22 @@ void OptionsScene::Update(const double& dt)
 					b.first->get_components<TextComponent>()[0]->getText()->setColor(Color(254, 203, 82));
 				}
 			}
+		}
+
+		// Select resolution
+		if (_btn_Resolution->get_components<ButtonComponent>()[0]->isSelected())
+		{
+			printf("bip\n");
+			_clickCooldown = 0.2f;
+
+			// Loop through resolutions
+			int nextIndex;
+			if (_tempResolutionIndex + 1 >= Engine::resolutions.size()) nextIndex = 0;
+			else nextIndex = _tempResolutionIndex + 1;
+
+			_tempResolutionIndex = nextIndex;
+
+			_btn_Resolution->get_components<TextComponent>()[0]->getText()->setString(writeResolutionButtonText(_tempResolutionIndex));
 		}
 	}
 
@@ -136,6 +166,15 @@ void OptionsScene::Update(const double& dt)
 				_changingControl = nullptr;
 			}
 		}
+	}
+
+	// Change scene
+	if (flag_back)
+	{
+		// Chenge resolution if different
+		if (_tempResolutionIndex != Engine::ResolutionIndex()) Engine::ChangeResolution(_tempResolutionIndex);
+
+		Engine::ChangeScene(&scene_menu);
 	}
 
 	Scene::Update(dt);
