@@ -22,6 +22,8 @@ static float loadingTime;
 static RenderWindow* _window;
 
 bool Engine::_fullscreen = false;
+bool Engine::_flagChangeResolution = false;
+int Engine::_currentResolutionIndex;
 vector<pair<int, int>> Engine::resolutions{
 	make_pair(1920, 1080),
 	make_pair(1680, 1050),
@@ -143,6 +145,13 @@ void Engine::Start(unsigned int width, unsigned int height,
 					_window = &window;
 				}
 			}
+			// Change resolution
+			if (_flagChangeResolution && _fullscreen)
+			{
+				window.create(VideoMode(resolutions[_currentResolutionIndex].first, resolutions[_currentResolutionIndex].second), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
+				_window = &window;
+				_flagChangeResolution = false;
+			}
 		}
 
 		window.clear(Color(44, 40, 38));
@@ -247,4 +256,13 @@ Scene::~Scene() { UnLoad(); }
 Scene* Engine::GetActiveScene()
 {
 	return _activeScene;
+}
+
+void Engine::ChangeResolution(int index)
+{
+	if (_fullscreen)
+	{
+		_flagChangeResolution = true;
+		_currentResolutionIndex = index;
+	}
 }

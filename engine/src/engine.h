@@ -39,6 +39,7 @@ public:
 	static void setVsync(bool b);
 	static Scene* GetActiveScene();
 	static std::vector<std::pair<int, int>> resolutions;
+	static void ChangeResolution(int index);
 
 private:
 	static Scene* _activeScene;
@@ -46,6 +47,8 @@ private:
 	static void Update();
 	static void Render(sf::RenderWindow& window);
 	static bool _fullscreen;
+	static bool _flagChangeResolution;
+	static int _currentResolutionIndex;
 };
 
 namespace timing {
