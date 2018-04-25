@@ -43,7 +43,7 @@ vector<pair<int, int>> Engine::resolutions{
 };
 
 void Loading_update(float dt, const Scene* const scn) {
-	//  cout << "Eng: Loading Screen\n";
+
 	if (scn->isLoaded()) {
 		cout << "Eng: Exiting Loading Screen\n";
 		loading = false;
@@ -58,9 +58,6 @@ void Loading_update(float dt, const Scene* const scn) {
 	}
 }
 void Loading_render() {
-	// cout << "Eng: Loading Screen Render\n";
-
-	
 
 	static Texture tex(*Resources::get<sf::Texture>("tex.png"));
 	loadingSprite.setTexture(tex);
@@ -113,7 +110,6 @@ void Engine::Render(RenderWindow& window) {
 void Engine::Start(unsigned int width, unsigned int height,
 	const std::string& gameName, Scene* scn) {
 	RenderWindow window;
-	//window.create(VideoMode(width, height), gameName);
 	window.create(VideoMode(width, height), gameName, Style::Titlebar | Style::Close);
 	_gameName = gameName;
 	_window = &window;
@@ -140,7 +136,6 @@ void Engine::Start(unsigned int width, unsigned int height,
 				if (event.key.code == sf::Keyboard::F11)
 				{
 					_fullscreen = !_fullscreen;
-					//window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Resize | Style::Close));
 					window.create(VideoMode(width, height), gameName, (_fullscreen ? Style::Fullscreen : Style::Titlebar | Style::Close));
 					_window = &window;
 				}
@@ -185,9 +180,7 @@ void Engine::ChangeScene(Scene* s) {
 		old->UnLoad(); // todo: Unload Async
 	}
 
-	// Notes:
-	// * There is a `thread::sleep_for(3)` insode `Scene1.load().
-	// * If the game crashes change `_activeScene->LoadAsync()` to `_activeScene->Load()`.
+	// Note: if the game crashes change `_activeScene->LoadAsync()` to `_activeScene->Load()`
 
 	if (!s->isLoaded()) {
 		cout << "Eng: Entering Loading Screen\n";
