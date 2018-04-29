@@ -6,7 +6,7 @@ We should use this to keep track of everything we have to write in the report an
 
 ### Editor
 
-Remeber to change the editor indentation to 2 spaces (Sam wrote verything like that).
+Make sure you're using tabs.
 
 ### Debug only code
 
