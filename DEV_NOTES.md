@@ -155,6 +155,8 @@ if (Keyboard::isKeyPressed(Controls::GetKeyboardKey("Up")))
 }
 ```
 
+Joystic controls are not remappable.
+
 ## Menu
 
 Press <kbd>Esc</kbd> for a while to return to menu.
