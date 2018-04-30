@@ -1,0 +1,244 @@
+% #######################################
+% ########### FILL THESE IN #############
+% #######################################
+\def\mytitle{Coursework Report}
+\def\mykeywords{Games engineering, SFML, Box2D, C++}
+\def\myauthor{Marco Moroni}
+\def\contact{40213873@napier.ac.uk}
+\def\mymodule{Games engineering (SET09121)}
+% #######################################
+% #### YOU DON'T NEED TO TOUCH BELOW ####
+% #######################################
+\documentclass[10pt, a4paper]{article}
+\usepackage[a4paper,outer=1.5cm,inner=1.5cm,top=1.75cm,bottom=1.5cm]{geometry}
+\twocolumn
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+%colour our links, remove weird boxes
+\usepackage[colorlinks,linkcolor={black},citecolor={blue!80!black},urlcolor={blue!80!black}]{hyperref}
+%Stop indentation on new paragraphs
+\usepackage[parfill]{parskip}
+%% Arial-like font
+\IfFileExists{uarial.sty}
+{
+    \usepackage[english]{babel}
+    \usepackage[T1]{fontenc}
+    \usepackage{uarial}
+    \renewcommand{\familydefault}{\sfdefault}
+}{
+    \GenericError{}{Couldn't find Arial font}{ you may need to install 'nonfree' fonts on your system}{}
+    \usepackage{lmodern}
+    \renewcommand*\familydefault{\sfdefault}
+}
+%Napier logo top right
+\usepackage{watermark}
+%Lorem Ipusm dolor please don't leave any in you final report ;)
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{listings}
+%give us the Capital H that we all know and love
+\usepackage{float}
+%tone down the line spacing after section titles
+\usepackage{titlesec}
+%Cool maths printing
+\usepackage{amsmath}
+%PseudoCode
+\usepackage{algorithm2e}
+
+\titlespacing{\subsection}{0pt}{\parskip}{-3pt}
+\titlespacing{\subsubsection}{0pt}{\parskip}{-\parskip}
+\titlespacing{\paragraph}{0pt}{\parskip}{\parskip}
+\newcommand{\figuremacro}[5]{
+    \begin{figure}[#1]
+        \centering
+        \includegraphics[width=#5\columnwidth]{#2}
+        \caption[#3]{\textbf{#3}#4}
+        \label{fig:#2}
+    \end{figure}
+}
+
+\lstset{
+	escapeinside={/*@}{@*/}, language=C++,
+	basicstyle=\fontsize{8.5}{12}\selectfont,
+	numbers=left,numbersep=2pt,xleftmargin=2pt,frame=tb,
+    columns=fullflexible,showstringspaces=false,tabsize=4,
+    keepspaces=true,showtabs=false,showspaces=false,
+    backgroundcolor=\color{white}, morekeywords={inline,public,
+    class,private,protected,struct},captionpos=t,lineskip=-0.4em,
+	aboveskip=10pt, extendedchars=true, breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941}
+}
+
+\thiswatermark{\centering \put(336.5,-38.0){\includegraphics[scale=0.8]{logo}} }
+\title{\mytitle}
+\author{\myauthor\hspace{1em}\\\contact\\Edinburgh Napier University\hspace{0.5em}-\hspace{0.5em}\mymodule}
+\date{}
+\hypersetup{pdfauthor=\myauthor,pdftitle=\mytitle,pdfkeywords=\mykeywords}
+\sloppy
+% #######################################
+% ########### START FROM HERE ###########
+% #######################################
+\begin{document}
+    \maketitle
+%    \begin{abstract}
+%        This coursework presents three types of gravity that are implemented in a physics-based simulation.
+%    \end{abstract}
+    
+    \textbf{Keywords -- }{\mykeywords}
+    
+    \section{Introduction}
+    The game that was built, \textit{Azucena}, is a single player RPG that focuses on combat with some aspects of exploration.\\
+    It takes inspiration mainly from two games: \textit{The Legend Of Zelda} and \textit{Hyper Light Drifter}.\\
+    The player controls Azucena, a llama mother who has to rescue her three babies. Azucena can spit at enemies or evade them by dashing.\\
+    There are three levels and the player can choose in which order it want to explore them. In each level there is a baby llama waiting for Azucena; they are behind a door that has to be opened with a key.\\
+    The game can downloaded from https://marcomoroni.github.io/azucena/.
+    
+    \section{Changes from original game design document}
+    Although some things differ from what stated in the original game design document, the core idea of the game remained the same throughout the development.
+    
+    \subsection{Story}
+    Azucena was meant to be rescued by a human along with her babies. In the final version she is the one rescuinge them.
+    
+    \subsection{Bosses}
+    The game includes a total of three enemy types, all with its own AI. It does not, however, include bosses. This also means that the keys will only let Azucena reach her babies instead of opening a boss area.
+    
+    \subsection{Player actions}
+    The main (and only) attack of Azucena is spitting: she does not have a melee attack as decided in the original document. This was purely a design choice.
+    
+    \subsection{Collectibles}
+    Azucena can pick up keys and healing herbs (potions). The player has to hold the pick up key for a few second. If the key is picked it will follow the player (and then open a door when near one).\\
+    Coins have not been implemented due to the limited time. It would have required a system to buy items and/or upgrades. Instead, upgrades will be given when a baby llama is rescued.
+    
+    \subsection{Menu}
+    There is no pause menu: it would have required many changes on the engine. Instead, the player can hold "Esc" for a few seconds to return to the main menu. If the player "Continue"s the game it will reload the scene but the game previous state is restored.
+    
+    \subsection{Tutorial}
+    The original plan was to have one of the three levels as a tutorial level. The final game does not have such level, but instead the game explains mechanics and controls in different ways:
+    \begin{itemize}
+    	\item Goal of the game: At the beginning of the game a cutscene plays. Here there is Azucena sleeping, while suddenly her babies run away, each to the direction of one of three three levels. The llama wakes up and the player can start playing, knowing where to go and what it has to find find.
+    	\item End game: Another cutscene will play when Azucena rescue all three of her babies. They will be happly jumping around. 
+    	\item Controls: At the bottom of the screen there can be messages to help the player play the game:
+    	\begin{itemize}
+    		\item After the first cutscene a message explains the three basic controls (movement, spit and dash).
+    		\item The first time the player is close to a collectible a message tells what key to hold to pick it up.
+    		\item The first time the player picks up a healing herb a message tells what key to press to use it.
+    	\end{itemize}
+    	\item Rewards: When the player rescue a baby llama a message shows what reward the player received.
+    \end{itemize}
+    
+    \subsection{Editor}
+    Using an image to generate the tiles by pixel colours could have been very beneficial, but due to the limited time the engine load maps from a text file.
+    
+    \section{Software design}
+    
+    \subsection{Prefabs}
+    The concept of prefabs from the \textit{Unity} engine has been used here. In the load function of every scene there is a list of functions which create entities of various types, for instance \texttt{create\_player()}, \texttt{create\_key()}, \texttt{create\_game\_ui()}, etc. These functions are stored in a \texttt{prefabs.cpp} file and this avoids code repetition.\\
+    The prefabs are also used to instantiate entities in real-time, such as a bullets. The number of entities that can be created in this way is very limited and simple so this method was used instead of object pooling.
+    
+    \subsection{Map generation}
+    The map has sprites as tiles. When the level is loading, all these sprites are merged into a single render texture, from which a single bigger sprite is created. In such a way the map is only a single image and it makes the game more performant.
+    
+    \subsection{Game UI}
+    When playing, Azucena’s health and healing herbs are always shown on the top left corner of the screen. Messages also stick to a position on the screen.\\
+    This is done by using an entity that stays always at the center of the current view.
+    
+    \subsection{Camera}
+    The camera smoothly follows the player because at every frame a new \texttt{View} is set. However it stops moving before reaching the player. By doing so if the player moves by just a small amount, the camera doesn't necessarily follow it.
+    
+    \subsection{Changing scenes}
+    It has been important to remember to put the code a scene only at the end of a scenes's \texttt{Update()} function. The reason is because if a scene is changed its update keep running until it reaches the end, and if there are reference to entities they won't be found because the are unloaded.\\
+    To archive this there are multiple flags that if set to \texttt{true} they will let the engine change the scene at thend of the \texttt{Update()}.
+    
+    \subsection{Remappable controls}
+    To make controls remappable a lookup table as been made by using a dictionary of \texttt{<string, Keyboard::Key>} where the \texttt{string} is the name of the action.
+    This static dictionary is stored in a \texttt{Controls} class. The class is used in the following ways.\\
+    To set or change a keyboard key use
+    \begin{lstlisting}
+    Controls::SetKeyboardKey("Up", Keyboard::W)\end{lstlisting}
+    To get a keyboard key use
+    \begin{lstlisting}
+    Controls::GetKeyboardKey("Up")\end{lstlisting}
+    For example
+    \begin{lstlisting}
+    if(Keyboard::IsKeyPressed(Controls::GetKeyboardKey("Up")))
+    {
+    	// Go up
+    }\end{lstlisting}
+    
+    \subsection{Save and load}
+    Game informations that can be changed and should be read thourghout the game are centrally stored in static variables inside a \texttt{Data} class. This class is also responsible for saving (\texttt{Data::Save()}) and loading (\texttt{Data::Load()}) the game data to a text file.
+    
+    \subsection{State machines}
+    The engine for this coursework was based on a game engine built during the semester. This engine has a state machine component, but early in the development it was clear that states had to include a method that would run only when the state is entered. For instance, if a state runs only for a fixed amount of time, a timer has to be reset every time the state is entered. Therefore states now include an \texttt{enterState()} function.
+    
+    \subsubsection{Enemy \textit{A}}
+    \figuremacro{h}{EnemyA}{Enemy \textit{A} AI}{}{1.0}
+    Enemy \textit{A} will chase the player if it comes close enough. If the player goes away, enemy \textit{A} will return to its starting position. This enemy attacks by dashing to the player. The \textit{Prepare attack} runs for a fixed amount of time and it simulates a running start. The \textit{Attack} state also stops after the timer reaches 0 and in here the enmy dashes towards the player. The direction of the dash is calculated when entering the state, so it will follow a straight line. This behaviour makes it possible for the player to evade it.
+    
+    \subsubsection{Enemy \textit{B}}
+    \figuremacro{h}{EnemyB}{Enemy \textit{B} AI}{}{1.0}
+    When the player comes close to this enemy, it will start looping through two behaviuors:
+    \begin{itemize}
+    	\item Move three times in three orthogonal random directions;
+    	\item Shoot four bullets (up, down, left and right).
+    \end{itemize}
+	Since the maps are not very large it was not necessary for the enemy to return to the idle state if the player is far away (the same is valid for enemy \textit{C}).
+    
+    \subsubsection{Enemy \textit{C}}
+    \figuremacro{h}{EnemyC}{Enemy \textit{C} AI}{}{1.0}
+    Like the other enemies, when the player comes close, this enemy will start looping though two behaviours:
+    \begin{itemize}
+    	\item Move following a circular path with the player position as the center of such circle.
+    	\item Shoot three bullets, one towards the player and the other two in the same direction but displaced by a small angle.
+    \end{itemize}
+    
+    \subsubsection{Other}
+    States machines have been implemented for many other non-AI behaviours, for example in the key.\\
+    A key when picked up follows the player and when the player is close enough to a door the key will move toward the door. When it reaches it, the door is unlocked. To archive this behaviour the key state machine uses these three states: \textit{Not taken}, \textit{Taken} and \textit{Used}.\\
+    It could have been useful to have a state machine for the player as well. However its behaviours were programmed early in the development and it would have required a lot of work to amend them.
+    
+    \subsection{Physics}
+    The game uses the \textit{Box2D} physics engine, but not in the porper way: it sets velecities each frame instead of using impulses. This may not be the correct way to use it, but it gives compete control overe every movement. This choice has been made also because the game has a top-down view therfore its entities do not need to b affected by gravity.
+    
+    \section{Game implementation}
+    \figuremacro{h}{capture01}{Game still}{}{1.0}
+    \figuremacro{h}{capture02}{Game still}{}{1.0}
+    \figuremacro{h}{capture03}{Game still}{}{1.0}
+    
+    
+    \section{Implementation evaluation}
+    Overall, the original game idea has been almost fully implemented.\\
+    It resembles a lot \textit{Hyper Light Drifter}: interaction with objects, shooting, movement, etc. However, this is very standard formula so the changes between these type of games are mostly aesthetic.\\
+    The game can be fully completed and if it had more ememy variety and bigger maps, it could potentially be considered a \textit{complete} game.
+    
+    \section{Performance analysis and optimisation}
+    \figuremacro{h}{performance}{\textit{Visual Studio} performance analysis}{}{1.0}
+    
+    \section{Playtest}
+    Most players were satisfied by the quality of the game, especially by the dash controls. A common comment was that it "looks like a complete game".
+    Sometimes there are problems with the physics system, but they can be temporarily fixed by restarting the application.
+    One playtester’s game was unable to load the map texture.
+    
+    \section{Project managment}
+    \textit{GitHub} has been the main tool for project management.\\
+    Issues have been used to track bugs, mandatory features and features to add if there was additional time (and they have been tagged accordingly).\\
+    The repo has implemented continuous integration with \textit{AppVeyor} on the \texttt{master} branch.
+    Features have been added in new branches and then merged into the \texttt{master} branch. It can be seen that some feature have been attempted multiple times.
+    
+    \section{Resources}
+    \begin{itemize}
+    	\item Sound effects: https://opengameart.org/content/512-sound-effects-8-bit-style
+    	\item Music: http://ericskiff.com/music/
+    	\item Font: https://datagoblin.itch.io/monogram
+    	\item \textit{OpenAL Soft}: http://openal-soft.org/
+    	\item Color palette: http://simurai.com/projects/2016/01/01/duotone-themes
+    \end{itemize}
+    
+    
+\bibliographystyle{ieeetr}
+\bibliography{references}
+		
+\end{document}
