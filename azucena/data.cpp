@@ -56,7 +56,7 @@ void Data::save()
 {
 	printf("Opening save file...\n");
 	ofstream file;
-	file.open(save_file_path, ofstream::trunc);
+	file.open(save_file_path, fstream::out);
 
 	printf("Saving...\n");
 	file <<
