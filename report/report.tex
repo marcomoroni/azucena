@@ -132,7 +132,7 @@
     \subsection{Editor}
     Using an image to generate the tiles by pixel colours could have been very beneficial, but due to the limited time the engine load maps from a text file.
     
-    \section{Software design}
+    \section{Software design ... flow diagram ...}
     
     \subsection{Prefabs}
     The concept of prefabs from the \textit{Unity} engine has been used here. In the load function of every scene there is a list of functions which create entities of various types, for instance \texttt{create\_player()}, \texttt{create\_key()}, \texttt{create\_game\_ui()}, etc. These functions are stored in a \texttt{prefabs.cpp} file and this avoids code repetition.\\
@@ -176,11 +176,11 @@
     
     \subsubsection{Enemy \textit{A}}
     \figuremacro{h}{EnemyA}{Enemy \textit{A} AI}{}{1.0}
-    Enemy \textit{A} will chase the player if it comes close enough. If the player goes away, enemy \textit{A} will return to its starting position. This enemy attacks by dashing to the player. The \textit{Prepare attack} runs for a fixed amount of time and it simulates a running start. The \textit{Attack} state also stops after the timer reaches 0 and in here the enmy dashes towards the player. The direction of the dash is calculated when entering the state, so it will follow a straight line. This behaviour makes it possible for the player to evade it.
+    Enemy \textit{A} will chase the player if it comes close enough (figure~\ref{fig:EnemyA}). If the player goes away, enemy \textit{A} will return to its starting position. This enemy attacks by dashing to the player. The \textit{Prepare attack} runs for a fixed amount of time and it simulates a running start. The \textit{Attack} state also stops after the timer reaches 0 and in here the enmy dashes towards the player. The direction of the dash is calculated when entering the state, so it will follow a straight line. This behaviour makes it possible for the player to evade it.
     
     \subsubsection{Enemy \textit{B}}
     \figuremacro{h}{EnemyB}{Enemy \textit{B} AI}{}{1.0}
-    When the player comes close to this enemy, it will start looping through two behaviuors:
+    When the player comes close to this enemy, it will start looping through two behaviuors (see figure~\ref{fig:EnemyB}):
     \begin{itemize}
     	\item Move three times in three orthogonal random directions;
     	\item Shoot four bullets (up, down, left and right).
@@ -189,7 +189,7 @@
     
     \subsubsection{Enemy \textit{C}}
     \figuremacro{h}{EnemyC}{Enemy \textit{C} AI}{}{1.0}
-    Like the other enemies, when the player comes close, this enemy will start looping though two behaviours:
+    Like the other enemies, when the player comes close, this enemy will start looping though two behaviours (see figure~\ref{fig:EnemyC}):
     \begin{itemize}
     	\item Move following a circular path with the player position as the center of such circle.
     	\item Shoot three bullets, one towards the player and the other two in the same direction but displaced by a small angle.
@@ -203,7 +203,7 @@
     \subsection{Physics}
     The game uses the \textit{Box2D} physics engine, but not in the porper way: it sets velecities each frame instead of using impulses. This may not be the correct way to use it, but it gives compete control overe every movement. This choice has been made also because the game has a top-down view therfore its entities do not need to b affected by gravity.
     
-    \section{Game implementation}
+    \section{Game implementation ...}
     \figuremacro{h}{capture01}{Game still}{}{1.0}
     \figuremacro{h}{capture02}{Game still}{}{1.0}
     \figuremacro{h}{capture03}{Game still}{}{1.0}
@@ -216,6 +216,9 @@
     
     \section{Performance analysis and optimisation}
     \figuremacro{h}{performance}{\textit{Visual Studio} performance analysis}{}{1.0}
+    A performance report has been generated using \textit{Visual Studio} (see figure~\ref{fig:performance}).\\
+    The report shows that the parts that can be majorly improved are the \texttt{StateMachineComponent} and the \texttt{PlayerHealthComponent}.\\
+    \texttt{StateMachineComponent} is expected to be a heavy part of the program, while \texttt{PlayerHealthComponent} is not. However the rason was easy to spot: every frame the \texttt{Engine::GetActiveScene()->ents.find()} function is called to find all the postions in the scene. This is one of the worst design choices (although it has been made sure throughout the code to call this function as little as possible), but in order to change it a lot of work would have been required.
     
     \section{Playtest}
     Most players were satisfied by the quality of the game, especially by the dash controls. A common comment was that it "looks like a complete game".
