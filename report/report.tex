@@ -132,7 +132,7 @@
     \subsection{Editor}
     Using an image to generate the tiles by pixel colours could have been very beneficial, but due to the limited time the engine load maps from a text file.
     
-    \section{Software design ... flow diagram ...}
+    \section{Software design}
     
     \subsection{Prefabs}
     The concept of prefabs from the \textit{Unity} engine has been used here. In the load function of every scene there is a list of functions which create entities of various types, for instance \texttt{create\_player()}, \texttt{create\_key()}, \texttt{create\_game\_ui()}, etc. These functions are stored in a \texttt{prefabs.cpp} file and this avoids code repetition.\\
@@ -203,11 +203,18 @@
     \subsection{Physics}
     The game uses the \textit{Box2D} physics engine, but not in the porper way: it sets velecities each frame instead of using impulses. This may not be the correct way to use it, but it gives compete control overe every movement. This choice has been made also because the game has a top-down view therfore its entities do not need to b affected by gravity.
     
-    \section{Game implementation ...}
+    \section{Game implementation}
     \figuremacro{h}{capture01}{Game still}{}{1.0}
     \figuremacro{h}{capture02}{Game still}{}{1.0}
     \figuremacro{h}{capture03}{Game still}{}{1.0}
-    
+    When the game starts a cutscene will play (figure~\ref{fig:capture01}): Azucena, a llama mother, is sleeping and suddenly her three babies run away. She will have to rescue them by completing three levels, one for each baby. The player can choose in which order to player the levels, as they are all connected to a central scene.\\
+    Each baby is behind a door, so the player has to find its key to unlock it.\\
+    The overworld is populated by monsters, and the only way for the player to face them is to spit at them or evade them by dashing.\\
+    The player can recover health
+    \begin{itemize}
+    	\item when it returns to the central scene or
+    	\item when it uses a healing herb. Heliang herbs can be foud in the overworld and the picked up.
+    \end{itemize}
     
     \section{Implementation evaluation}
     Overall, the original game idea has been almost fully implemented.\\
@@ -221,15 +228,22 @@
     \texttt{StateMachineComponent} is expected to be a heavy part of the program, while \texttt{PlayerHealthComponent} is not. However the rason was easy to spot: every frame the \texttt{Engine::GetActiveScene()->ents.find()} function is called to find all the postions in the scene. This is one of the worst design choices (although it has been made sure throughout the code to call this function as little as possible), but in order to change it a lot of work would have been required.
     
     \section{Playtest}
+    \figuremacro{h}{playtest01}{Playtest question}{ - \textit{Was the goal of the game clear?}}{1.0}
+    \figuremacro{h}{playtest02}{Playtest question}{ - \textit{Do you think the game was fair?}}{1.0}
+    \figuremacro{h}{playtest03}{Playtest question}{ - \textit{How would you consider the difficulty?}}{1.0}
+    \figuremacro{h}{playtest04}{Playtest question}{ - \textit{Overall experience}}{1.0}
+    \figuremacro{h}{playtest05}{Playtest question}{ - \textit{Anything else you would like to point outr?}}{1.0}
+    Playtestes have been asked to answer a few question after playing the game (see figures \ref{fig:playtest01}, \ref{fig:playtest02}, \ref{fig:playtest03}, \ref{fig:playtest04} and \ref{fig:playtest05}).\\
     Most players were satisfied by the quality of the game, especially by the dash controls. A common comment was that it "looks like a complete game".
     Sometimes there are problems with the physics system, but they can be temporarily fixed by restarting the application.
-    One playtester’s game was unable to load the map texture.
+    One playtester's game was unable to load the map texture.
     
     \section{Project managment}
     \textit{GitHub} has been the main tool for project management.\\
     Issues have been used to track bugs, mandatory features and features to add if there was additional time (and they have been tagged accordingly).\\
-    The repo has implemented continuous integration with \textit{AppVeyor} on the \texttt{master} branch.
-    Features have been added in new branches and then merged into the \texttt{master} branch. It can be seen that some feature have been attempted multiple times.
+    The repo has implemented continuous integration with \textit{AppVeyor} on the \texttt{master} branch.\\
+    Features have been added in new branches and then merged into the \texttt{master} branch. It can be seen that some feature have been attempted multiple times.\\
+    In the the repo there is a \texttt{DEV\_NOTES.md} file: it has been used as a dicumentation file and a repference for the report.
     
     \section{Resources}
     \begin{itemize}
@@ -239,9 +253,5 @@
     	\item \textit{OpenAL Soft}: http://openal-soft.org/
     	\item Color palette: http://simurai.com/projects/2016/01/01/duotone-themes
     \end{itemize}
-    
-    
-\bibliographystyle{ieeetr}
-\bibliography{references}
 		
 \end{document}
